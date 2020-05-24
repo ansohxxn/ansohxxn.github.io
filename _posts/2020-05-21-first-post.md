@@ -1,6 +1,6 @@
 ---
 title:  "github.io 블로그 시작하기"
-excerpt: "Jekyll + Github Pages로 블로그 만들기."
+excerpt: "Jekyll + Github Pages로 블로그 만들기 [테스트 1]."
 
 categories:
   - Blog
