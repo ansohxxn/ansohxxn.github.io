@@ -10,11 +10,9 @@ tags:
 toc: true
 toc_sticky: true
  
-date: 2020-05-27
+date: 2020-05-26
 last_modified_at: 2020-05-27
 ---
-<br>
-
 [Jekyll 한글 문서](https://jekyllrb-ko.github.io/)와 [Minimal Mistakes 공식 문서](https://mmistakes.github.io/minimal-mistakes/)를 참고하였다.💛 잘 알아두고 기록해둬야 블로그를 뚝딱뚝딱 만질 수 있겠지? 😂
 
 ## minimal-mistakes 구조 한 눈에 보기
@@ -59,7 +57,7 @@ main:
   - title: "Sitemap"
     url: /sitemap/
 ```
-<u>상단 메뉴바</u>인 것 같다. 메뉴바를 커스터마이징할 때 이 문서를 건드리면 될 것 같다. url이 현재 저렇게 되있기 때문에 Quick-Start Guide와 About을 누르면 Minimal Mistakes 문서 페이지로 이동한다.서브 url이  year-archive, collection-archive로 등록된 문서가 현재 디렉터리에 없기 때문에 Sample Posts를 누르면 404 에러 페이지가 뜨고 있다. 얼른 메뉴바를 손봐야겠다. 🙄
+**상단 메뉴바** 인 것 같다. 메뉴바를 커스터마이징할 때 이 문서를 건드리면 될 것 같다. url이 현재 저렇게 되있기 때문에 Quick-Start Guide와 About을 누르면 Minimal Mistakes 문서 페이지로 이동한다.서브 url이  year-archive, collection-archive로 등록된 문서가 현재 디렉터리에 없기 때문에 Sample Posts를 누르면 404 에러 페이지가 뜨고 있다. 얼른 메뉴바를 손봐야겠다. 🙄
 
 #### 📝ui-text.yml
 
@@ -88,7 +86,7 @@ main:
 |  ├── 📘video                   # embeding vedeo like youtube helper      
 |  ├── 📘figure                  #      
 |  ├── 📝analytics.html          #  
-|  ├── 📝archive-single.htm      #  
+|  ├── 📝archive-single.html     #  
 |  ├── 📝author-profile-custom-links.html #  
 |  ├── 📝author-profiles.html    #  
 |  ├── 📝breadcrumbs.html        #  
@@ -228,5 +226,20 @@ Youtube, Vimeo 같은 비디오를 embeding 하는 helper. 유튜브의 경우 �
 이렇게 사용한다. image_path는 필수이며 alt와 caption은 옵션.
 Liquid 태그로 include figure 이미지를 불러오는 역할을 하는 HTML 코드가 담겨있는 📝`figure`가 불러와진다. 
 
-#### 📝analytics.html
+#### 📝html
 
+##### 📝analytics.html
+```
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-1234567-8"
+    anonymize_ip: false # default
+```
+
+##### 📝archive-single.html
+
+```
+{ % include archive-single.html % }
+```
+포스트 페이지들 링크 모아둔 `아카이브 페이지`에서 각 포스트 링크가 어떻게 보여질지에 대한 문서.
