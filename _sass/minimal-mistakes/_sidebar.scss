@@ -167,11 +167,13 @@
 .sidebar .author__name {
   font-family: $sans-serif;
   font-size: $type-size-3;
+  color:#FFF;
   font-weight: bold;
 }
 
 .author__bio {
   margin: 0;
+  font-size: $type-size-4;
 
   @include breakpoint($large) {
     margin-top: 10px;

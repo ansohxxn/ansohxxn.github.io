@@ -27,14 +27,20 @@ layout: default
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
           {% if page.title %}<h1 id="page-title" class="page__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}
-          {% if page.read_time %}
-            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
-          {% endif %}
-          {% if page.last_modified_at %}
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }}</strong> <time datetime="{{ page.last_modified_at | date: "%Y-%m-%d" }}">{{ page.last_modified_at | date: "%B %-d, %Y" }}</time></p>
+          {% if page.last_modified_at and page.date %}
+            <p class="page__meta"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%-d" }}</time>&nbsp&nbsp&nbsp<strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ "Updated:" }}</strong> <time datetime="{{ page.last_modified_at | date: date_to_xmlschema }}">{{ page.last_modified_at | date: "%Y.%m.%-d" }}</time></p>
           {% elsif page.date %}
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
-        {% endif %}
+            <p class="page__meta"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%-d" }}</time></p>
+          {% elsif page.last_modified_at %}
+            <p class="page__meta"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ "Updated:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%-d" }}</time></p>
+          {% endif %}
+          {% if site.category_archive.type and page.categories[0] and site.tag_archive.type and page.tags[0] %}
+            {% include category-list.html %}{% include tag-list.html %}
+          {% elsif site.category_archive.type and page.categories[0] %}
+            {% include category-list.html %}
+          {% elsif site.tag_archive.type and page.tags[0] %}
+            {% include tag-list.html %}
+          {% endif %}
         </header>
       {% endunless %}
 
@@ -55,7 +61,6 @@ layout: default
         {% if site.data.ui-text[site.locale].meta_label %}
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
         {% endif %}
-        {% include page__taxonomy.html %}
       </footer>
 
       {% if page.share %}{% include social-share.html %}{% endif %}
@@ -73,7 +78,7 @@ layout: default
     <div class="page__related">
       <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}</h4>
       <div class="grid__wrapper">
-        {% for post in site.related_posts limit:4 %}
+        {% for post in site.related_posts limit:3 %}
           {% include archive-single.html type="grid" %}
         {% endfor %}
       </div>
@@ -83,7 +88,7 @@ layout: default
     <div class="page__related">
       <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}</h4>
       <div class="grid__wrapper">
-        {% for post in site.posts limit:4 %}
+        {% for post in site.posts limit:3 %}
           {% if post.id == page.id %}
             {% continue %}
           {% endif %}

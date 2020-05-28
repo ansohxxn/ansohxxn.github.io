@@ -9,6 +9,8 @@ tags:
 
 toc: true
 toc_sticky: true
+
+breadcrumbs: true
  
 date: 2020-05-26
 last_modified_at: 2020-05-27
@@ -138,9 +140,9 @@ provider에 사용할 analytics에 맞는 html 파일 이름을 문자열로 적
 마찬가지로 custom.html은 `_includes/comments-providers`에 없는 댓글 플랫폼을 사용하려 할 때 여기에 embeded code를 추가해주자.
 [플랫폼별로 사용법](https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments)
 
-#### 📁footer, header
+#### 📁footer, head
 
-폴더에 들어있는 cumtom.html에 footer와 header의 커스터마이징 내용을 적어주면 될 것 같다.
+폴더에 들어있는 `cumtom.html`에 footer와 head의 커스터마이징 내용을 적어주면 될 것 같다. favicon 파비콘 삽입 태그를 이 `_includes/head/custom.html` 에 삽입해주었다.
 
 #### 📁search
 
@@ -236,10 +238,35 @@ analytics:
     tracking_id: "UA-1234567-8"
     anonymize_ip: false # default
 ```
+이렇게 yml 형식으로 써서 `analytics.html`에 애널리틱스의 provider 정보와 tracking_id, anonymize_ip 정보를 넘겨준다.
 
 ##### 📝archive-single.html
 
 ```
-{ % include archive-single.html % }
+{ % include archive-single.html % } 
+# archive-single.html의 
 ```
-포스트 페이지들 링크 모아둔 `아카이브 페이지`에서 각 포스트 링크가 어떻게 보여질지에 대한 문서.
+포스트 페이지들 링크 모아둔 `아카이브 페이지`에서 각 포스트(싱글페이지) 링크가 어떻게 보여질지에 대한 문서. 이 블로그의 홈에서 Recent Pages가 나오는데 이런게 바로 아카이브 페이지!
+
+##### 📝author-profile-custom-links.html
+```html
+<!--예시-->
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+```
+minimal mistakes 에서 제공하는 author profile link는 Github, 메일, Facebook 등이 있다. 이 밖에도 Kakao같은 `📝author-profiles.html` 에서 제공되지 않는 link를 사용하려면 API를 참고하여 이곳에 위 코드 블럭처럼 코드를 이 파일에 넣어주면 될 것 같다. 
+
+##### 📝author-profiles.html
+
+author profile의 link로 프로필에 삽입할 수 있도록 Github, mail, facebook, steam, youtube 등등 다양한 링크의 HTML 코드를 제공한다.
+
+##### 📝breadcrumbs.html
+
+
+
+***
+    🌜 개인 공부 기록용 블로그입니다. 오류나 틀린 부분이 있을 경우 
+    언제든지 댓글 혹은 메일로 지적해주시면 감사하겠습니다! 😄
