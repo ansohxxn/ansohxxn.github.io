@@ -13,9 +13,13 @@ toc_sticky: true
 breadcrumbs: true
  
 date: 2020-05-26
-last_modified_at: 2020-05-27
+last_modified_at: 2020-05-29
 ---
-[Jekyll 한글 문서](https://jekyllrb-ko.github.io/)와 [Minimal Mistakes 공식 문서](https://mmistakes.github.io/minimal-mistakes/)를 참고하였다.💛 잘 알아두고 기록해둬야 블로그를 뚝딱뚝딱 만질 수 있겠지? 😂
+    🌕 계속 수정해나갈 문서입니다.
+
+[Jekyll 한글 문서](https://jekyllrb-ko.github.io/)와 [Minimal Mistakes 공식 문서](https://mmistakes.github.io/minimal-mistakes/)를 참고하였다.
+HTML, SCSS, Liquid. 어려운 언어는 아니지만 문법을 몰라서 공부해가며 파악하고 정리했는데 재밌었다 😎 각각의 역할을 파악하는데에 <u>💛Chrome 개발자 도구💛</u>도 도움이 많이 되었다. 블로그 커스타미이징시 개발자 도구를 적극 이용하자! 
+
 
 ## minimal-mistakes 구조 한 눈에 보기
 기본적으로 Jekyll 디렉터리 구조를 뼈대로 하고 있지만 테마들마다 디렉터리 구조가 조금씩 다른 것 같다. 내가 쓰고 있는 테마 minimal-mistakes의 디렉터리 구조를 살펴보고자 한다.
@@ -32,6 +36,7 @@ minimal-mistakes
 ├── 📝index.html                 # paginated home page showing recent posts
 └── 📝package.json               # NPM build scripts
 ```
+
 <br>
 
 ## 📁_data 폴더 
@@ -95,6 +100,7 @@ main:
 |  ├── 📝browser-upgrade.html    #  
 |  ├── 📝category-list.html      #  
 |  ├── 📝commtent.html           #  
+|  ├── 📝commtents.html           #  
 |  ├── 📝documents-collection.html #  
 |  ├── 📝footer.html             #  
 |  ├── 📝head.html               #  
@@ -105,7 +111,7 @@ main:
 |  ├── 📝paginator.html          #  
 |  ├── 📝post_pagination.html    #  
 |  ├── 📝posts-category.html     #  
-|  ├── 📝post-tag.html           #  
+|  ├── 📝posts-tag.html           #  
 |  ├── 📝read-time.html          #  
 |  ├── 📝scripts.html            #  
 |  ├── 📝seo.html                #  
@@ -215,15 +221,19 @@ foo:
 
 ##### 📝video
 Youtube, Vimeo 같은 비디오를 embeding 하는 helper. 유튜브의 경우 영상의 긴 url 말고 `짧은 url`을 따서 url의 뒷부분을 id로 넣어준다. 예를 들어 https://youtu.be/XsxDH4HcOWA url을 가진 유튜브 영상이라면 
-```
-{ % include video id="XsxDH4HcOWA" provider="youtube" % } 
+```liquid
+{% raw %}
+{% include video id="XsxDH4HcOWA" provider="youtube" %}
+{% endraw %} 
 ```
 이렇게 유튜브 영상을 삽입할 수 있다. _include 파일에 있는 video helper 코드를 재사용하여 삽입! helper내의 id, provider 값은 각각 짧은 url과 youtube로 설정해준다. 💥`?start=110`을 붙여주면 유튜브 영상이 110초부터 재생되게끔 할 수 있다. Vimeo와 Google Drive에 있는 영상도 비슷한 방법으로 embeding 하면 된다!
 
 ##### 📝figure
 한 개의 이미지 요소를 생성한다. 
-```
-{ % include figure image_path="/assets/images/unsplash-image-10.jpg" alt="this is a placeholder image" caption="This is a figure caption." % }
+```liquid
+{% raw %}
+{% include figure image_path="/assets/images/unsplash-image-10.jpg" alt="this is a placeholder image" caption="This is a figure caption." %}
+{% endraw %}
 ```
 이렇게 사용한다. image_path는 필수이며 alt와 caption은 옵션.
 Liquid 태그로 include figure 이미지를 불러오는 역할을 하는 HTML 코드가 담겨있는 📝`figure`가 불러와진다. 
@@ -242,11 +252,12 @@ analytics:
 
 ##### 📝archive-single.html
 
+```liquid
+{% raw %}
+{% include archive-single.html %} 
+{% endraw %}
 ```
-{ % include archive-single.html % } 
-# archive-single.html의 
-```
-포스트 페이지들 링크 모아둔 `아카이브 페이지`에서 각 포스트(싱글페이지) 링크가 어떻게 보여질지에 대한 문서. 이 블로그의 홈에서 Recent Pages가 나오는데 이런게 바로 아카이브 페이지!
+포스트 페이지들 링크 모아둔 `아카이브 페이지`에서 각 포스트(싱글페이지) 링크가 어떻게 보여질지에 대한 문서. 이 블로그의 홈에서 Recent Pages가 나오는데 이런게 바로 아카이브 페이지! 
 
 ##### 📝author-profile-custom-links.html
 ```html
@@ -265,7 +276,124 @@ author profile의 link로 프로필에 삽입할 수 있도록 Github, mail, fac
 
 ##### 📝breadcrumbs.html
 
+![image](https://user-images.githubusercontent.com/42318591/83213140-5d451500-a19c-11ea-983e-9baaf97fbb0a.png)
 
+프로필 위에 있는 이런게 바로 breadcrumbs. `최상위문서/상위문서/해당포스트` 이런식의 계층 구조로 해당 페이지의 상대적 위치를 보여준다. 이렇게 breadcrumbs 를 구현할 수 있는 html 문서가 있으니 `_config.yml`혹은 각 포스트 md 파일 머릿말에 `breadcrumb: true` 해주면 나타난다.
+
+##### 📝browser-upgrade.html
+
+IE9 브라우저로 접속할 경우 브라우저를 업그레이드 하라는 블록이 나타나도록 해주는 html 문서
+
+##### single-page > 📝page__taxonomy.html
+
+minimal-mistakes 문서와 프로젝트 코드들을 살펴보니 
+- `(single)  page`는 포스트 하나를 열었을 때 보이는 본문을 의미하는 것 같고 
+- `post`는 포스트들을 모아둔 `archive page`내에서 보여지는 <u>각각의 포스트</u>를 의미하는 것 같다
+- `posts`는 포스트들의 포스트 같은 느낌..? `archive page`들을 모아둔 더 상위에 있는 `archive page`내에서 <u>각각의 archive page</u> 인 것 같다.  
+이렇게 개념을 잡고 블로그 커스터마이징을 하는 중인데 아직 모호해서 좀 더 구체적으로 공부를 해봐야겠다. 
+
+`taxonomy`의 사전적 정의는 분류 체계. `(single) page` 내에서 `태그`와 `카테고리`를 나타내는 부분이다. `📁_layouts/single.html`에서 어떻게 보여질지 조작할 수 있다.
+![image](https://user-images.githubusercontent.com/42318591/83218656-5244b180-a1a9-11ea-8f5f-db23551e1bbd.png)
+
+```liquid
+{% raw %}
+{% if site.tag_archive.type and page.tags[0] %}
+  {% include tag-list.html %}
+{% endif %}
+
+{% if site.category_archive.type and page.categories[0] %}
+  {% include category-list.html %}
+{% endif %}
+{% endraw %}
+``` 
+`liquid` 언어로 `📝tag-list.html`코드를 소환하는 부분과 `📝category-list.html` 코드를 소환하는 부분이 함께 있다. 
+
+`📁_layouts/single.html`에서 어떻게 보여질지 조작할 수 있다. 나는 태그가 없다면 카테고리만 나타나게끔, 카테고리가 없다면 태그만 나타나게끔 하고 싶었기 때문에 `page__taxonomy`를 `{ % include % }` 하지 않고 if-elsif 문을 두어서 `tag-list`, `category-list` 따로 따로 include 해주었다. 자세한 사항은 추후 포스팅. 
+
+##### single-page > 📝tag-list.html
+
+`(single) page` 내에서 태그 리스트를 만들고 어떻게 보여질지를 나타냄. `📁_layouts/single.html`에서 어떻게 보여질지 조작할 수 있다.
+
+##### single-page > 📝category-list.html
+
+`(single) page` 내에서 카테고리 리스트를 만들고 어떻게 보여질지를 나타냄. `📁_layouts/single.html`에서 어떻게 보여질지 조작할 수 있다.
+
+##### single-page > 📝page__hero.html, 📝page__hero_video.html
+
+`page__hero`가 뭔지 정확히는 잘 모르겠지만 [minimal-mistakes](https://mmistakes.github.io/minimal-mistakes/) 문서 페이지에 가면 헤더에서 볼 수 있는 블로그 제목이 달려있는 큰 사진 같은 것을 hero라고 칭하는 것 같다. 
+
+##### post > 📝post__taxonomy.html ⭐
+
+![image](https://user-images.githubusercontent.com/42318591/83220899-30e6c400-a1af-11ea-9694-65f060c3698b.png)
+
+원래 minimal-mistakes 프로젝트에 없는 파일인데 내가 만들어 추가한 html 파일이다. 내 블로그의 홈은 최근에 등록 된 포스트들만 모아진 archive page인데 위 빨간 박스 부분들을 page가 아닌 `post`로 칭하는 것 같다.  
+📝post__taxonomy.html 을 따로 만든 이유
+1. 이 archive page의 각 포스트 링크에 태그와 카테고리를 보이게 하기 위하여. 
+    - 원래는 excerpt 발췌글과 날짜만 보였다. 위 사진은 커스터마이징한 결과!
+    - 📝category-list.html 코드들을 복사해 와 `page.categories` 이런 것들을 다 `post.categories` 로 바꿔주었다. tag도 마찬가지. 
+![image](https://user-images.githubusercontent.com/42318591/83222003-4d383000-a1b2-11ea-826a-1bade2624804.png)  
+2. 태그 리스트를 카테고리 옆에 붙이고 싶었는데 페이지 본문에 있는 모양처럼 태그가 자꾸 카테고리 리스트에서 줄바꿈 된 채로 통째로 다니는게 맘에 들지 않았다. 
+    - 그래서 줄바꿈 되지 않도록 post__tag-list, post__category-list 이렇게 따로 두지 않고 이 📝post__taxonomy.html 에서 이 둘을 같은 HTML 태그 안에 넣었다. 
+    - 카테고리와 태그의 디자인을 서로 다르게 하기 위하여 scss 와 연결될 클래스도 다르게 설정해주었다. 
+
+위에서 설명한 `📝archive-single.html`에서 어떻게 보여질지 조작할 수 있다.
+자세한 내용은 추후 포스팅
+
+##### post > 📝post_pagination.html
+
+싱글 페이지 (포스트 md파일) 아래에 `previous`, `next` 이전글 다음글 볼 수 있는 버튼이 있는데 바로 그것.
+
+##### posts > 📝posts-category.html
+
+`카테고리 archive`들을 모아둔 `archive page`. 포스트들이 담긴 하나 하나의 카테고리들이 모인 전체 카테고리 페이지라고 보면 될 것 같다.
+
+##### posts > 📝posts-tag.html
+
+`태그 archive`들을 모아둔 `archive page`. 포스트들이 담긴 하나 하나의 태그페이지들이 모인 전체 태그 페이지라고 보면 될 것 같다.
+
+##### 📝commtent.html
+
+댓글 코멘트 한 개의 위치와 모양을 관장하는 html
+
+##### 📝commtents.html
+
+코멘트 여러개가 모인 블록을 관장하는 html.
+댓글 플랫폼(disqus, facebook)에 따라 모양이 다르게끔 되어있다.
+
+##### 📝document-collection.html
+
+`collection`은 서로 관련있는 포스트나 아카이브 페이지들을 그룹화하여 모아둔 페이지라는 점에서 `archive page`와 비슷하다. 둘다 비슷하긴 한데 `archive page`는 태그나 카테고리 혹은 연도같은 포스트의 데이터에 의하여 포스트들이 자동 분류되고 `collection`은 관련있는 포스트들을 사용자 정의로 그룹화하여 모아둔 페이지를 뜻한다.  
+ex) 팀 멤버들  목록, 포트폴리오, 레시피
+
+`📝archive-single.html`를 for문 돌려서 여러개 출력하고 `📁_layouts/collection.html`에서 나타난다.
+
+- [collection 사용방법](https://mmistakes.github.io/minimal-mistakes/docs/collections/)
+    1. `__config.yml`에 collections 값을 추가한다.
+        ex.  collection: portfolio
+    2. `📁__pages` 폴더에 (없으면 직접 만들기) portfolio 폴더 추가해서 거기에 포스트 파일(md) 올리기
+    3. 포스트 머릿말엔 `collection: portfolio`, `permalink: /portfolio/`. `layout: collection` 추가 해주기
+
+##### 📝footer.html
+
+RSS 아이콘 있는 아랫 부분... 
+
+##### 📝head.html
+
+직접적으로 보여지는건 없고 SCSS 정보 같은 것만 담겨있는 듯하다(?)
+
+##### 📝masthead.html
+
+블로그 제목있고 메뉴바 있는 상단 부분
+
+##### 📝paginator.html
+
+포스트들이 모여진 `archive page`에서 페이지 번호 ! 곧 구현할 것이다. 추후 포스팅
+
+##### 📝read-time.html 
+
+포스트를 읽으면 타이틀 밑에 뜨는 최근에 읽은 시간. 1 min read 이런식으로 떴었는데 필요한 정보는 아닌 것 같아 삭제했다. 삭제한 방법 추후 
+
+##### 📝scripts.html
 
 ***
     🌜 개인 공부 기록용 블로그입니다. 오류나 틀린 부분이 있을 경우 

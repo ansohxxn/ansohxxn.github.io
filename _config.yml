@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "dark" # "default"  "air", "aqua", "contrast", , "dir
 
 # Site Settings
 locale                   : "en-US"
-title                    : "블로그 제목에 대해 늘 고민 중"
+title                    : "블로그 제목에 대해 늘 고민 중 🤔"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "ansohxxn💛"
@@ -95,7 +95,7 @@ analytics:
 author:
   name             : "🌙 ansohxxn"
   avatar           : "/assets/images/my-cat.jpg"
-  bio              : "😃 IT, 😁 Game, 😎Movie, 😺Cat"
+  bio              : "😃 IT,😁 Game,😎 Movie,😺 Cat"
   location         : "Seoul, South Korea"
   links:
     - label: "Email"
