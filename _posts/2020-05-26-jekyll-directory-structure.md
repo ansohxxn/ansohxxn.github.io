@@ -480,6 +480,8 @@ toc 구현 코드
 |  └────└── 📕_variables.scss 
 └──── 📕_minimal-mistakes.scss
 ```
+<br>
+
 ## 📁_assets
 ```
 ├── 📁_css              # main.scss             
