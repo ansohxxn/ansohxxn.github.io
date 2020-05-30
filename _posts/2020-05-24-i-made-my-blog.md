@@ -1,5 +1,5 @@
 ---
-title:  "[Jekyll] 깃허브(Github) 블로그를 생성해 보자." 
+title:  "[Github 블로그] 깃허브(Github) 블로그를 생성해 보자." 
 excerpt: "Jekyll로 깃허브 블로그를 만들어 보았다."
 
 categories:
