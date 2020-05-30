@@ -495,6 +495,8 @@ toc 구현 코드
   - YMAL 헤더 머릿말에서 설정한 변수들은 `page.xxx`
   - 📘_config.yml 에서 설정한 변수들은 `site.xxx`
     - 📘_config.yml 에 설정되지 않은 변수인데 site.pages 로 쓰이는 변수들은 Jekyll가 자동으로 생성한 변수라고 생각하면 된다.
+    - site.pages: _posts 폴더에 있는 페이지 이외의 모든 페이지
+    - site.posts: _posts 폴더 에 있는 모든 페이지
 
 ## 📓 Gemfile
 
