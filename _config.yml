@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "dark" # "default"  "air", "aqua", "contrast", , "dir
 
 # Site Settings
 locale                   : "en-US"
-title                    : "퀘스트 하나 하나 깨 나가듯🌝"
+title                    : " 블로그 제목 고민 중 🌝"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "ansohxxn💛"
@@ -75,7 +75,7 @@ facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 : # Open Graph/Twitter default site image
+og_image                 :  "/assets/images/my-cat.jpg" # Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
@@ -128,6 +128,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
+      url: "https://github.com/ansohxxn"
       # url:
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"

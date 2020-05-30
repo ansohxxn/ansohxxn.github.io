@@ -497,6 +497,9 @@ toc 구현 코드
     - 📘_config.yml 에 설정되지 않은 변수인데 site.pages 로 쓰이는 변수들은 Jekyll가 자동으로 생성한 변수라고 생각하면 된다.
     - site.pages: _posts 폴더에 있는 페이지 이외의 모든 페이지
     - site.posts: _posts 폴더 에 있는 모든 페이지
+config.yml 에서 `post`나 `page`의 default 설정값을 지정해 놓을 수 있다. 
+  - post : 날짜, 카테고리, 태그에 따라 분류되는 글. 우리가 포스팅하는 그 글.
+  - page : 날짜, 카테고리, 태그같은 것들과 상관 없이 어떤 목적으로 만든 페이지
 
 ## 📓 Gemfile
 
