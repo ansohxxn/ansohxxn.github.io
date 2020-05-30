@@ -5,7 +5,7 @@ excerpt: "블로그 커스터마이징을 하기 위해 미리 알아야 할 jek
 categories:
   - Blog
 tags:
-  - [Blog, jekyll]
+  - [Blog, jekyll, minimal-mistake]
 
 toc: true
 toc_sticky: true
