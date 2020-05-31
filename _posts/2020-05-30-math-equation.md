@@ -48,8 +48,8 @@ defaults:
 ## 수식 쓰는 방법
 
 ### 수식 문법 참고
-[MathJax 공식 문서](https://www.mathjax.org/)
-[Notion 수식](https://www.math.brown.edu/~jhs/ReferenceCards/TeXRefCard.v1.5.pdf)
+[MathJax 공식 문서](https://www.mathjax.org/)  
+[Notion 수식 기호 모음](https://www.math.brown.edu/~jhs/ReferenceCards/TeXRefCard.v1.5.pdf)
 
 ### inline으로 수식 쓰는 방법
 `\\(` 와 `\\)` 사이에 문법대로 수식을 쓴다
@@ -59,8 +59,6 @@ defaults:
 `원래 힘으로 돌아가려는 힘 벡터` = \\(\vec{f_{ij,spring}} = -k(\vert\vec{x_i} - \vec{x_j}\vert - l_0){\vec{x_i} - \vec{x_j}\over{\vert\vec{x_i} - \vec{x_j}\vert}} \\)
 ```
 `원래 힘으로 돌아가려는 힘 벡터` = \\(\vec{f_{ij,spring}} = -k(\vert\vec{x_i} - \vec{x_j}\vert - l_0){\vec{x_i} - \vec{x_j}\over{\vert\vec{x_i} - \vec{x_j}\vert}} \\)
-
-[이 분의 블로그를 참고했습니다](https://www.cross-validated.com/How-to-render-math-on-Minimal-Mistakes/)
 
 ### 블록으로 수식 쓰는 방법
 `\\[` 와 `\\]` 사이에 문법대로 수식을 쓴다
