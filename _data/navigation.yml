@@ -7,7 +7,7 @@ main:
   - title: "Category"
     url: /categories/
   - title: "Tag"
-   url: /tags/
+    url: /tags/
   - title: "Post by Year"
-   url: /year-archive/
+    url: /year-archive/
  
