@@ -11,3 +11,12 @@ main:
   - title: "Post by Year"
     url: /year-archive/
  
+blogging:
+  - title: "Language"
+    children:
+      - title: "C++"
+        url: /categories/#C++
+  - title: "Etc"
+    children:
+      - title: "Blog Dev"
+        url: /categories/#Blog

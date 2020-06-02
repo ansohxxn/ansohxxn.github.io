@@ -268,6 +268,7 @@ compress_html:
 
 # Defaults
 defaults:
+
   # _posts
   - scope:
       path: ""
@@ -280,3 +281,5 @@ defaults:
       share: true
       related: true
       mathjax: true
+      sidebar:
+        nav: "blogging"
