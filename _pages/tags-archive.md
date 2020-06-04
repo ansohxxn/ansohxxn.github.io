@@ -40,7 +40,7 @@ author_profile: true
     {% for tag in grouped_all_tags %}
     <div class="archive-group">
         {% assign tag_name = tag.name | slugize %}
-        <h3 id="#{{ tag_name }}">{{ tag_name }}</h3>
+        <h2 id="#{{ tag_name }}">{{ tag_name }}</h2>
         <a name="{{ tag_name }}"></a>
         <!-- Merge posts -->
         {% assign all_posts = '' | split: ',' %}
