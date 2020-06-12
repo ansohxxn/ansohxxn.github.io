@@ -14,9 +14,8 @@ main:
 blogging:
   - title: "C + +"
     children:
-      - title: "C++ language"
+      - title: "C++"
         url: /categories/#c
-    children:
       - title: "C++ Games, Graphics"
         url: /categories/#c-games
   - title: "E t c"
