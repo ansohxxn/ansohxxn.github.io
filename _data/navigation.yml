@@ -12,11 +12,14 @@ main:
     url: /year-archive/
  
 blogging:
-  - title: "L a n g u a g e"
+  - title: "C + +"
     children:
-      - title: "C++"
-        url: /categories/#C++
+      - title: "C++ language"
+        url: /categories/#c
+    children:
+      - title: "C++ Games, Graphics"
+        url: /categories/#c-games
   - title: "E t c"
     children:
       - title: "Blog Dev"
-        url: /categories/#Blog
+        url: /categories/#blog
