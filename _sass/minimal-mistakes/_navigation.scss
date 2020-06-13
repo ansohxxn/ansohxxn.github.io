@@ -433,10 +433,12 @@
 .nav__list .nav__items {
   margin: 0;
   font-size: 1.25rem;
+  font-family: $sans-serif;
 
   a {
     color: inherit;
-    font-size: $type-size-5;
+    font-size: $type-size-4;
+    font-family: $sans-serif;
     color: mix(#fff,$primary-color,80%);
 
     &:hover {
@@ -491,7 +493,8 @@
   display: block;
   margin: 0.5rem 0;
   padding: 0.25rem 0;
-  font-size: $type-size-4;
+  font-size: $type-size-3;
+  font-family: $sans-serif;
   font-weight: bold;
   color: mix(#fff,$primary-color,30%);
   text-transform: uppercase;
