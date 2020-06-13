@@ -19,7 +19,7 @@ last_modified_at: 2020-05-25
 ---
 <br>
 
-# 1. Github 에서 `블로그 용`으로 쓸 새로운 Repository 를 생성한다.
+# 1. Github 에서 블로그 용으로 쓸 새로운 Repository 를 생성한다.
 
 ![image](https://user-images.githubusercontent.com/42318591/82748040-bd713b00-9dd9-11ea-8c65-4b54676abd1e.png)
 
