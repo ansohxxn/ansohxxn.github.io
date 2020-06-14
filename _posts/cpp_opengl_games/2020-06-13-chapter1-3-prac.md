@@ -27,6 +27,10 @@ last_modified_at: 2020-06-13
 
 이전 포스트 보러가기 🖐 [1.3 상호작용 맛보기 - 키보드 입력과 반응](https://ansohxxn.github.io/c++%20games/chapter1-3/)
 
+[연습 문제 출처 : 홍정모 교수님 블로그](https://blog.naver.com/atelierjpro/221413483005)
+
+<br>
+
 ## 🙋 Q1. 포탄 여러개 쏘는 탱크 구현하기
 
 ![image](https://user-images.githubusercontent.com/42318591/84557002-3709a280-ad62-11ea-8546-c7ff2c77ece8.png){: .align-center}

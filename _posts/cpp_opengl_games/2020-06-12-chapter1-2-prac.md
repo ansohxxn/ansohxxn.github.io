@@ -27,6 +27,9 @@ last_modified_at: 2020-06-12
 
 이전 포스트 보러가기 🖐 [1.2 기본적인 그리기 - 이동, 회전, 애니메이션](https://ansohxxn.github.io/c++%20games/chapter1-2/)
 
+[연습 문제 출처 : 홍정모 교수님 블로그](https://blog.naver.com/atelierjpro/221413483005)
+
+<br>
 
 ## 🙋 Q1. 공전하는 태양계 만들기
 
