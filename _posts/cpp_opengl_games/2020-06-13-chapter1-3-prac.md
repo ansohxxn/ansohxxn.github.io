@@ -22,12 +22,14 @@ last_modified_at: 2020-06-13
 
 # 1.3 연습문제
 
-연습 문제는 스스로 풀이했습니다. 😀   
-{: .notice--primary} 
+연습 문제는 스스로 풀이했습니다. 😀    
+이전 포스트 보러가기 🖐 [1.3 상호작용 맛보기 - 키보드 입력과 반응](https://ansohxxn.github.io/c++%20games/chapter1-3/)   
+연습 문제 출처 : [홍정모 교수님 블로그](https://blog.naver.com/atelierjpro/221413483005)
+{: .notice--warning} 
 
-이전 포스트 보러가기 🖐 [1.3 상호작용 맛보기 - 키보드 입력과 반응](https://ansohxxn.github.io/c++%20games/chapter1-3/)
 
-[연습 문제 출처 : 홍정모 교수님 블로그](https://blog.naver.com/atelierjpro/221413483005)
+
+
 
 <br>
 
