@@ -1,5 +1,5 @@
 ---
-title:  "[C++, OpenGL] 1.4 연습 문제" 
+title:  "[C++, OpenGL] 1.4 연습 문제 풀이" 
 
 categories:
   - C++ games
@@ -75,22 +75,20 @@ namespace jm
 	class MouseExample : public Game2D
 	{
 	public:
-		float radius = 0.1f;                원의 반지름은 0.1f 로 설정
-		vec2 circlePos = vec2(0.5f, 0.5f);  원의 고정 위치
+		float radius = 0.1f;                // 원의 반지름은 0.1f 로 설정
+		vec2 circlePos = vec2(0.5f, 0.5f);  // 원의 고정 위치
 
 		void update() override
 		{
-			const vec2 mouse_pos = getCursorPos(true);       마우스 현재 위치
+			const vec2 mouse_pos = getCursorPos(true);       // 마우스 현재 위치
 
-			translate(circlePos);    
-if 문이 참일 땐 3. - 빨간원 파란원 둘다 translate(circlePos) 
-if 문이 거짓일땐 2. - 파란원만  translate(circlePos) 
-			drawFilledCircle(Colors::blue, radius);          1. 파란 원을 그린다.
+			translate(circlePos);  // 아래 if 문이 거짓일땐 파란원만, 아래 if 문이 참일 땐 빨간원 파란원 둘다 translate 될 것.
+			drawFilledCircle(Colors::blue, radius);         // 1. 파란 원을 그린다.
 
 			if (mouse_pos.x >= circlePos.x - radius && mouse_pos.x <= circlePos.x + radius 
 					&& mouse_pos.y >= circlePos.y - radius && mouse_pos.y <= circlePos.y + radius)
 			{
-				drawFilledCircle(Colors::red, radius);        원 안에 마우스 커서가 들어 가는게 참일 땐 2. 빨간 원을 그린다.
+				drawFilledCircle(Colors::red, radius);       // 원 안에 마우스 커서가 들어 가는게 참일 땐 2. 빨간 원을 그린다.
 			}
 		}
 	};
