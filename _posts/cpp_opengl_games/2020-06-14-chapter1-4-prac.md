@@ -4,7 +4,7 @@ title:  "[C++, OpenGL] 1.4 연습 문제 풀이"
 categories:
   - C++ games
 tags:
-  - [Programming, C++, OpenGL, Graphics, Math]
+  - [Programming, Cpp, OpenGL, Graphics, Math]
 
 toc: true
 toc_sticky: true
