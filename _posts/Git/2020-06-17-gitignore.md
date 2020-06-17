@@ -47,8 +47,6 @@ git commit -m "커밋 메세지"
 git push
 ```
 
-<br>
-
 ***
 <br>
 
