@@ -23,7 +23,7 @@ last_modified_at: 2020-06-08
 # 2.3 연습문제
 
 **연습 문제**는 스스로 풀이했습니다. 😀       
-해당 챕터 보러가기 🖐 [2.3 다형성으로 유연하게](https://ansohxxn.github.io/c++%20games/chapter2-1/)   
+해당 챕터 보러가기 🖐 [2.3 다형성으로 유연하게](https://ansohxxn.github.io/c++%20games/chapter2-3/)   
 연습 문제 출처 : [홍정모 교수님 블로그](https://blog.naver.com/atelierjpro/221413483005)
 {: .notice--warning}
 
