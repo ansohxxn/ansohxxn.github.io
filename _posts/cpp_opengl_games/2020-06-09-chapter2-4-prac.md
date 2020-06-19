@@ -4,7 +4,7 @@ title:  "[C++, OpenGL] 2.4 연습 문제 풀이 (아직 풀이 X)"
 categories:
   - C++ games
 tags:
-  - [Programming, Cpp, OpenGL, Graphics]
+  - [Programming, Cpp, OpenGL, Graphics, Design Pattern]
 
 toc: true
 toc_sticky: true
@@ -38,7 +38,7 @@ last_modified_at: 2020-06-09
 
 ## 🙋 Q3. 콘솔창 입력 기능을 확장해서 파일로부터 입력을 받도록 해보세요.
 
-
+***
 <br>
 
     🌜 개인 공부 기록용 블로그입니다. 오류나 틀린 부분이 있을 경우 
