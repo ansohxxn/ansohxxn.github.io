@@ -1,5 +1,5 @@
 ---
-title:  "[C++, OpenGL] 2.5 연습 문제 풀이 (아직 풀이 X)" 
+title:  "[C++] 2.5 연습 문제 풀이 (아직 풀이 X)" 
 
 categories:
   - C++ games
