@@ -4,7 +4,7 @@ title:  "[C++] 3.3 연습 문제 풀이"
 categories:
   - C++ games
 tags:
-  - [Programming, Cpp, OpenGL, Graphics, Design Pattern]
+  - [Programming, Cpp, OpenGL, Graphics, Math, Physics]
 
 toc: true
 toc_sticky: true
