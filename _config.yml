@@ -15,7 +15,7 @@
 minimal_mistakes_skin    : "dark" # "default"  "air", "aqua", "contrast", , "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "en-US"
+locale                   : "ko-KR"
 title                    : " 취업하고 시퍼효 🌝"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
@@ -268,7 +268,6 @@ compress_html:
 
 # Defaults
 defaults:
-
   # _posts
   - scope:
       path: ""
