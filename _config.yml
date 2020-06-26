@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "dark" # "default"  "air", "aqua", "contrast", , "dir
 
 # Site Settings
 locale                   : "ko-KR"
-title                    : " 취업하고 시퍼효 🌝"
+title                    : " ansohxxn 블로그 🌝"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "ansohxxn💛"
-description              : "An amazing website."
+description              : "게임 개발자 지망생으로서 공부한 것들을 정리하여 올리느 블로그입니다."
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
