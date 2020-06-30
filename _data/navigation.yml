@@ -14,15 +14,19 @@ main:
 blogging:
   - title: "C + +"
     children:
-      - title: "따라하며 배우는 C++"
+      - title: "◽ 따라하며 배우는 C++"
         url: /categories/#cpp
-      - title: "게임 만들기 연습 문제"
+      - title: "◽ 게임 만들기 연습 문제"
         url: /categories/#c-games
   - title: "U n i t y"
     children:
-      - title: "유니티 C# 게임 프로그래밍 에센스"
+      - title: "◽ 유니티 C# 게임 프로그래밍 에센스"
         url: /categories/#unity-lesson-1
+      - title: "◽ 내 유니티 문서"
+        url: https://ansohxxn.github.io/gameengine/list/
   - title: "E t c"
     children:
-      - title: "Github 블로그 만들기"
+      - title: "◽ Github 블로그 만들기"
         url: /categories/#blog
+      - title: "◽ Git, Github"
+        url: /categories/#git
