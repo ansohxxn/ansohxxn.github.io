@@ -2,7 +2,7 @@
 main:
   - title: "Home"
     url: /index.html
-  - title: "About me"
+  - title: "Read me"
     url: /about/
   - title: "Category"
     url: /categories/
