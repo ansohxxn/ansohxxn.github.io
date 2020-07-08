@@ -32,6 +32,8 @@ blogging:
         url: /categories/#unity-lesson-1
       - title: "◽ 내 유니티 문서"
         url: https://ansohxxn.github.io/gameengine/list/
+      - title: "◽ 게임 디자인 패턴"
+        url: /categories/#design-pattern
   - title: "E t c"
     children:
       - title: "◽ Github 블로그 만들기"
