@@ -32,6 +32,7 @@ last_modified_at: 2020-07-08
 3. 실행하고나면 b2.exe이 생기는데 이것도 실행해 줌
   - cmd로 실행하자. 비주얼 스튜디오와 bit에 맞게 옵션을 주어 설정하기 위해서.
   - 난 VS 2017 15.6 버전이기 때문에 아래 명령어를 사용했다. 각각 32bit, 64bit.
+  
     ```
     b2 -j4 -a --toolset=msvc-14.13 variant=debug,release link=static threading=multi address-model=32 lib32
 
