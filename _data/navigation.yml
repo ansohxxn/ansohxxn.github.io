@@ -22,6 +22,8 @@ blogging:
     children:
       - title: "◽ 횡스크롤 게임 만들기"
         url: /categories/#ue4-lesson-1
+      - title: "◽ 언리얼 C++ 게임 개발"
+        url: /categories/#ue4-lesson-2
   - title: "U n i t y"
     children:
       - title: "◽ 유니티 C# 게임 프로그래밍 에센스"
