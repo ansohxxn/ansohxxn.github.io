@@ -1,5 +1,5 @@
 ---
-title:  "(미완성)Chapter 1. Boost 라이브러리, Boost.Asio" 
+title:  "Chapter 1. Boost 라이브러리, Boost.Asio" 
 
 categories:
   -  Cpp NetWork 
@@ -21,7 +21,7 @@ last_modified_at: 2020-07-08
 
 - C++ 프로그래머를 위한 유용한 오픈소스 C++ 라이브러리 모음.
   - 많이 사용되고 유용하기 때문에 C++ 표준에도 종종 포함되어 왔다.
-  - 게임 회사 상당수가 Boost 라이브러리를 사용하고 있다. 
+  - IT, 게임 회사 상당수가 Boost 라이브러리를 사용하고 있다. 
 
 ### 설치
 
@@ -47,7 +47,21 @@ last_modified_at: 2020-07-08
 
 <br>
 
-## 
+## 🔔 Boost.Asio
+
+> Boost 라이브러리 중 하나로 <u>네트워크, 비동기 프로그래밍</u>과 관련 있는 라이브러리다.
+
+- 네트워크 프로그래밍에 주로 사용
+- 비동기 IO 입출력 프로그래밍을 지원함
+  - I/O 작업을 빠르게 처리할 수 있음
+- 멀티플랫폼 지원
+- 고성능 네트워크 프로그래밍에도 사용 가능
+
+> #include \<boost/asio.hpp> 로 Boost.Asio 사용.
+
+<br>
+
+## 🔔 간단한 Echo 서버, 클라이언트 만들기 (동기식 I/O 방식)
 
 ***
 <br>
