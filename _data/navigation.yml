@@ -18,6 +18,8 @@ blogging:
         url: /categories/#cpp
       - title: "◽ 게임 만들기 연습 문제"
         url: /categories/#c-games
+      - title: "◽ Boost.Asio 네트워크 프로그래밍"
+        url: /categories/#cpp-network
   - title: "U E 4"
     children:
       - title: "◽ 횡스크롤 게임 만들기"
