@@ -30,10 +30,10 @@ blogging:
     children:
       - title: "◽ 유니티 C# 게임 프로그래밍 에센스"
         url: /categories/#unity-lesson-1
-      - title: "◽ 내 유니티 문서"
-        url: https://ansohxxn.github.io/gameengine/list/
       - title: "◽ 게임 디자인 패턴"
         url: /categories/#design-pattern
+      - title: "◽ 내 유니티 문서"
+        url: https://ansohxxn.github.io/gameengine/list/
   - title: "E t c"
     children:
       - title: "◽ Github 블로그 만들기"
