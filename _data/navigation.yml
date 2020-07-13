@@ -26,6 +26,8 @@ blogging:
         url: /categories/#ue4-lesson-1
       - title: "◽ 언리얼 C++ 게임 개발"
         url: /categories/#ue4-lesson-2
+      - title: "◽ 내 언리얼 문서"
+        url: https://ansohxxn.github.io/gameengine/unreal-list/
   - title: "U n i t y"
     children:
       - title: "◽ 유니티 C# 게임 프로그래밍 에센스"
@@ -33,7 +35,7 @@ blogging:
       - title: "◽ 게임 디자인 패턴"
         url: /categories/#design-pattern
       - title: "◽ 내 유니티 문서"
-        url: https://ansohxxn.github.io/gameengine/list/
+        url: https://ansohxxn.github.io/gameengine/unity-list/
   - title: "E t c"
     children:
       - title: "◽ Github 블로그 만들기"

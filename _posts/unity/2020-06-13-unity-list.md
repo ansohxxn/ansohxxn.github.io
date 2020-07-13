@@ -1,5 +1,5 @@
 ---
-title:  "Unity > 컴포넌트, 함수, 변수, UnityEngine, 패키지 등등 총 정리" 
+title:  "Unity C# > 컴포넌트, 함수, 변수, UnityEngine, 패키지 등등 총 정리" 
 
 categories:
   -  GameEngine
