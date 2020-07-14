@@ -12,14 +12,16 @@ main:
     url: /year-archive/
  
 blogging:
-  - title: "C / C + + / C #"
+  - title: "C / C ++ / C #"
     children:
       - title: "◽ 따라하며 배우는 C++"
         url: /categories/#cpp
-      - title: "◽ 게임 만들기 연습 문제"
+      - title: "◽ C++ 게임 만들기 연습 문제"
         url: /categories/#c-games
-      - title: "◽ Boost.Asio 네트워크 프로그래밍"
+      - title: "◽ C++ Boost.Asio 네트워크 프로그래밍"
         url: /categories/#cpp-network
+      - title: "◽ C # 프로그래밍 입문"
+        url: /categories/#c-sharp
   - title: "U E 4"
     children:
       - title: "◽ 횡스크롤 게임 만들기"
@@ -32,12 +34,16 @@ blogging:
     children:
       - title: "◽ 유니티 C# 게임 프로그래밍 에센스"
         url: /categories/#unity-lesson-1
-      - title: "◽ 게임 디자인 패턴"
-        url: /categories/#design-pattern
       - title: "◽ 내 유니티 문서"
         url: https://ansohxxn.github.io/gameengine/unity-list/
+  - title: "Computer Science"
+    children:
+      - title: "◽ 네트워크"
+        url: /categories/#network
   - title: "E t c"
     children:
+      - title: "◽ 디자인 패턴"
+        url: /categories/#design-pattern
       - title: "◽ Github 블로그 만들기"
         url: /categories/#blog
       - title: "◽ Git, Github"
