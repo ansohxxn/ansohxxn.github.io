@@ -70,6 +70,19 @@ last_modified_at: 2020-07-13
     - 이 속성이 언리얼 디테일 윈도우뷰에서 보이지만 이 속성의 값을 <u>편집은 할 수 없다.</u>
   - UPROPERTY(EditAnywhere)
     - 이 속성이 언리얼 디테일 윈도우뷰에서 보이며 이 속성의 값도 <u>편집은 할 수 있다.</u>
+  - UPROPERTY(EditAnywhere, Category = Stat, <u>Meta = (AllowPrivateAccess = true)</u>)
+    - `priavte` 은닉성을 유지하나 에디터에서 편집할 수 있게 해주는 키워드
+
+<br>
+
+### UE_LOG
+> `UE_LOG`(카테고리, 로깅 수준, 형식 문자열, 인자...)
+
+- 로그를 출력한다.
+
+### ABLOG
+- 특정 카테고리를 고정으로 하고 로그를 남길 때 제작하는 매크로.
+
 
 <br>
 <br>
@@ -114,10 +127,50 @@ Water->SetRelativeLocation(FVector(0.0f, 0.0f, 135.0f));
 
 <br>
 
+### AddActorLocalRotation(Y축회전, Z축회전, X축 회전)
+
+- 액터를 인수만큼 추가로 회전시킴.
+- `FRotator`를 인수로 넘김
+
+```cpp
+AddActorLocalRotation(FRotator(0.0f, RotateSpeed * DeltaTime, 0.0f));  // Z 축으로 30도 * 프레임당 시간 만큼 회전
+```
+
+<br>
+
 ### SetStaticMesh(포인터)
 
 StaticMesh 컴포넌트를 해당 포인터가 참조하는 에셋을 붙인 상태로 붙여준다.
 
+<br>
+
+### FString::printf
+
+- C언어의 printf와 비슷하다. 형식 문자열을 출력함.
+- 언리얼에서는 `%s` 부분에 함수를 사용한다면 함수앞에 꼭 `*`를 붙여주어야 한다.
+  - *GetName()
+- TEXT 매크로로 인수를 넘긴다.
+
+```cpp
+ FString::printf(TEXT("Actor Name: %s, ID : %d, Location X : %.3f", *GetName(), ID, GetActorLocation().X);
+```
+
+<br>
+<br>
+
+## 👩‍🦰 이벤트 함수
+
+### BeginPlay
+  - 액터가 게임에 참여할 때 자동 호출
+  - 유니티의 Start
+
+### Tick(float DeltaTime)
+  - 매 프레임마다 호출됨
+  - 유니티의 Update
+  - 프레임 타임 정보가 인수로 필요함.
+
+### EndPlay
+  - 액터가 게임에서 퇴장하여 메모리에서 소멸될 때 자동 호출
 
 <br>
 <br>
