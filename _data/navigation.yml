@@ -12,7 +12,7 @@ main:
     url: /year-archive/
  
 blogging:
-  - title: "C + +"
+  - title: "C / C + + / C #"
     children:
       - title: "◽ 따라하며 배우는 C++"
         url: /categories/#cpp
