@@ -213,6 +213,8 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 1. 위치 좌표
 2. 벡터
 - `magnitude` : 벡터의 길이 및 크기. float
+- `sqrMagnitude` : 벡터의 길이 제곱. float
+- `normalized` : 해당 벡터의 방향 벡터. (길이 1)
 - `forward` : 해당 벡터의 ***앞쪽*** 을 나타내는 <u>방향 벡터</u> (길이가 1인)
 - `SmoothDamp(Vector, Vector, ref Vector3, float)` 함수
   - 매개변수 첫번째 벡터가
