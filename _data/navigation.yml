@@ -42,6 +42,8 @@ blogging:
         url: /categories/#algorithm-lesson-1
       - title: "◽ 자료구조와 알고리즘 with C#"
         url: /categories/#algorithm-lesson-2
+      - title: "◽ C 로 배우는 자료구조"
+        url: /categories/#data-structure
   - title: "C S"
     children:
       - title: "◽ 네트워크"
