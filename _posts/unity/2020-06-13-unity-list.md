@@ -232,6 +232,7 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 - *함수*
   - `Debug.Log` : 콘솔 출력
   - `Debug.DrawRay` : 레이캐스트 광선을 그려주어 개발자가 시각적으로 볼 수 있게끔 해준다.
+  - `Debug.LogFormat` : 출력 포맷 설정
 
 <br>
 
