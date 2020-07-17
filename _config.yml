@@ -96,7 +96,7 @@ author:
   name             : "🌙 ansohxxn"
   avatar           : "/assets/images/my-cat.jpg"
   bio              : "공부, 개인 프로젝트 기록하는 노트"
-  location         : "Seoul, South Korea"
+  #location         : "Seoul, South Korea"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"

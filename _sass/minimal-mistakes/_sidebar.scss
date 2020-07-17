@@ -127,8 +127,8 @@
   }
 
   img {
-    max-width: 250px;
-    border-radius: 15%;
+    max-width: 200px;
+    border-radius: 20%;
 
     @include breakpoint($large) {
       padding: 5px;
@@ -168,7 +168,6 @@
   font-family: $sans-serif;
   font-size: $type-size-3;
   color:#FFF;
-  font-weight: bold;
 }
 
 .author__bio {
