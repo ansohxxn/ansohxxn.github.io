@@ -1,0 +1,250 @@
+---
+title:  "[STL 알고리즘] algorithm" 
+
+categories:
+  - STL
+tags:
+  - [Coding Test, Cpp, STL]
+
+toc: true
+toc_sticky: true
+
+date: 2020-07-21
+last_modified_at: 2020-07-21
+---
+
+## 🔔 STL 알고리즘
+
+> #include \<algorithm>
+
+- [모두의 알고리즘 페이지 참고하기](https://modoocode.com/256)
+- 코테 공부하며 알게된 것들만 차근 차근 추가해나갈 것.
+
+## 🔔 원소를 수정하지 않는 작업들
+
+### for_each
+
+> 처음과 끝 반복자 범위 내 원소들에 대해 함수를 실행시킨다.
+
+- 원소들에 대해 함수를 실행시키되 <u>원소를 수정하지 않는다. </u>
+- 원소들을 <u>순차적으로</u> 접근하여 함수를 실행시킨다.
+- **인수**
+  1. 범위의 첫 원소 가리키는 반복자
+  2. 범위의 끝 원소 가리키는 반복자
+  3. 함수 포인터
+    - 람다 함수 넘기기 가능  
+- **리턴값**
+  - 인수로 전달 받은 함수 객체를 리턴한다.
+
+```cpp
+for_each(myvector.begin(), myvector.end(), myfunction);
+```
+- myvector 라는 벡터의 처음부터 끝까지 모든 원소들에 대해 myfunction 함수를 실행시킨다.
+
+<br>
+
+### 순열 
+
+> 원소들을 어떤 순서로 나열한 것
+
+<br>
+
+## 🔔 원소를 수정하는 작업들
+
+### 파티션(partition)
+
+> 특정 조건을 만족하는 원소들은 앞으로 보내고 나머지들은 뒤로 보내는 작업 
+
+<br>
+
+### 정렬(sort)
+
+#### sort
+
+```cpp
+sort(myVector.begin(), myVector.end());
+```
+
+> `<` 연산자를 사용하여 정렬한다. 
+
+- 정렬 하고자 하는 범위의 첫번째 원소를 가리키는 반복자와 끝 원소를 가리키는 반복자를 인수로 넘긴다.
+- 기본적으로 오름차순으로 정렬된다.
+  - `sort` 함수를 사용하여 객체를 정렬하고자 할 때는 `<`연산자를 오버로딩 해야 한다.
+
+
+```cpp
+bool compare(const float & a, const float & b)
+{
+  return a > b;
+}
+...
+sort(myVector.begin(), myVector.end(), compare);
+```
+
+> 비교 연산 결과(`bool`타입)를 리턴하는 비교 함수를 직접 정의하여 이를 포인터로 넘겨줄 수 있다. 이 방법으로 <u>내가 원하는 기준대로 정렬시킬 수 있다.</u>
+
+- 사용자 정의 **비교함수**
+  - 인수는 반드시 2개 받아야 한다.
+    - 비교는 피연산자가 2개 있어야 하니까
+  - 인자가 굳이 `const &`일 필요는 없지만 <u>비교 함수 내부에서 인자로 받은 원소를 수정하면 안된다.</u>
+  - `<` 연산 결과 리턴 👉 오름차순 정렬
+  - `>` 연산 결과 리턴 👉 내림차순 정렬
+- 아래와 같이 람다 함수로 넘길 수도 있다.
+  ```cpp
+  std::sort(s.begin(), s.end(), [](int a, int b) { return a > b; });**
+  ```
+- **템플릿 비교 함수**
+  - string 비교할 때 함수, int 비교할 때 함수,... 이렇게 다 만들 필요 없이 <u>비교 함수 또한 구조체 템플릿으로 만들고 ()연산자를 오버로딩하면 된다.</u> 어떤 타입이든 간에 템플릿을 통하여 구체화 된다.
+    ```cpp
+    struct int_compare {
+    bool operator()(const int& a, const int& b) const { return a > b; }
+    };
+
+    ...
+    std::sort(vec.begin(), vec.end(), int_compare());
+    ```
+
+```cpp
+#include <functional>
+
+std::sort(s.begin(), s.end(), std::greater<int>());
+```
+- C++ 표준인 `functional` 라이브러리의 `greater<타입>()` 함수 객체를 넘겨 내림 차순 정렬을 해줄 수도 있다. 
+
+<br>
+
+#### partial_sort 
+
+> 배열의 일부분만 정렬한다.
+
+```cpp
+partial_sort(start, middle, end)
+```
+- [start, end) 전체 원소들 중에서 [start, middle) 자리에 전체에서 가장 작은애들만 순서대로 저장한다.
+  - 즉 [start, middle) <u>자리에만 전체 정렬을 적용함.</u> 나머지는 신경 안씀.
+  - 예를 들어
+    - 5 3 1 6 4 7 2 👉 partial_sort 👉 <u>1 2 3</u> 6 5 7 4
+      - 3 개만 정렬했다.
+  - 100명중 상위 10명의 성적만 보고 싶다. 이럴 때 쓰면 좋을 정렬. 
+- `sort`와 마찬가지로 비교를 위한 비교 함수 포인터도 인자로 넣어줄 수 있다.
+
+<br>
+
+#### stable_sort
+
+> 정렬은 하되 원소들간의 순서를 보전한다.
+
+- 일반 `sort`의 경우 [a, b]  원소의 크기가 같다면 [a, b]가 될지 [b, a]가 될지는 랜덤으로 정해진다.
+- 그러나 `stable_sort`는 원래 순서를 보전하기 때문에 크기가 같으면 [a, b]로 유지가 된다.
+- 때문에 `sort`보다는 좀 느리다.
+- `sort`와 마찬가지로 비교를 위한 비교 함수 포인터도 인자로 넣어줄 수 있다.
+
+<br>
+
+### 이진 탐색(binary search)
+
+> 아래 함수들을 사용하기 위해선 <u>원소들이 정렬되어 있다는 전제가 있어야 한다.</u>
+
+#### lower_bound 
+
+> 어떤 값의 <u>하한선</u>
+
+```cpp
+lower = lower_bound(myVector.begin(), myVector.end(), 7);
+```
+
+- 두 반복자로 나타낸 해당 범위 안의 원소들 중 <u>세번째 인수 값보다 <u>크거나 같은</u> 첫번째 원소의 반복자를 리턴</u>한다.
+  - 없다면 범위의 끝을 나타내는 반복자를 리턴한다. 
+- `sort`와 마찬가지로 비교를 위한 비교 함수 포인터도 인자로 넣어줄 수 있다.
+- 예시
+  - arr = [1, 2, 3, 4, 5, 6, 7] 일때
+  - `lower_bound(arr, arr + 10, 6)`은 `6을 가리키는 반복자` 이다.
+    - 6 보다 크거나 같은 첫번째 원소는 6
+
+<br>
+
+#### upper_bound 
+
+```cpp
+upper = upper_bound(myVector.begin(), myVector.end(), 7);
+```
+
+- 두 반복자로 나타낸 해당 범위 안의 원소들 중 <u>세번째 인수 값보다 <u>큰</u> 첫번째 원소의 반복자를 리턴</u>한다.
+  - 없다면 범위의 끝을 나타내는 반복자를 리턴한다. 
+- `sort`와 마찬가지로 비교를 위한 비교 함수 포인터도 인자로 넣어줄 수 있다.
+- 예시
+  - arr = [1, 2, 3, 4, 5, 6, 7] 일때
+  - `upper_bound(arr, arr + 10, 6)`은 `7 을 가리키는 반복자` 이다.
+    - 6 보다 큰 첫번째 원소는 7
+
+<br>
+
+#### equal_range 
+
+```cpp
+equal_range(vec.begin(), vec.end(), 3);
+```
+- <u>(lowerbound, uppderbound)</u>의 `std::pair` 객체를 리턴한다. 
+  - (해당 범위 내에서 처음으로 3과 같거나 큰 원소의 반복자, 해당 범위 내에서 처음으로 3보다큰 원소의 반복자)
+
+<br>
+
+#### binary_search 
+
+```cpp
+// 이렇게 구현되어 있다.
+
+template <class ForwardIterator, class T>
+  bool binary_search (ForwardIterator first, ForwardIterator last, const T& val)
+{
+  first = std::lower_bound(first,last,val);
+  return (first!=last && !(val<*first));
+}
+```
+```cpp
+binary_search(vec.begin(), vec.end(), 3);
+```
+
+- `bool`타입을 리턴한다.
+  - 즉 세번째 인수가 해당 범위 내에 있다면 true, 없으면 false를 리턴한다.
+
+<br>
+
+### 병합(merge)
+
+> 아래 함수들을 사용하기 위해선 <u>원소들이 정렬되어 있어야 한다.</u>
+
+<br>
+
+### 집합(set)
+
+> 아래 함수들을 사용하기 위해선 <u>원소들이 정렬되어 있어야 한다.</u>
+
+<br>
+
+## 🔔 힙(heap)
+
+<br>
+
+## 🔔 최대/최소 관련
+
+### max, min
+
+```cpp
+max(1, 3); // 1, 3 중 더 큰 값
+min(1, 3); // 1, 3 중 더 작은 값
+```
+- 객체 끼리의 `max`, `min`을 구하고 싶으면 `<` 비교 연산자 오버로딩 해놓기
+
+<br>
+
+## 🔔 기타
+
+***
+<br>
+
+    🌜 개인 공부 기록용 블로그입니다. 오류나 틀린 부분이 있을 경우 
+    언제든지 댓글 혹은 메일로 지적해주시면 감사하겠습니다! 😄
+
+[맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
+
