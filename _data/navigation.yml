@@ -16,7 +16,7 @@ blogging:
     children:
       - title: "◽ 따라하며 배우는 C++"
         url: /categories/#cpp
-      - title: "◽ C++ STL"
+      - title: "◽ C++ STL & 표준"
         url: /categories/#stl
       - title: "◽ C++ 게임 만들기 연습 문제"
         url: /categories/#c-games
