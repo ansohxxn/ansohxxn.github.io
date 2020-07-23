@@ -44,6 +44,8 @@ blogging:
         url: /categories/#coding-test-lesson
       - title : "◽ 프로그래머스"
         url: /categories/#programmers
+      - title : "◽ 백준 알고리즘"
+        url: /categories/#boj
   - title: "Algorithm"
     children:
       - title: "◽ 영리한 프로그래밍을 위한 알고리즘"
