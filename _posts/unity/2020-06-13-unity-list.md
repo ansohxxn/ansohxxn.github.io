@@ -108,6 +108,9 @@ last_modified_at: 2020-06-13
 ### Character Controller
 - `Rigidbody`를 사용하지 않고, 즉 현실적인 물리시스템을 사용하지 않고 움직임의 대부분을 개발자의 코드에 의해서 통제하게끔 만드는 컴포넌트다.
 - `Collider`를 확장한 컴포넌트.
+- *변수*
+  - `isGrounded` 
+    - bool 타입 변수로 캐릭터가 땅에 닿고 있으면 True를 리턴한다.
 
 <br>
 
@@ -215,7 +218,9 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 - `magnitude` : 벡터의 길이 및 크기. float
 - `sqrMagnitude` : 벡터의 길이 제곱. float
 - `normalized` : 해당 벡터의 방향 벡터. (길이 1)
-- `forward` : 해당 벡터의 ***앞쪽*** 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+- `forward` : 해당 벡터의 ***앞 쪽*** 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+- `right` : 해당 벡터의 ***오른 쪽*** 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+- `up` : 해당 벡터의 ***위 쪽*** 을 나타내는 <u>방향 벡터</u> (길이가 1인)
 - `SmoothDamp(Vector, Vector, ref Vector3, float)` 함수
   - 매개변수 첫번째 벡터가
   - 매개변수 두번째 벡터로 되기까지
@@ -250,6 +255,10 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 
 ### Physics
 물리와 관련된 함수들이 미리 들어있는 함수 집합
+- *변수,상수*
+  - `Physics.gravity`
+    - 중력 가속도 상수 벡터
+    - Physics.gravity.y 는 y 방향의 중력 가속도를 뜻함.
 - *함수*
   - `Physics.OverlapSphere(Vector3 pos, float radius)`
     - 구의 중심 위치(pos)와 반지름을 매개변수로 넘겨주면 구의 <u>반경 내에 있는 모든 * Collider * </u> 들을 <u>Collider 배열로 리턴</u>한다.
@@ -264,6 +273,7 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
       - 광선과 충돌한 Collider의 정보를 담는 역할을 하는 `RaycastHit` 타입의 변수도 매개변수로 넘겨준다. 이때 `out`을 함께 써서 바로 적용될 수 있게 해주기.
         - *if (Physics.Raycast(ray, `out hit`, distance, whatIsTarget))*
           - 광선에 충돌이 감지되는 순간, 이 if 조건문이 실행되자마자 RaycastHit 타입의 hit 변수에 충돌한 Collider의 정보가 들어간다. 
+      
 
 <br>
 
@@ -435,12 +445,15 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 - 1초에 수십번씩 자신의 상태를 갱신하고 주기적으로 계속 실행 
   - 외부에서 직접 찾아 실행할 필요 없음. 
 - <u>스스로 매 프레임마다 실행 됨.</u>
+- <u>프레임 속도는 환경마다 다르기 때문에 물리 처리를 update() 함수에서 해주면 환경에 따라 물리 처리 오차가 발생할 수 있어 비추천</u>
 
 ### void FixedUpdate()
-- Update()처럼 매 프레임 실행된다.
+- <u>Update()처럼 매번 반복 실행</u>되나 프레임에 기반하지 않고 어떤 고정적이고 동일한 시간에 기반하여 실행된다.
   - Update()와의 차이점
     - Update()는 화면 한번 깜빡일때마다 실행되서 렉걸리거나 환경이 안좋거나 하면 그만큼 Update()도 적게 실행되지만
     - Fixedupdate()는 환경에 상관없이 무조건 실행 횟수를 지킨다. 정해진 수만큼 무조건 실행 함
+- <u>프레임과 상관없이 고정적인 시간마다 실행되기 때문에 환경에 상관없이 물리처리를 오차 없이 실행시킬 수 있다.</u>
+  - 물리처리는 **FixedUpdate()** 안에서 해주기.
 
 ### void OnTriggerEnter(Collider other)
 - On<u>Trigger</u>Enter : `Trigger`인 Collider와 충돌할 때 자동으로 실행된다. 
