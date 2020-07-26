@@ -12,6 +12,9 @@ layout: single
 
 개인적으로 공부하고 프로젝트 한 것들을 기록하는 블로그입니다.  
 저만의 위키 혹은 포트폴리오와도 같은 소중한 공간이에요! 👱‍♀️  
-이 블로그의 모든 글들은 검색 엔진에 노출되지 않습니다. [📜robots.txt](https://ansohxxn.github.io/robots.txt)
 {: style="text-align: center;"}
 {: .notice--warning}
+
+<!--
+이 블로그의 모든 글들은 검색 엔진에 노출되지 않습니다. [📜robots.txt](https://ansohxxn.github.io/robots.txt)
+-->
