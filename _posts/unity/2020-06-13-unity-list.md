@@ -124,6 +124,11 @@ last_modified_at: 2020-06-13
 
 <br>
 
+### Line Renderer
+주어진 점들을 이은 선을 그리는 역할을 한다.
+
+<br>
+
 ### Audio Source
 mp3파일을 재생시키는 컴포넌트. 마치 카세트 같은 것. 테이프로 쓸 오디오 클립(mp3 파일)만 넣어주면 된다. 
 - 옵션 
@@ -461,6 +466,11 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 - <u>프레임과 상관없이 고정적인 시간마다 실행되기 때문에 환경에 상관없이 물리처리를 오차 없이 실행시킬 수 있다.</u>
   - 물리처리는 **FixedUpdate()** 안에서 해주기.
 
+### void LateUpate()
+  - 유니티 함수로, <u>매 프레임마다 실행되지만 Update()함수 보다 늦게 실행된다.</u>
+    - <u>Update() 함수 실행이 다 끝난 후에, Update()함수의 종료 시점에 맞춰서 LateUpdate() 가 실행</u>된다.
+  - 예를 들어 캐릭터의 이동 방향 계산은 Update() 에서 끝내준 후,Update()에서 계산 끝낸 캐릭터의 이동 방향에 따라 LateUpdate()에서 카메라가 캐릭터를 따라가도록 하는 식으로 구현한다.
+
 ### void OnTriggerEnter(Collider other)
 - On<u>Trigger</u>Enter : `Trigger`인 Collider와 충돌할 때 자동으로 실행된다. 
   - `Is Trigger`가 <u>체크된 Collider와 충돌하는 경우 발생되는 메세지</u>
@@ -643,6 +653,7 @@ MonoBehaviour 에서 지원하는 함수로, 함수 혹은 이벤트를 실행�
 - `shift` : shift 한 후 파일을 두개 선택하면 그 파일들을 포함하여 파일 사이에 있는 파일들까지도 전부 선택된다.
   - `Alt + shift` : 표면상 리스트 뿐만아니라 모든 자식의 자식들까지 다 선택된다. 
 - 게임 창의 maximize on play 누르면 게임 실행화면을 큰 화면으로 볼 수 있다.
+- `Alt + 🔻` : `Alt` 누른 채로  Hierarchy창의 오브젝트의 자식 목록들을 볼 수 있는 🔻를 누르면 모~~든 자식의 자식들까지 모든 리스트가 펼쳐진다.
 
 ***
 <br>
