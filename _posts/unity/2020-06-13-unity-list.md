@@ -127,6 +127,14 @@ last_modified_at: 2020-06-13
 ### Line Renderer
 주어진 점들을 이은 선을 그리는 역할을 한다.
 
+- 프로퍼티
+  - `positionCount`
+    - <u>선에 위치한 정점의 수</u>를 Set 하고 Get 할 수 있는 프로퍼티. 
+- 함수
+  - `SetPosition`
+    - 인수 👉 정점 인덱스, 위치로 사용할 Vector3 
+    - 선분 상의 정점의 위치를 지정하는 함수
+
 <br>
 
 ### Audio Source
@@ -135,6 +143,13 @@ mp3파일을 재생시키는 컴포넌트. 마치 카세트 같은 것. 테이�
   - `Play On Awake` : 게임 시작하자 마자 재생할건지
   - `Loop` : 음악이 끝나도 다시 반복할건지
   - 볼륨 크기 설정도 가능
+- 함수
+  - `Play()`
+    - 클립을 재생. 단, 인수를 필요로 하지 않으므로 미리 `clip`에 재생시킬 클립이 할당 되어 있어야 한다.
+    - 소리를 중첩시키지 않기 때문에 이미 재생 중이었던 소리는 중지 시킨후 자신의 클립을 재생시킨다.
+  - `PlayOneShot(clip)`
+    - 클립을 1회 재생. 단 Play()와는 다르게 재생시킬 `clip`을 인수로 받는다.
+    - Play()와는 다르게 소리를 중첩해서 재생할 수 있다. 이미 재생 중이었던 소리를 중지시키지 않은 채로 자신의 클립을 같이 그 위에 재생시킨다.
 
 <br>
 
@@ -251,8 +266,8 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 
 ### Mathf
 - 수학과 관련된 함수들이 미리 들어있는 함수 집합
-  - Mathf(a, b) : a, b 둘 중 더 큰 것을 리턴한다.
-  - sqrt(a) : 루트 a 
+  - `Max(a, b)` : a, b 둘 중 더 큰 것을 리턴한다.
+  - `sqrt(a)` : 루트 a 
   - `SmoothDamp(float, float, ref float, float)` 함수
     - 매개변수 첫번째 값이
     - 매개변수 두번째 값으로 되기까지
@@ -261,6 +276,8 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
   - `SmoothDampAngle(float, float, ref float, float)`
     - 👉 SmoothDamp 함수와 기능은 동일하나 <u>각도를 고려해서 스무스하게 변경시킨다.</u>
       - 360도 체계에서는 예를들어 -270도와 90도는 같은 회전값임을 의미하니까 사실 -270도면 90도만 돌면 되는건데 일반 SmoothDamp 함수를 사용하면 270도씩 돌아버리니까 SmoothDampAngle을 사용하면 <u>의도와 달리 더 많이 회전하는 경우를 막아 줌</u> !
+  - `Clamp(float target, float a, float b);`
+    - target 이 a ~ b 범위를 벗어나지 않도록 한다. 
 
 <br>
 
@@ -280,10 +297,12 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
     - `Physics.Raycast(발사위치 Vector3, 발사방향 Vector3, 광선길이 float, 감지할 레이어 Layer)`
       - 발사 위치와 발사 방향은 필수 매개변수다.
     - `Physics.Raycast(광선 Ray, 충돌 정보 RaycastHit, 광선길이 float, 감지할 레이어 Layer)`
+      - Boolean 타입을 리턴한다. `Raycast`에 걸린게 있다면 true 리턴.
       - `Ray`는 광선의 바랏 위치와 발사 방향을 담고 있는 광선이다.
       - 광선과 충돌한 Collider의 정보를 담는 역할을 하는 `RaycastHit` 타입의 변수도 매개변수로 넘겨준다. 이때 `out`을 함께 써서 바로 적용될 수 있게 해주기.
         - *if (Physics.Raycast(ray, `out hit`, distance, whatIsTarget))*
           - 광선에 충돌이 감지되는 순간, 이 if 조건문이 실행되자마자 RaycastHit 타입의 hit 변수에 충돌한 Collider의 정보가 들어간다. 
+      - 감지할 레이어 마스크인 다섯번째 인수에 `~`을 붙여주면 그 레이어 마스크가 붙은 오브젝트들은 레이 캐스트 처리 하지 말고 무시하라는 뜻.
       
 
 <br>
@@ -380,6 +399,8 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
   - `1.0f`면 bRotation을 그대로 따름
   - `0.0f`면 aRotation을 그대로 따름
   - `0.2f`면 aRotation에 좀 더 가깝게 회전
+- `Quaternion.AngleAxis(float angle, Vector3 axis);`
+  - 축 axis 주위를 angle 만큼 회전한 rotation을 생성하고 리턴한다.
 - `eulerAngles`
   - 변수다. `Quaternion.eulerAngles`이렇게 쓰는게 아니라 `Quaternion타입을 참조하는 변수.eulerAngles` 이렇게 쓴다.
   - 쿼터니언을 오일러각으로 변환시킨다. 즉 Vector3로 변환한다. 
