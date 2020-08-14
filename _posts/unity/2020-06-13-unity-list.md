@@ -80,6 +80,9 @@ last_modified_at: 2020-06-13
       - 카메라가 찍고 있는 화면은 (x, y) 2D 좌표를 사용하며 화면의 좌측 하단은 (0,0)이며 화면의 우측 상단은 (1,1)이다. 
       - z 값은 카메라 오브젝트로부터 실제 카메라가 찍고 있는 화면까지의 실제 게임 월드 거리, 즉 카메라의 깊이를 의미한다.
       - (0.5f, 0.5f, 0.0f)를 넘겨준다는 것은 <u>카메라 화면의 정중앙 + 화면과 카메라 오브젝트는 위치를 일치하게</u> 라는 듯이다.
+  - `ViewportPointToRay(Vecotr3)`
+    - 카메라가 찍고 있는 화면(뷰포트)상의 위치를 Vector3로 넘기면 그 화면 상 위치를 가로지르는 `Ray`를 리턴한다. 
+    - position.z 는 무시 된다. 
 
 <br>
 
@@ -303,6 +306,13 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
         - *if (Physics.Raycast(ray, `out hit`, distance, whatIsTarget))*
           - 광선에 충돌이 감지되는 순간, 이 if 조건문이 실행되자마자 RaycastHit 타입의 hit 변수에 충돌한 Collider의 정보가 들어간다. 
       - 감지할 레이어 마스크인 다섯번째 인수에 `~`을 붙여주면 그 레이어 마스크가 붙은 오브젝트들은 레이 캐스트 처리 하지 말고 무시하라는 뜻.
+  - `Physics.Linecast`
+    - `Physics.Raycast(발사시작위치 Vector3, Linecast 종료 지점 Vector3, 충돌 정보 RaycastHit, 감지할 레이어 Layer)`
+    - 라인캐스트. 눈에 보이지 않는 광선을 쏴서 물리적 충돌을 감지한다.
+    - Raycast 와의 차이점 
+      - 👉 Linecast는 정확한 종료 지점을 알 고 어떤 범위 내에서의 충돌을 감지하려 할 때, Raycast는 방향만 알 때 사용! 
+    - start과 **end** <u>사이의 범위</u>내에서 교차하는 충돌이 있을 경우 true를 리턴
+    - 충돌 정보는 `Raycast hit`에 저장된다.
       
 
 <br>
@@ -528,11 +538,22 @@ void OnTriggerEnter(Collider other)
 <br>
 
 ### void OnEnable()
+
+> 해당 스크립트가 <u>활성화 될 때마다 자동으로 실행된다.</u>
+
 `컴포넌트`가 꺼져 있다가 켜지는 상태마다 발동된다. Start()와 비슷하지만 Start()는 게임 시작시 한번 발동되는 반면 OnEnable()은 컴포넌트가 꺼져있다가 켜질 때마다 1회씩 실행된다. 
 - 게임 시작되자마자 `enabled = true` 상태인 컴포넌트들에게 발동
 - 게임 도중에`enabled = false`이다가 `enabled = true`가 되는 컴포넌트들에게 발동
   - 오브젝트 끌 때는 `SetActive(false)`
   - 컴포넌트나 스크립트를 끌 때는 `enabled = false`
+
+<br>
+
+### void OnDisable()
+
+> 해당 스크립트가 <u>비활성화 될 때마다 자동으로 실행된다.</u>
+
+`컴포넌트`가 켜져 있다가 꺼지는 상태마다 발동된다. 
 
 <br>
 
