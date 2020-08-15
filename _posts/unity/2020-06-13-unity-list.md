@@ -385,6 +385,8 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
   - update같이 매 프레임마다 실행되는 함수 안에서 시간 간격을 고려하여 곱해준다.
     - 1초에 3m 가게 움직이고 싶은데 <u>1초에 60번 깜빡이는 60프레임 컴퓨터</u>라면 update함수 내에서 `3m * Time.deltaTime` 해주면 된다.
     - 매 프레임마다 `3m * Time.deltaTime`씩 움직여 최종적으로 1초에 3m 움직이게 되는 것.
+- `Time.time`
+  - 게임 시작 후 현재까지의 경과 시간(float 초 단위)
 
 <br>
 
