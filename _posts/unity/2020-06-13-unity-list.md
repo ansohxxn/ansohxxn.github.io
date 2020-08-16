@@ -34,6 +34,10 @@ last_modified_at: 2020-06-13
 - 톱니 바퀴 버튼을 누른 후 Reset을 누르면 오브젝트 위치가 원점으로 돌아간다.
 - ✨ <u>부모 자식 관계</u> 또한 Transform이 관리한다.
   - `transform.parent` : 내 부모 오브젝트를 뜻한다.
+    - 함수 `SetParent(부모 Transform)` 로 부모 오브젝트를 지정해줄 수 있다.
+      ```c#
+      effect.transform.SetParent(parent);
+      ```
 
 
 #### `Translate(Vector3)`
@@ -162,6 +166,16 @@ mp3파일을 재생시키는 컴포넌트. 마치 카세트 같은 것. 테이�
 이 컴포넌트를 붙이면 오브젝트는 파티클 효과를 일으킬 수 있다.
 - 변수
   - `duration` : Particle System 은 스스로의 러닝타임을 알고 있다. 
+- 함수
+  - `Play()`
+    - 파티클 이펙트 재생
+- 유니티상의 옵션
+  - `Stop action`
+    - 이펙트가 재생이 끝났을때 실행될 처리.
+      - `Destroy`를 할당해주면 이펙트 재생이 끝나자마 이펙트 오브젝트가 파괴된다.
+      - `Disable`을 할당해주면 이펙트 재생이 끝나자마 이펙트 오브젝트가 비활성화 된다.
+      - `Callback` 을 할당해주면 이펙트 재생이 끝나자마자 **OnParticleSystemStop** 이벤트 함수가 실행된다. 즉, **OnParticleSystemStop** 이벤트 함수안에 내가 원하는 처리 구현해놓아 실행시킬 수도 있다.
+    
 
 <br>
 
