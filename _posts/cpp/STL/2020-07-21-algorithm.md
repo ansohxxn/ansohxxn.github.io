@@ -98,7 +98,9 @@ sort(myVector.begin(), myVector.end(), compare);
   std::sort(s.begin(), s.end(), [](int a, int b) { return a > b; });**
   ```
 - **템플릿 비교 함수**
-  - string 비교할 때 함수, int 비교할 때 함수,... 이렇게 다 만들 필요 없이 <u>비교 함수 또한 구조체 템플릿으로 만들고 ()연산자를 오버로딩하면 된다.</u> 어떤 타입이든 간에 템플릿을 통하여 구체화 된다.
+  - string 비교할 때 함수, int 비교할 때 함수,... 이렇게 다 만들 필요 없이 <u>비교 함수 또한 구조체 템플릿으로 만들고 ()연산자를 오버로딩하면 된다.</u>
+  - 주의 사항 📢 `a < b` 일 때도 true, `a == b`일 때도 true, 즉 `a <= b` 일 때 true식으로 구현하면 안된다. 런타임 에러남! 정렬 기준이 명확하지 않기 때문. **strict weak ordering 위반**
+  - 어떤 타입이든 간에 템플릿을 통하여 구체화 된다.
     ```cpp
     struct int_compare {
     bool operator()(const int& a, const int& b) const { return a > b; }
