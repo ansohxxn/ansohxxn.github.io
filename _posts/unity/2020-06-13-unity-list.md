@@ -34,6 +34,10 @@ last_modified_at: 2020-06-13
 - 톱니 바퀴 버튼을 누른 후 Reset을 누르면 오브젝트 위치가 원점으로 돌아간다.
 - ✨ <u>부모 자식 관계</u> 또한 Transform이 관리한다.
   - `transform.parent` : 내 부모 오브젝트를 뜻한다.
+    - 함수 `SetParent(부모 Transform)` 로 부모 오브젝트를 지정해줄 수 있다.
+      ```c#
+      effect.transform.SetParent(parent);
+      ```
 
 
 #### `Translate(Vector3)`
@@ -83,6 +87,8 @@ last_modified_at: 2020-06-13
   - `ViewportPointToRay(Vecotr3)`
     - 카메라가 찍고 있는 화면(뷰포트)상의 위치를 Vector3로 넘기면 그 화면 상 위치를 가로지르는 `Ray`를 리턴한다. 
     - position.z 는 무시 된다. 
+  - `WorldToScreenPoint(Vector3)`
+    - 월드 좌표계 위치(Vector3)를 인수로 받아서 이를 <u>카메라 화면 상의 위치로 변환하여 Vector2 를 리턴한다.</u>
 
 <br>
 
@@ -160,6 +166,16 @@ mp3파일을 재생시키는 컴포넌트. 마치 카세트 같은 것. 테이�
 이 컴포넌트를 붙이면 오브젝트는 파티클 효과를 일으킬 수 있다.
 - 변수
   - `duration` : Particle System 은 스스로의 러닝타임을 알고 있다. 
+- 함수
+  - `Play()`
+    - 파티클 이펙트 재생
+- 유니티상의 옵션
+  - `Stop action`
+    - 이펙트가 재생이 끝났을때 실행될 처리.
+      - `Destroy`를 할당해주면 이펙트 재생이 끝나자마 이펙트 오브젝트가 파괴된다.
+      - `Disable`을 할당해주면 이펙트 재생이 끝나자마 이펙트 오브젝트가 비활성화 된다.
+      - `Callback` 을 할당해주면 이펙트 재생이 끝나자마자 **OnParticleSystemStop** 이벤트 함수가 실행된다. 즉, **OnParticleSystemStop** 이벤트 함수안에 내가 원하는 처리 구현해놓아 실행시킬 수도 있다.
+    
 
 <br>
 
@@ -271,6 +287,7 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 - 수학과 관련된 함수들이 미리 들어있는 함수 집합
   - `Max(a, b)` : a, b 둘 중 더 큰 것을 리턴한다.
   - `sqrt(a)` : 루트 a 
+  - `Floor(float)` : 내림. 소수점 버림
   - `SmoothDamp(float, float, ref float, float)` 함수
     - 매개변수 첫번째 값이
     - 매개변수 두번째 값으로 되기까지
@@ -429,7 +446,7 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 - scene과 scene을 넘나 드는 작업을 하고 싶을 때 사용.
 - `SceneManagement`를 사용할 수 있다.
 - ***함수***
-  - `SceneManager.LoadScene("씬 이름" 혹은 씬 인덱스), 모드)`;
+  - `SceneManager.LoadScene("씬 이름" 혹은 "씬 인덱스"), 모드)`;
     - 해당 씬을 로드한다.
     - 첫번째 인수로 씬의 이름 문자열이나 씬의 인덱스를 넘긴다.
     - 모드는 `LoadSceneMode.Single`, `LoadSceneMode.Additive` 이렇게 2가지 있는 Single이 디폴트 값이다. 따라서 인수 한개만 넘기면 싱글 모드로 씬을 로드한다.
@@ -437,7 +454,13 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
       - `LoadSceneMode.Additive` : 현재 씬에 새로운씬을 추가적으로 덧대어 로드. 말풍선을 덧붙이는 느낌.
   - `SceneManager.GetActiveScene()`
     - 현재 활성화 되있는 씬을 리턴한다.
-    - SceneManager.GetActiveScene().`buildIndex` : 현재 활성화 되있는 씬의 인덱스 리턴
+    - SceneManager.GetActiveScene().`buildIndex`
+      - 현재 활성화 되있는 씬의 인덱스 리턴
+    - SceneManager.GetActiveScene().`name`
+      - 현재 활성화 되있는 씬의 이름 리턴
+  ```c#
+  SceneManager.LoadScene(SceneManager.GetActiveScene().name);  // 현재 활성화 되어있는 씬을 재시작
+  ```
 
 <br>
 
@@ -668,6 +691,30 @@ myEvent.invoke();
     - 해당 오브젝트를 Brain Camera로 설정해준다.
     - 여러개의 가상 카메라 중 하나를 선택하여 사용할 수 있는 기능을 가진다.
 
+<br>
+<br>
+
+## 👩‍🦰 Attributes
+
+### [SerializeField]
+
+```c#
+[SerializeField] private GameObject gameoverUI;
+```
+
+- private 이지만 `[SerializeField]`이 붙으면 <u>private 하더라도 유니티 엔진의 Inspector 창에서 슬롯이 열려</u> 이를 수정할 수 있다.
+
+<br>
+
+### [Range]
+
+```c#
+[Range(0.0f, 12.0f)] public float Size = 12.0f;
+```
+
+- 유니티 엔진의 Inspector 창에서 해당 최소값 ~ 최대값을 범위로 가지는 <u>슬라이더 슬롯</u>이 열린다.
+
+<br>
 <br>
 
 ## 👩‍🦰 미분류
