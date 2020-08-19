@@ -2,8 +2,8 @@
 main:
   - title: "Home"
     url: /index.html
-  - title: "Read me"
-    url: /about/
+  #- title: "Read me"
+    #url: /about/
   - title: "Category"
     url: /categories/
   - title: "Tag"
@@ -40,12 +40,14 @@ blogging:
         url: https://ansohxxn.github.io/gameengine/unity-list/
   - title: "Coding Test"
     children:
-      - title: "◽ C++을 이용한 문제 해결"
-        url: /categories/#coding-test-lesson
+      - title: "◽ C++ 알고리즘 구현"
+        url: /categories/#algorithm
       - title : "◽ 프로그래머스"
         url: /categories/#programmers
       - title : "◽ 백준 알고리즘"
         url: /categories/#boj
+      - title: "◽ 인프런 코딩 테스트 강의"
+        url: /categories/#coding-test-lesson
   - title: "Algorithm"
     children:
       - title: "◽ 영리한 프로그래밍을 위한 알고리즘"
