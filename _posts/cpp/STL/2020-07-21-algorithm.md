@@ -232,7 +232,7 @@ binary_search(vec.begin(), vec.end(), 3);
 
 <br>
 
-## 🔔 최대/최소 관련
+## 🔔 수학 관련
 
 ### max, min
 
@@ -259,6 +259,57 @@ min_element(시작 주소/반복자, 끝 주소/반복자)  // 해당 범위(끝
     ```
 
 <br>
+
+### next_permutation
+
+> `bool` 타입을 리턴한다. 
+
+```cpp
+next_permutation(vec.begin(),vec.end());
+```
+- 시작 위치, 끝 위치를 인수로 넘겨 해당 범위를 넘겨주면 <u>인수로 넘긴 범위를 기준으로</u> <u>다음 순열 모양새로 정렬을 한 후</u> `true` 를 리턴한다.
+  - 다음 순열이 없다면 `false` 리턴
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main(){
+
+	vector<int> v = {1, 2, 3};
+	
+	do
+	{
+		for(int i = 0; i < 3; i++)
+		{
+			cout << v[i] << " ";
+		}
+
+		cout << '\n';
+
+	}while(next_permutation(v.begin(),v.end()));   
+
+}
+```
+
+- 다음 순열이 있다면 `true`를 리턴하고 없으면 `false`를 리턴하므로 위와 같이 while 반복 문의 조건으로 넣어 모든 순열을 전부 구할 수 있다.
+- 위의 코드는 {1, 2, 3}의 `3P3` 순열들을 순열 순서대로 출력하게 된다.
+
+
+<br>
+
+### prev_permutation
+
+> `bool` 타입을 리턴한다. 
+
+```cpp
+prev_permutation(vec.begin(),vec.end());
+```
+- 시작 위치, 끝 위치를 인수로 넘겨 해당 범위를 넘겨주면 <u>인수로 넘긴 범위를 기준으로</u> <u>이전 순열 모양새로 정렬을 한 후</u> `true` 를 리턴한다.
+  - 이전 순열이 없다면 `false` 리턴
 
 ## 🔔 기타
 
