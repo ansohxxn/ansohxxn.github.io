@@ -2,7 +2,7 @@
 title:  "Chapter 1. Boost 라이브러리, Boost.Asio" 
 
 categories:
-  -  Cpp NetWork 
+  -  Cpp Network 
 tags:
   - [Cpp, Programming, Network]
 

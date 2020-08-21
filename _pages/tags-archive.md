@@ -3,6 +3,5 @@ title: "Tag"
 layout: tags
 permalink: /tags/
 author_profile: true
-sidebar:
-    nav: "blogging"
+sidebar_main: true
 ---
