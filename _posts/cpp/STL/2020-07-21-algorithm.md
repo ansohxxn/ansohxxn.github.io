@@ -147,6 +147,17 @@ partial_sort(start, middle, end)
 
 <br>
 
+#### reverse
+
+> 인수로 넘긴 범위의 순서를 거꾸로 뒤집는다.
+
+```cpp
+string str = "abcdefg";
+reverse(str.begin() + 3, str.end());  // abcgfed  인덱스 3~끝 부분만 순서를 뒤집는다.
+```
+
+<br>
+
 ### 이진 탐색(binary search)
 
 > 아래 함수들을 사용하기 위해선 <u>원소들이 정렬되어 있다는 전제가 있어야 한다.</u>
