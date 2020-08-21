@@ -11,18 +11,24 @@ main:
   - title: "Post by Year"
     url: /year-archive/
  
+
+# 카테고리 추가시 
+  # 1. _includes/nav_list_main 에서 코드를 추가한다.
+    # sidebar.html 에서 머릿말에 sidebar_main = true 를 해주면 nav_list_main 을 불러오게끔 마지막 부분에 코딩이 되어있다.
+  # 2. pages/catecory 에 연결할 카테고리 페이지를 추가한다.
+
 blogging:
   - title: "C/C++/C#"
     children:
-      - title: "◽ 따라하며 배우는 C++"
-        url: /categories/#cpp
+      - title: "◽ C++"
+        url: /categories/cpp
       - title: "◽ C++ STL & 표준"
         url: /categories/#stl
-      - title: "◽ C++ 게임 만들기 연습 문제"
+      - title: "◽ C++ 연습 문제"
         url: /categories/#c-games
       - title: "◽ C++ Boost.Asio 네트워크"
         url: /categories/#cpp-network
-      - title: "◽ C # 프로그래밍"
+      - title: "◽ C# 프로그래밍"
         url: /categories/#c-sharp
   - title: "Unreal Engine 4"
     children:
