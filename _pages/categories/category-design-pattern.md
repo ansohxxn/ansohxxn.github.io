@@ -10,5 +10,5 @@ sidebar_main: true
 
 ***
 
-{% assign posts = site.categories.['Design Pattern'] | sort:"date" | reverse %}
+{% assign posts = site.categories.['Design Pattern'] %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}

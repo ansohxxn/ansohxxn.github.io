@@ -10,5 +10,5 @@ sidebar_main: true
 
 ***
 
-{% assign posts = site.categories.['Coding Test Lesson'] | sort:"date" | reverse %}
+{% assign posts = site.categories.['Coding Test Lesson'] %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}

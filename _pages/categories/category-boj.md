@@ -10,5 +10,5 @@ sidebar_main: true
 
 ***
 
-{% assign posts = site.categories.BOJ | sort:"date" | reverse %}
+{% assign posts = site.categories.BOJ %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
