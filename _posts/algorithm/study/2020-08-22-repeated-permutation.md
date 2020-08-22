@@ -97,7 +97,7 @@ b b b
 
 <br>
 
-### 순열 구하기
+### 일반 순열 구하기
 
 > *위에 중복 순열 구하는 코드와 비슷한 방식대로*  한단계씩 깊숙히 들어가면서 대입하되 <u>이전에 후보가 결정되지 않았었던 원소만 대입할 수 있는 장치</u>를 넣으면 일반 순열을 구현할 수 있다.
 
@@ -141,9 +141,9 @@ int main()
     vector<char> vec = {'a', 'b', 'c', 'd'};
     vector<char> perm(r);
     
-    vector<pair<char, bool>> check(vec.size());
-    for(int i = 0; i < check.size(); i++)  // check는 vec의 원소들이 이미 perm 원소로 결정된 적이 있는지를 함께 나타내주는 컨테이너가 될 것이다.
-        check[i] = make_pair(vec[i], false);  // false로 초기화
+    vector<pair<char, bool>> check;
+    for(int i = 0; i < vec.size(); i++)  // check는 vec의 원소들이 이미 perm 원소로 결정된 적이 있는지를 함께 나타내주는 컨테이너가 될 것이다.
+        check.push_back(make_pair(vec[i], false));  // false로 초기화
     
     repeatPermutation(check, perm, 0); // 4P2 {'a', 'b', 'c', 'd'}의 길이 2의 순열 모두 출력하기
 
@@ -184,6 +184,33 @@ d c
     for(int i = 0; i < check.size(); i++)
         check[i] = make_pair(vec[i], false);
     ```
+
+<br>
+
+#### cf) vector 에러와 깨달음
+
+```cpp
+    vector<char> vec = {'a', 'b', 'c', 'd'};
+    vector<char> perm(r);
+    
+    vector<pair<char, bool>> check(vec.size());
+    for(int i = 0; i < vec.size(); i++)  
+        check.push_back(make_pair(vec[i], false)); 
+```
+
+> 위와 같이 하면 에러가 발생하거나 공백들이 출력되는 등 정상적으로 출력되지 않는다. 왜 그럴까? 
+
+- <u>check는 vec.size() 사이즈 만큼의 공간을 이미 갖고 있는 상태다.</u> `vector<pair<char, bool>> check(vec.size());` 라고 선언해서!
+- 그런 상태에서 `push_back`을 해버리면 내용물은 텅텅 비었지만 <u>vec.size() 사이즈만큼의 공간을 차지하는 상태에서 뒤에 원소를 추가해주려고 하니 에러가 발생</u>하는 것이다.
+
+```cpp
+vector<pair<char, bool>> check;
+for(int i = 0; i < vec.size(); i++)  
+    check.push_back(make_pair(vec[i], false)); 
+```
+
+- `vector<pair<char, bool>> check;` 그냥 이렇게 사이즈 0 인 아무것도 없는 빈 공간의 컨테이너로 선언한 후 그 이후에 `push_back`으로 뒤에 추가해주면 문제가 발생하지 않는다.
+
 
 ***
 <br>
