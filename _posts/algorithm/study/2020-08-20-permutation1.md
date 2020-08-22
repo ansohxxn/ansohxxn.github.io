@@ -20,7 +20,7 @@ last_modified_at: 2020-08-20
 ## 순열이란
 
 - 순서를 따진다.
-  - `abc` 와 `abc`는 서로 다른 존재이다.
+  - `abc` 와 `acb`는 서로 다른 존재이다.
 - 중복을 허용하지 않는다.
 - `nPr`
   - 5P3 = 5 X 4 X 3
@@ -29,7 +29,7 @@ last_modified_at: 2020-08-20
 
 <br>
 
-## 재귀로 구현한 코드
+## 재귀로 구현한 코드 1
 
 > 예시) `{'a', 'b', 'c', 'd'}` 배열의 `4P3`의 순열 출력하기
 
@@ -329,6 +329,79 @@ d a b
 1. 모든 case는 base case에 수렴하는 방향으로 가야한다.
   - ex) `depth`는 최초에 0 에서 시작하여 `depth == r`인 base case에 수렴하도록 재귀 호출시 `depth + 1`을 인수로 넘긴다.  
 2. 한 단계씩 재귀 할 때마다 변화를 줄 인수를 넘겨주어야 한다. 👉 `depth` 
+
+<br>
+
+### 재귀로 구현한 코드 2
+
+- 아래 코드의 자세한 설명은 [이 포스트 참고](https://ansohxxn.github.io/algorithm/repeated-permutation/#%EC%88%9C%EC%97%B4-%EA%B5%AC%ED%95%98%EA%B8%B0)
+
+```cpp
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void repeatPermutation(vector<pair<char, bool>> check, vector<char> perm, int depth)
+{
+    if (depth == perm.size())  // perm.size 👉 r
+    {
+        for(int i = 0; i < perm.size(); i++)
+        {
+            cout << perm[i] << " ";
+        }
+        cout << endl;
+        
+        return;
+    }
+    
+    for(int i = 0; i < check.size(); i++)  // check.size() 👉 vec.size()와 동일. vec 원소들 순회나 마찬가지!
+    {
+        if (check[i].second == true)  // 이전에 perm 원소로 결정된 vec원소라면 그냥 지나가기
+            continue;
+        else
+        {
+            check[i].second = true;  // 이전에 perm 원소로 결정된 vec원소라고 표시해 줌.
+            perm[depth] = check[i].first;   // 이전에 perm 원소로 결정된 vec원소가 아니라면 perm의 원소로 결정. depth 자리에 대입. 
+            repeatPermutation(check, perm, depth + 1);  // perm의 다음 원소 결정하러 가기
+            check[i].second = false;  // 결정하고 돌아왔으면 체크 해제
+        }
+    }
+}
+
+int main()
+{
+    const int r = 2;
+    
+    vector<char> vec = {'a', 'b', 'c', 'd'};
+    vector<char> perm(r);
+    
+    vector<pair<char, bool>> check(vec.size());
+    for(int i = 0; i < check.size(); i++)  // check는 vec의 원소들이 이미 perm 원소로 결정된 적이 있는지를 함께 나타내주는 컨테이너가 될 것이다.
+        check[i] = make_pair(vec[i], false);  // false로 초기화
+    
+    repeatPermutation(check, perm, 0); // 4P2 {'a', 'b', 'c', 'd'}의 길이 2의 순열 모두 출력하기
+
+    return 0;
+}
+
+```
+```
+💎출력💎
+
+a b
+a c
+a d
+b a
+b c
+b d
+c a
+c b
+c d
+d a
+d b
+d c
+```
 
 <br>
 
