@@ -51,6 +51,14 @@ for_each(myvector.begin(), myvector.end(), myfunction);
 
 ## 🔔 원소를 수정하는 작업들
 
+### iter_swap
+
+> 두 반복자를 인수로 넘기면 두 반복자가 가리키는 원소를 바꿔치기 해준다.
+
+```cpp
+iter_swap(str.begin() + depth, str.begin() + i);  // str[depth]와 str[i]가 서로 자리를 바꾸게 된다.
+```
+
 ### 파티션(partition)
 
 > 특정 조건을 만족하는 원소들은 앞으로 보내고 나머지들은 뒤로 보내는 작업 
