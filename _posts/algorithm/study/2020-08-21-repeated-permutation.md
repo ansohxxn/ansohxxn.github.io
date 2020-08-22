@@ -9,8 +9,8 @@ tags:
 toc: true
 toc_sticky: true
 
-date: 2020-08-22
-last_modified_at: 2020-08-22
+date: 2020-08-21
+last_modified_at: 2020-08-21
 ---
 
 ## 중복 순열이란
