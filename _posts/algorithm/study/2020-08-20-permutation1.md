@@ -122,6 +122,12 @@ d a b
       - `depth`를 초기값인 0 부터 넘겨주어 1 씩 증가시켜 깊게 들어간다. 
       - `nPr` 이므로 r번째까지 들어가면 되므로 `depth == r`이 될 때 재귀 종료된다.
   - 스왑 하고 재귀한 후 다시 스왑하여 원래 자리로 되돌려야 한다.
+    - 스왑은 위 코드처럼 직접 `void swap` 함수를 구현할 수도 있지만 STL알고리즘 헤더에서 지원하는 `iter_swap` 함수를 사용할 수도 있다!
+      ```cpp
+      #include <algorithm>
+
+      iter_swap(str.begin() + depth, str.begin() + i);
+      ```
 
 <br>
 
