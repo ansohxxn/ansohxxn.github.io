@@ -522,7 +522,7 @@ int main(){
 
 <br>
 
-#### 주의 사항 : 오름차순 정렬
+#### 특징 : 1. 오름차순 정렬
 
 > `next_permutation`으로 모든 순열을 구하려면 반드시 <u>오름 차순 정렬이 되어 있어야 한다.</u> `<` 연산자를 사용하여 순열 정렬을 해나가기 때문이다.
 
@@ -600,6 +600,13 @@ int main(){
 
 <br>
 
+#### 특징 : 2. 중복 제외
+
+중복을 제외하고 정렬이 된다. 예를 들어 1 이 두 개 중복되어 있는 `{0, 1, 1}`의 순열을 구한다면, 원래 같으면 3P3 인 6가지의 순열 결과가 나와야 하지만 중복 결과가 제외된 `{0, 1, 1}`, `{1, 0, 1}`, `{1, 1, 0}` 이렇게 3 가지만 나온다! 1이 2개가 중복되어 있기 때문에 중복된 결과가 있을 수 있는데 이는 제외됨.
+
+
+<br>
+
 ### prev_permutation
 
 > `bool` 타입을 리턴한다. 
@@ -611,8 +618,9 @@ prev_permutation(vec.begin(),vec.end());
   - 이전 순열이 없다면 `false` 리턴
 - `next_permutation`과는 다르게 `<`연산자를 사용한 <u>내림 차순 정렬로 순열 정렬을 해나간다.</u>
   - 이 얘기는 즉, `prev_permutation`을 사용하여 모든 `nPn` 순열 결과를 구하려면 미리 내림 차순 정렬을 해놔야 한다는 얘기!  
-- <u>조합(Combination)을 구현할 때 사용한다.</u>
-  - [조합 포스트 참고](https://ansohxxn.github.io/algorithm/combination/#stl-prev_permutation으로-조합-구현하기)
+- `next_permutation`와 마찬가지로 <u>중복을 제외하고 정렬</u>된다.
+  - 이 성질은 <u>조합(Combination)을 구현할 때 사용한다.</u>
+    - [조합 포스트 참고](https://ansohxxn.github.io/algorithm/combination/#stl-prev_permutation으로-조합-구현하기)
 
 ```cpp
 #include <iostream>
