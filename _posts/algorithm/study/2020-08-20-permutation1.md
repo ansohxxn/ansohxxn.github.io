@@ -332,7 +332,7 @@ d a b
 
 <br>
 
-### 재귀로 구현한 코드 2
+## 재귀로 구현한 코드 2
 
 - 아래 코드의 자세한 설명은 [이 포스트 참고](https://ansohxxn.github.io/algorithm/repeated-permutation/#%EC%88%9C%EC%97%B4-%EA%B5%AC%ED%95%98%EA%B8%B0)
 
