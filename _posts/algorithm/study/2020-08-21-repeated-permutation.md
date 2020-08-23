@@ -189,13 +189,17 @@ d c
 
 #### cf) vector 에러와 깨달음
 
+> 공간이 없는 벡터일 때 👉 `push_back`
+
+> 내용물은 아직 없지만 공간은 잡혀있는 벡터일 때 👉 `[]` 
+
 ```cpp
     vector<char> vec = {'a', 'b', 'c', 'd'};
     vector<char> perm(r);
     
     vector<pair<char, bool>> check(vec.size());
     for(int i = 0; i < vec.size(); i++)  
-        check.push_back(make_pair(vec[i], false)); 
+        check.push_back(make_pair(vec[i], false)); // ❌런타임 에러 발생!
 ```
 
 > 위와 같이 하면 에러가 발생하거나 공백들이 출력되는 등 정상적으로 출력되지 않는다. 왜 그럴까? 
@@ -211,6 +215,22 @@ for(int i = 0; i < vec.size(); i++)
 
 - `vector<pair<char, bool>> check;` 그냥 이렇게 사이즈 0 인 아무것도 없는 빈 공간의 컨테이너로 선언한 후 그 이후에 `push_back`으로 뒤에 추가해주면 문제가 발생하지 않는다.
 
+
+```cpp
+vector<int> vec;
+
+vec[0] = 2;  // ❌런타임 에러 발생!
+```
+
+벡터 `vec`은 아직 아무런 공간을 차지 하지 않는 벡터다. 그런 상황에서 `vec[0]`을 통해 없는 공간을 사용하려고 하면 위와같이 에러가 발생한다.
+
+```cpp
+vector<int> vec(3);
+
+vec[0] = 2;  
+```
+
+위와 같이 `vec`을 선언시 int 데이터가 3 개 들어갈 만큼 공간을 미리 확보해두면 `vec[0]`을 통해 접근해도 문제가 없다. 이미 `vec`로서 존재하는 공간에 접근하려고 하는 것이기 때문이다! 그리고 저렇게 미리 공간을 잡아두면 vec[0]~vec[2]는 `0`으로 초기화를 해준다. (int 벡터의 경우)
 
 ***
 <br>
