@@ -50,7 +50,7 @@ void Combination(vector<char> arr, vector<char> comb, int r, int index, int dept
 {
     if (r == 0)
     {
-        for(int i = 0; i < index; i++)
+        for(int i = 0; i < comb.size(); i++)
             cout << comb[i] << " ";
         cout << endl;
     }
@@ -171,7 +171,7 @@ void Combination(vector<char> arr, vector<char> comb, int index, int depth)
 {
     if (depth == comb.size())
     {
-        for(int i = 0; i < index; i++)
+        for(int i = 0; i < comb.size(); i++)
             cout << comb[i] << " ";
         cout << endl;
         
