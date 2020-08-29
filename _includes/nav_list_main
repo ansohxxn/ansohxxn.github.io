@@ -140,6 +140,13 @@
             </ul>
             <ul>
                 {% for category in site.categories %}
+                    {% if category[0] == "Blender" %}
+                        <li><a href="/categories/blender" class="">Blender ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
                     {% if category[0] == "Git" %}
                         <li><a href="/categories/git" class="">Git & Github ({{category[1].size}})</a></li>
                     {% endif %}
