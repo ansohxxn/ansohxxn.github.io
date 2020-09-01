@@ -66,10 +66,21 @@ last_modified_at: 2020-06-13
 
 <br>
 
+### Capsule Collider
+
+Collider는 <u>물리적으로 오브젝트끼리 표면에 충돌이 일어났을 때를 감지</u>하고 이를 처리하는 컴포넌트다. 캡슐 모양의 Collider로 주로 인체, 나무, 가로등과 같은 긴 형태의 모델의 Collider로 사용 된다. 
+
+<br>
+
 ### Mesh Renderer
 - 오브젝트에게 그림을 그려주는 컴포넌트
 - 마치 물감 같은 컴포넌트
 - **<u>Material</u>**을 다룬다.
+
+<br>
+
+### Skinned Mesh Renderer
+- Bone 애니메이션을 렌더링 할 때, 애니메이션으로 메시를 변경하기 위해 사용하는 컴포넌트.
 
 <br>
 
@@ -247,6 +258,22 @@ mp3파일을 재생시키는 컴포넌트. 마치 카세트 같은 것. 테이�
   - [참고 포스트](https://ansohxxn.github.io/unity%20lesson%201/chapter10-3/)
 
 <br>
+
+### Nav Mesh Agent
+
+> `AI`로 이 컴포넌트를 오브젝트에 붙이면 해당 오브젝트가 목표까지 최단 거리를 계산해 추적하는 역할을 하며 충돌을 회피하는 기능을 제공한다. 
+
+- 지나갈 수 있는 영역과 없는 영역을 미리 구워 놔서 `NavMesh` 데이터들을 만들어 놔야 한다. 
+- ***변수***
+  - `radius`
+    - Agent의 반경
+    - 이 반경을  Agent들간의 충돌을 계산할 수도 있고 장애물을 어떻게 돌아갈 것인지에 계산될 수 있다.
+  - `stoppingDistance`
+    - Agent가 목표를 추적하다가 목표 위치에 가까워졌을시 서서히 정지하는 근접 거리.
+  - `speed`
+    - Agent의 최대 이동 속도
+
+<br>
 <br>
 
 ## 👩‍🦰 UnityEngine
@@ -255,22 +282,26 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 <br>
 
 ### Vector2, Vector3
-1. 위치 좌표
-2. 벡터
-- `magnitude` : 벡터의 길이 및 크기. float
-- `sqrMagnitude` : 벡터의 길이 제곱. float
-- `normalized` : 해당 벡터의 방향 벡터. (길이 1)
-- `forward` : 해당 벡터의 ***앞 쪽*** 을 나타내는 <u>방향 벡터</u> (길이가 1인)
-- `right` : 해당 벡터의 ***오른 쪽*** 을 나타내는 <u>방향 벡터</u> (길이가 1인)
-- `up` : 해당 벡터의 ***위 쪽*** 을 나타내는 <u>방향 벡터</u> (길이가 1인)
-- `SmoothDamp(Vector, Vector, ref Vector3, float)` 함수
-  - 매개변수 첫번째 벡터가
-  - 매개변수 두번째 벡터로 되기까지
-  - 네번째 매개변수인 시간(float)동안 스무스하게 변화하는 값을 리턴한다.
-  - 세번째 매개변수는 Call by reference인 ref 참조 변수로서 직전, 마지막 프레임에서의 속도를 나타낸다. 함수 안에서 계산되어 바깥으로 꺼내짐.
-- `zero` : 원점. 
-  - `Vector2.zero` 👉 (0, 0)
-  - `Vector3.zero` 👉 (0, 0, 0)
+> 위치 좌표, 벡터
+- ***변수***
+  - `magnitude` : 벡터의 길이 및 크기. float
+  - `sqrMagnitude` : 벡터의 길이 제곱. float
+  - `normalized` : 해당 벡터의 방향 벡터. (길이 1)
+  - `forward` : 해당 벡터의 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+  - `right` : 해당 벡터의 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+  - `up` : 해당 벡터의 ***위 쪽*** (y 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+  - `zero` : 원점. 
+    - `Vector2.zero` 👉 (0, 0)
+    - `Vector3.zero` 👉 (0, 0, 0)
+- ***함수***
+  - `SmoothDamp(Vector, Vector, ref Vector3, float)` 함수
+    - 매개변수 첫번째 벡터가
+    - 매개변수 두번째 벡터로 되기까지
+    - 네번째 매개변수인 시간(float)동안 스무스하게 변화하는 값을 리턴한다.
+    - 세번째 매개변수는 Call by reference인 ref 참조 변수로서 직전, 마지막 프레임에서의 속도를 나타낸다. 함수 안에서 계산되어 바깥으로 꺼내짐.
+  - `Distance(Vector a, Vector b)`
+    - a 와 b 사이의 거리를 리턴한다. float 리턴.
+
 
 <br>
 
@@ -430,6 +461,8 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
   - `0.2f`면 aRotation에 좀 더 가깝게 회전
 - `Quaternion.AngleAxis(float angle, Vector3 axis);`
   - 축 axis 주위를 angle 만큼 회전한 rotation을 생성하고 리턴한다.
+    - 예를 들어 중심 축이 되는 `axis`가 y 축이라면 회전 값이 y 값은 변하지않고 x, z 값만 변한다.
+      - ![image](https://user-images.githubusercontent.com/42318591/91792755-40175b00-ec51-11ea-84b5-5537a296cdc3.png){: width="70%" height="70%"}{: .align-center}
 - `eulerAngles`
   - 변수다. `Quaternion.eulerAngles`이렇게 쓰는게 아니라 `Quaternion타입을 참조하는 변수.eulerAngles` 이렇게 쓴다.
   - 쿼터니언을 오일러각으로 변환시킨다. 즉 Vector3로 변환한다. 
@@ -437,6 +470,17 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 - `identity`
   - 변수다. 
   - 0도, 0도, 0도로 회전한 쿼터니언 값.
+
+<br>
+
+### Gizmos
+
+> `OnDrawGizmos()`, `OnDrawGizmosSelected()` 같은 이벤트 함수 내에서 사용되며 개발자의 편의를 위해 Scene상에서만 보여지는 기즈모를 그리는 함수들이 모여이는 클래스다.
+
+- ***변수***
+  - `color` 기즈모 컬러
+- ***함수***
+  - `DrawSphere(Vector3 center, float radius` 기즈모가 될 구를 그린다. 
 
 <br>
 
@@ -487,6 +531,28 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
   - hit.point : 광선에 감지된 Collider의 충돌 위치벡터
   - hit.collider : 광선에 감지된 Collider
 
+
+<br>
+<br>
+
+## 👩‍🦰 UnityEditor
+`using UnityEditor` 를 해주어야만 사용이 가능하다. 
+
+### Handles
+
+<u>그림을 그리는 여러가지 함수</u>가 내장되어 있는 클래스다. 3D 기즈모와 같은 것을 그릴 수 있고 GUI도 그릴 수 있다.
+
+- ***변수***
+  - `color` 핸들하는 색상
+- ***함수***
+  - `DrawSolidArc` 색깔이 꽉 채워져 칠해져 있는 부채꼴(Arc)를 그린다.
+    - 인수
+      - *Handles.DrawSolidArc(eyeTransform.position, Vector3.up, leftRayDirection, fieldOfView, viewDistance);*
+        - 시야 각이 그려지는 위치인 `eyeTransform.position` 에서 그려지며 (Vector3 center)
+        - `Vector3.up` 축을 기준으로 회전한 부채꼴 (Vector3 normal)
+        - `leftRayDirection` 을 부채꼴 시작점으로 (from Vector3)
+        - 오른쪽으로 `fieldOfview` 각도만큼 회전한 (float angle)
+        - 중심으로부터 호가 그려지는 길이는, 즉 반지름이 `viewDistance` (좀비가 볼 수 있는 거리)인 Arc를 그린다. (float radius) 
 
 <br>
 <br>
@@ -591,6 +657,22 @@ void OnTriggerEnter(Collider other)
 
 - 애니메이션의 관절 꺾는 IK 정보가 갱신될 때마다 발동되는 이벤트 함수.
 - Animator와 관련된 이벤트로 애니메이터가 붙어있는 오브젝트만 이 이벤트 함수를 동작시킬 수 있다.
+- 씬상에 존재하기는 하나 아직 보이지는 않는 그런 오브젝트들을 기즈모를 통해 보여줌으로서 위치 조정을 쉽게 해주는 등등 개발자 편의를 돕는다. 
+
+<br>
+
+### void OnDrawGizmos()
+
+- 유디터 에디터 내에서만, 씬 상에서만 <u>매 프레임 기즈모를 그리는 역할</u>을 한다.
+- 이 함수가 소속된 스크립트가 컴포넌트로서 붙은 오브젝트가 Scene 화면 상에서 항상 보이도록 하는 이벤트 함수.
+- 씬상에 존재하기는 하나 아직 보이지는 않는 그런 오브젝트들을 기즈모를 통해 보여줌으로서 위치 조정을 쉽게 해주는 등등 개발자 편의를 돕는다. 
+
+<br>
+
+### void OnDrawGizmosSelected()
+
+- 유디터 에디터 내에서만, 씬 상에서만 <u>Hierarchy 창에서 선택된 오브젝트에 한해서만 매 프레임 기즈모를 그리는 역할</u>을 한다.
+- 이 함수가 소속된 스크립트가 컴포넌트로서 붙은 오브젝트가 선택됐을때만 보이도록 하는 이벤트 함수.
 
 <br>
 
