@@ -272,6 +272,11 @@ mp3파일을 재생시키는 컴포넌트. 마치 카세트 같은 것. 테이�
     - Agent가 목표를 추적하다가 목표 위치에 가까워졌을시 서서히 정지하는 근접 거리.
   - `speed`
     - Agent의 최대 이동 속도
+  - `remainingDistance`
+    - 현재 경로에서 목표 지점까지 남아있는 거리
+- ***함수***
+  - `SetDestination(Vector3 target)` 
+    - 목표 위치를 인수로 넘기면 agent가 해당 목표 지점까지 움직이게 하는 함수.
 
 <br>
 <br>
@@ -301,6 +306,8 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
     - 세번째 매개변수는 Call by reference인 ref 참조 변수로서 직전, 마지막 프레임에서의 속도를 나타낸다. 함수 안에서 계산되어 바깥으로 꺼내짐.
   - `Distance(Vector a, Vector b)`
     - a 와 b 사이의 거리를 리턴한다. float 리턴.
+  - `Angle(Vector a, Vector b)`
+    - a 와 b 사이의 각도를 리턴한다. float 리턴.
 
 
 <br>
@@ -367,12 +374,19 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 
 ### Random
 난수 생성과 관련된 함수들이 있는 집합
+- *변수/프로퍼티*
+  - Random.`insideUnitSphere`
+    - 반지름 1 을 갖는 구 안의 랜덤한 위치(Vector3)를 반환하는 프로퍼티. 
+      ```c#
+      var randomPos = Random.insideUnitSphere * distance + center;  // center를 중점으로 하여 반지름(반경) distance 내에 랜덤한 위치 리턴
+      ```
 - *함수*
   - Random.`Range(int min, int max)`;
     - [min, max) 범위내에서 <u>int 타입의 랜덤한 정수</u>를 리턴한다.
       - max는 포함되지 않는다. 
   - Random.`ColorHSV()`
     - 랜덤한 컬러를 리턴한다.
+  
 
 <br>
 
@@ -484,7 +498,7 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 
 <br>
 
-### UnityEngine.SceneManagement
+### 👩🏻‍🦰 UnityEngine.SceneManagement
 `using UnityEngine.SceneManagement`을 해주어야만 사용할 수 있다. 
 
 - scene과 scene을 넘나 드는 작업을 하고 싶을 때 사용.
@@ -505,6 +519,27 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
   ```c#
   SceneManager.LoadScene(SceneManager.GetActiveScene().name);  // 현재 활성화 되어있는 씬을 재시작
   ```
+
+<br>
+
+### 👩🏻‍🦰 UnityEngine.AI
+`using UniyEngine.AI`를 해주어야만 사용할 수 있다.
+
+#### NavMesh
+
+> AI 에이전트가 걸어다닐 수 있는 표면. 네비게이션 경로를 계산할 수 있는 표면이 된다.
+
+- ***함수***
+  - `SamplePosition((Vector3 sourcePosition, out NavMeshHit hit, float maxDistance, int areaMask)`
+    - `areaMask` 에 해당하는 NavMesh 중에서  `maxDistance` 반경 내에서 `sourcePositio`에 <u>가장 가까운 위치를 찾아서</u> 그 결과를 `hit`에 담음
+
+#### NavMeshHit
+
+> NavMesh 샘플링의 결과를 담을 컨테이너. Raycast hit 과 비슷
+
+  - `hit.normal` : 광선에 감지된 Collider의 노말 벡터 (충돌 표면의 방향벡터)
+  - `hit.distance` : 광선 발사 위치로부터 광선에 감지된 Collider까지의 거리
+  - `hit.position` : 광선에 감지된 Collider의 충돌 위치벡터
 
 <br>
 
