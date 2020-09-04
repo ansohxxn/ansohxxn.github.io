@@ -274,6 +274,9 @@ mp3파일을 재생시키는 컴포넌트. 마치 카세트 같은 것. 테이�
     - Agent의 최대 이동 속도
   - `remainingDistance`
     - 현재 경로에서 목표 지점까지 남아있는 거리
+  - `desiredVelocity`
+    - NavMeshAgent의 `desiredVelocity`은 음 목적지로 향하는 목표 속도를 나타낸다. 실제 속도는 아님! 현재 속도로 설정하고 싶은 원하는 속도 값. `desiredVelocity` 속도로 움직이게 하고 싶지만 실제론 관성이나 어떤 장애물에 의해 실제 속도(`velocity`)와는 차이가 날 수 있다.
+      - 예를 들어 우리가 원하는 속도가 50인데 현재 캐릭터가 장애물에 막혀 제자리에서 뛰고 있다면 속도는 실제로는 0 이다.
 - ***함수***
   - `SetDestination(Vector3 target)` 
     - 목표 위치를 인수로 넘기면 agent가 해당 목표 지점까지 움직이게 하는 함수.
@@ -287,7 +290,9 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 <br>
 
 ### Vector2, Vector3
+
 > 위치 좌표, 벡터
+
 - ***변수***
   - `magnitude` : 벡터의 길이 및 크기. float
   - `sqrMagnitude` : 벡터의 길이 제곱. float
@@ -350,6 +355,32 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
     - 구의 중심 위치(pos)와 반지름을 매개변수로 넘겨주면 구의 <u>반경 내에 있는 모든 * Collider * </u> 들을 <u>Collider 배열로 리턴</u>한다.
     - 추가 매개변수
       - layer도 같이 넘겨주면 해당 layer에 해당하는 Collider들만 들어있는 배열을 리턴한다. 
+  - `Physics.SphereCastNonAlloc`
+    - > 이 함수는 인수로 방향과 거리를 넘겨주면 구가 해당 방향과 거리로 <u>이동한 ✨궤적✨에 겹치는 Collider가 있는지를 검사한다.</u> 이게 바로 <u>Cast계열 함수들의 특성</u>
+    - ![image](https://user-images.githubusercontent.com/42318591/92210583-f5544800-eec9-11ea-9da2-403c5f25d02e.png){: width="70%" height="70%"}{: .align-center}
+    - 유니티에서 Collider를 찾아내는 방법은 크게 4 가지가 있다. `Ray`, `Box`, `Sphere`, `Capsule` 등등 이런 형태의 Collider 컴포넌트를 오브젝트에 달아서 OnTrigger나 OnCollision 같은 이벤트를 사용하여 해당 형태에 겹치는 Collider를 찾아내기도 한다.
+    - 그러나 이런 방법의 경우 매 프레임 실행되는 것이기 때문에 순간적으로 딱 한번만 Collider를 찾아내려고 하는 경우에는 성능상 부적절할 수 있다. 매 프레임 실행되므로 적당히 모양을 유지하는 경우에는 사용하기 괜찮지만 그 순간의 겹치는 Collider를 잡아내야 하는 경우에는 힘들기 때문!   
+    - **Physics의 Cast계열 함수** 들은 움직이려는 궤적에 충돌하는지를 검사하기 때문에 위와같이 프레임간 사이에서 빠르게 변화하여 감지되지 못할 수 있는 것들도 감지할 수 있도록 해준다.
+      - 종류
+      - `Cast` 
+        - 👉 찾아낸 충돌체 하나만을 구조체로 반환한다. 가장 처음에 충돌한 물체만 반환한다.
+      - `CastAll` 
+        - 👉 찾아낸 충돌체 전부를 리턴한다. `RaycastHit []` 배열로 리턴한다.
+      - `CastNonAlloc` 
+        - 👉 충돌체들을 리턴이 아닌 인수로 넘긴 `RaycastHit` 배열에 담아준다. 따라서 `CastAll`보다는 성능이 더 좋을 수 있다. 다만 찾아낸 충돌체들의 수가 인수로 넘긴 배열의 사이즈보다 적을 수도 많을 수도 있다는 것에 주의하여 사용해야 한다.
+        - 직전 프레임까지 어떤 `RaycastHit` 정보가 있었는지를 알 수 있다.
+      - 리턴은 `int`로 인수로 넘긴 배열이 채워진 사이즈, 즉 충돌체들의 개수를 리턴한다.
+    - <u>움직이려고 하자마자, 즉 궤적을 그리기도 전에 바로 Collider가 걸린 상태라면 첫번째로 감지된 이 Collider의 point는 제로 포인트다.</u>
+      - 가상의 구 *(SphereCastNonAlloc을 예로 들자면)* 가 움직이기도 전에 처음부터 겹쳐있었던 것(`hits[0]`)이 있다면 그 Collider의 `point`(충돌 위치)는 제로 포인트가 된다.
+        - `hits[0].point`는 (0, 0, 0) 
+        - 따라서 이런 경우엔 distance도 0 으로 나오게 된다.
+      - `Collider`가 들어있는 것이 아닌 `Raycast`에 걸린 원소들이 들어 있는 `hit` 배열의 크기를 리턴한다.
+        ```c#
+        var size = Physics.SphereCastNonAlloc(attackRoot.position, attackRadius, direction, hits, deltaDistance, whatIsTarget);
+        ```
+      - `attackRadius` 반경을 가진 구가 `attackRoot.position`에 위치로부터 `direction` 방향으로 `deltaDistance` 거리만큼 이동하면서 생긴 궤적(연속선상)에 겹치는 Collider들 중에서 `whatIsTarget` LayerMask를 가진 Collider가 있다면 그것을 `hits` 배열에 담고 그 배열의 크기를 리턴한다.
+      - `out hits` 혹은 `ref hits` 이렇게 레퍼런스로 넘기지 않은 이유는 `hits` 배열 이름이 그 자체로 레퍼런스가 되기 때문이다. 따라서 그냥 `hits`로 인수 넘기면 됨.  
+      - 배열이 아니라 그냥 `RaycastHit` 자체를 넘기는 것이였으면 value이므로 `out hit` 이런식으로 넘겨야 한다.
   - `Physics.Raycast`
     - 레이캐스트. 눈에 보이지 않는 광선을 쏴서 물리적 충돌을 감지한다.
     - `Physics.Raycast(발사위치 Vector3, 발사방향 Vector3, 광선길이 float, 감지할 레이어 Layer)`
@@ -368,6 +399,7 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
       - 👉 Linecast는 정확한 종료 지점을 알 고 어떤 범위 내에서의 충돌을 감지하려 할 때, Raycast는 방향만 알 때 사용! 
     - start과 **end** <u>사이의 범위</u>내에서 교차하는 충돌이 있을 경우 true를 리턴
     - 충돌 정보는 `Raycast hit`에 저장된다.
+  
       
 
 <br>
@@ -449,6 +481,16 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
     - 매 프레임마다 `3m * Time.deltaTime`씩 움직여 최종적으로 1초에 3m 움직이게 되는 것.
 - `Time.time`
   - 게임 시작 후 현재까지의 경과 시간(float 초 단위)
+- `Time.timeScale`
+  - `Time.timeScale`을 통해 시간이 흘러가는 속도를 변경한다면 `Time.fixedDeltaTime`도 그에 맞게 변경해줄 것을 권장한다.
+  - `Time.fixedDeltaTime = 0.02f * Time.timeScale`
+  - `Time.timeScale`이 2.0f이면 디폴트에 비해 두배로 시간이 빨리 흘러간다는 의미고 0.0f면 시간이 아예 흐르지 않고 정지 상태라는 것을 의미한다.
+- `Time.fixedDeltaTime`
+  - **FixedUpdate()** 함수가 실행되는 그 사이의 시간. 다음 **FixedUpdate()** 함수가 실행되기까지의 시간. 
+  - **FixedUpdate()** 함수는 디폴트로 1/50초인 0.02초를 주기로 실행되기 때문에 디폴트론 `Time.fixedDeltaTime` 값은 `0.02`이다.
+  - <u>FixedUpdate() 함수 안에서 사용할 때 Time.fixedDeltaTime가 아닌 그냥 Time.deltaTime 를 사용할 것을 권장한다.</u>
+    - 자동으로 `Time.deltaTime`이 **FixedUpdate()** 함수 안에서 쓰이면 알아서 `Time.fixedDeltaTime` 으로 리턴하기 때문이다. 
+      - `Time.deltaTime`은 알아서 **Update()** 함수에서는 프레임간의 사잇 시간으로서 동작하고  **FixedUpdate()** 함수 안에서 쓰이면 알아서 고정된 프레임인 `Time.fixedDeltaTime` (0.02초) 으로 쓰인다.
 
 <br>
 
@@ -561,10 +603,10 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 ### RaycastHit
 - `Raycast` 레이캐스트로부터 정보를 얻기 위한 타입으로 <u>광선에 감지된 Collider의 정보를 담는 컨테이너</u>다.
 - *변수*  RaycastHit hit 일때
-  - hit.normal : 광선에 감지된 Collider의 노말 벡터 (충돌 표면의 방향벡터)
-  - hit.distance : 광선 발사 위치로부터 광선에 감지된 Collider까지의 거리
-  - hit.point : 광선에 감지된 Collider의 충돌 위치벡터
-  - hit.collider : 광선에 감지된 Collider
+  - `hit.normal` : 광선에 감지된 Collider의 노말 벡터 (충돌 표면의 방향벡터)
+  - `hit.distance` : 광선 발사 위치로부터 광선에 감지된 Collider까지의 거리
+  - `hit.point` : 광선에 감지된 Collider의 충돌 위치벡터
+  - `hit.collider` : 광선에 감지된 Collider
 
 
 <br>
@@ -593,8 +635,10 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 <br>
 
 ## 👩‍🦰 이벤트 함수
-- 실수로 이름 오타나면 절대 실행 안된다!! 
-  - 오타여도 사용자 지정 함수인 줄 알고 잡아주지도 않음 ㅠ ㅠ OnTriggerEnter 인데 onTriggerEnter 라고 소문자로 써서 계속 실행되지 않았었는데 한참을 헤맸다...
+
+> 실수로 이름 오타나면 절대 실행 안된다!! (당연한 얘기지만.. 😂)
+
+- 오타여도 사용자 지정 함수인 줄 알고 잡아주지도 않음 ㅠ ㅠ OnTriggerEnter 인데 onTriggerEnter 라고 소문자로 써서 계속 실행되지 않았었는데 한참을 헤맸다...
 - 이름 실수 하지 않도록 주의 하자!!
 
 ### void Start()
@@ -616,12 +660,16 @@ C# 스크립트에서 `UnityEngine`이 제공하는 것들 정리. `using UnityE
 - <u>프레임 속도는 환경마다 다르기 때문에 물리 처리를 update() 함수에서 해주면 환경에 따라 물리 처리 오차가 발생할 수 있어 비추천</u>
 
 ### void FixedUpdate()
+
+> 디폴트로 0.02초 (초당 50회)마다 실행된다.
+
 - <u>Update()처럼 매번 반복 실행</u>되나 프레임에 기반하지 않고 어떤 고정적이고 동일한 시간에 기반하여 실행된다.
   - Update()와의 차이점
     - Update()는 화면 한번 깜빡일때마다 실행되서 렉걸리거나 환경이 안좋거나 하면 그만큼 Update()도 적게 실행되지만
     - Fixedupdate()는 환경에 상관없이 무조건 실행 횟수를 지킨다. 정해진 수만큼 무조건 실행 함
 - <u>프레임과 상관없이 고정적인 시간마다 실행되기 때문에 환경에 상관없이 물리처리를 오차 없이 실행시킬 수 있다.</u>
   - 물리처리는 **FixedUpdate()** 안에서 해주기.
+- `Time.fixedDeltaTime` 의 시간 간격으로 실행이 된다. 디폴트로 `Time.fixedDeltaTime` 값은 0.02f 이다.
 
 ### void LateUpate()
   - 유니티 함수로, <u>매 프레임마다 실행되지만 Update()함수 보다 늦게 실행된다.</u>
