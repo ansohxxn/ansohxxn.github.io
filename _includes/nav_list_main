@@ -110,7 +110,11 @@
                 {% endfor %}
             </ul>
             <ul>
-                <li><a href="/gameengine/unreal-list" class="">내 언리얼 문서 </a></li>
+                {% for category in site.categories %}
+                    {% if category[0] == "UE4Docs" %}
+                        <li><a href="/categories/ue4-docs" class="">내 언리얼 문서 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         
         <span class="nav__sub-title">CS</span>
