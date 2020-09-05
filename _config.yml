@@ -16,7 +16,7 @@ minimal_mistakes_skin    : "dark" # "default"  "air", "aqua", "contrast", , "dir
 
 # Site Settings
 locale                   : "ko-KR"
-title                    : " 평생 공부 블로그 : Tooday I Learned 👱‍♀️‍"
+title                    : " 평생 공부 블로그 Tooday I Learned‍ 👱‍♀️"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "ansohxxn💛"
@@ -93,7 +93,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "🌙 ansohxxn"
+  name             : "ansohxxn"
   avatar           : "/assets/images/my-cat.jpg"
   bio              : "공부, 개인 프로젝트 기록하는 노트"
   #location         : "Seoul, South Korea"
