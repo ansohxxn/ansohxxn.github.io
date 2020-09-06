@@ -36,9 +36,6 @@ last_modified_at: 2020-09-05
 
 ### 클래스 블루프린트 부모 클래스 종류
 
-- `Actor` 
-  - 레벨에 배치될 수 있음
-  - 캐릭터가 아닌 경우에 주로 쓴다. 장애물 같은.
 - `Character`
   - 레벨에 배치 될 수 있으며 이동도 할 수 있다.
   - 몬스터라던지 캐릭터라던지.
@@ -71,6 +68,32 @@ last_modified_at: 2020-09-05
 
 <br>
 
+### Input
+
+- 키보드 이벤트
+  - 예를들어 `A` 노드를 추가하면 `A` 키보드 키에 대한 레퍼런스 노드가 생성됨. 
+- `Enable Input`
+  - 기본적으로 언리얼은 액터가 Input을 받아들이는게 비활성화 되어있는 상태라 키보드 입력을 받으려면 이 노드를 추가해 주어야 한다.
+    - 컨트롤러로 `Get Player Controller` 리턴값을 연결해주어야 함
+- 사용자 지정 입력 축 (Axis Mapping)
+  -  Axis Mapping 추가하기
+  - 블루프린트창 - 편집 - 프로젝트 세팅 - 입력 - Axis Mappings + 추가 버튼 누르기. 
+    - 다음과 같이 추가 (이름은 "LeftRight")
+      - ![image](https://user-images.githubusercontent.com/42318591/92319631-7ee45100-f055-11ea-9a60-32ad75ee6beb.png){: width="60%" height="60%"}{: .align-center}
+    - A 키를 누르면 Axis Value 로 -1.0 을 리턴하고
+    - D 키를 누르면 Axis Value 로 1.0 을 리턴하고
+    - **아무 키도 누르지 않으면 Axis Value 는 0.0을 리턴하는**
+    - "LeftRight" 이벤트를 이제 노드로 추가할 수 있다!
+  - 이런 <u>Axix Mapping 이벤트 노드는 매 프레임마다 실행이 된다</u>
+    - 따라서 '누르는 동안' 이런거 구현하기 좋다.
+
+![image](https://user-images.githubusercontent.com/42318591/92319815-36c62e00-f057-11ea-97a2-538ed1679854.png){: width="100%" height="100%"}{: .align-center}
+
+- 위에서 추가한 `LeftRight` **이벤트** 노드를 추가한다.
+  - 이런 <u>Axix Mapping 이벤트 노드는 매 프레임마다 실행이 된다</u>
+
+<br>
+
 ### String
 
 - `PrintString`
@@ -82,6 +105,9 @@ last_modified_at: 2020-09-05
 
 - `SetActorLocation`
   - 액터의 트랜스폼 위치를 지정한다
+    - 타겟의 위치를 New Location 위치로 지정한다.
+- `GetActorLocation`
+  - 액터의 현재 위치를 리턴한다.
 - `AddActorWorldRotation`
   - 해당 값만큼 더하여 회전한다.
 
@@ -99,6 +125,26 @@ last_modified_at: 2020-09-05
 - `Set Simulate Physics`
   - 유니티의 Rigidbody처럼 중력, 마찰력 같은 물리 효과를 적용한다.
   - *Static Mesh Component* 에만 적용할 수 있음
+
+<br>
+
+### Math
+
+- `Vector + Vector`
+  - A + B
+    - 어떤 Vector 값을 리턴하는 노드의 실행핀과 연결하면 그게 A 가 되고 `Vector + Vector` 노드에 입력하는 벡터값은 B가 된다.
+    - 최종적으로 A + B 두 벡터의 값을 리턴한다.
+- `Vector + float`
+  - A + B
+    - 벡터가 되는 핀과 float이 되는 핀을 각각 연결해와서 결과를 도출해도 되고
+    - 연결 되지 않은 피연산자 핀은 입력하면 된다.
+
+<br>
+
+### Game
+
+- `GetPlayerController`
+  - 플레이어 컨트롤러를 리턴하는데 플레이어 컨트롤러는 플레이어에게서 받은 입력을 어떤 동작으로 변환하는 함수성을 구현하는, 사람 플레이어의 의지를 나타낸다
 
 ***
 <br>
