@@ -102,6 +102,15 @@ a, b 둘 중 더 큰 것을 리턴한다.
 ### `Clamp(float target, float a, float b);`
 - target 이 a ~ b 범위를 벗어나지 않도록 한다. 
 
+### `RoundToInt(float)`
+- 인수를 정수로 반올림
+
+### Lerp(float a, float b, float t)
+
+> a, b 사이의 t (0~1)만큼 위치한 값을 리턴한다.
+
+- t 가 0.5라면 리턴되는 값은 a 와 b 의 중간값!
+
 <br>
 
 ## 👩‍🦰 Physics
@@ -285,6 +294,15 @@ a, b 둘 중 더 큰 것을 리턴한다.
 ## 👩‍🦰 Color
 
 색깔들이 미리 이름 붙어 구현되어 있다. `Color.red`, `Color.yellow` 이런 식으로 되있어서 그냥 갖다 쓰기만 하면 됨.
+
+### 함수
+
+#### Lerp(Color a, Color b, float t)
+
+> a, b 색깔 사이의 t (0~1) 비율에 위치한 색을 리턴한다.
+
+- t 가 0.5라면 리턴되는 값은 a 와 b 의 중간값!
+- 
 
 <br>
 
