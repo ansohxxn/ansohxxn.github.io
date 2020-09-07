@@ -1,5 +1,5 @@
 ---
-title: "C++ 게임 만들기 연습 문제 패키지"
+title: "完 C++ 게임 만들기 연습 문제 패키지"
 layout: archive
 permalink: categories/cpp-games
 author_profile: true

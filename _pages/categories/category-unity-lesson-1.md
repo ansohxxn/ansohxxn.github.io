@@ -1,5 +1,5 @@
 ---
-title: "레트로의 유니티 C# 게임 프로그래밍 에센스 강의 필기"
+title: "完 레트로의 유니티 C# 게임 프로그래밍 에센스 강의 필기"
 layout: archive
 permalink: categories/unity-lesson-1
 author_profile: true
