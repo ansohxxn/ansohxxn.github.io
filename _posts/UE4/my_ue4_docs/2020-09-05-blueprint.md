@@ -1,5 +1,5 @@
 ---
-title:  "UE4 blueprint 정리" 
+title:  "UE4 Blueprint 정리" 
 
 categories:
   -  UE4Docs
@@ -37,6 +37,8 @@ last_modified_at: 2020-09-05
   - 추가 방법 👉 콘텐츠 브라우저에서 우클 - 블루프린트 클래스 - 부모 클래스를 선택한다.
     - 이렇게 만든 클래스를 더블클릭하면 블루프린트 창이 뜬다.
 
+
+
 <br>
 
 ## 👩‍🦰 클래스 블루프린트
@@ -67,6 +69,9 @@ last_modified_at: 2020-09-05
 <br>
 
 ## 👩‍🦰 노드 종류
+
+- 노드 추가시 원하는 노드가 검색해도 안나오는 이유는 `맥락 의존적(Context Sensitive)`에 체크가 되어 있어서 현재 맥락과 관련있는 노드만 검색되기 때문이다.
+  - 따라서 이를 체크 해제해주면 검색이 될 것이다.
 
 ### Event
 
@@ -152,7 +157,17 @@ last_modified_at: 2020-09-05
 ### Game
 
 - `GetPlayerController`
-  - 플레이어 컨트롤러를 리턴하는데 플레이어 컨트롤러는 플레이어에게서 받은 입력을 어떤 동작으로 변환하는 함수성을 구현하는, 사람 플레이어의 의지를 나타낸다
+  - Player Controller를 리턴하는데 플레이어 컨트롤러는 플레이어에게서 받은 입력을 어떤 동작으로 변환하는 함수성을 구현하는, 사람 플레이어의 의지를 나타낸다
+  - 온라인 게임이 아니라면 "Player Index 0" 로컬 플레이어에 대한 컨트롤러가 기본으로 리턴 됨
+- `Set View Target with Blend` 
+  - ![image](https://user-images.githubusercontent.com/42318591/92445321-2b0d6f80-f1ef-11ea-8643-c9c765380a80.png){: width="80%" height="80%"}{: .align-center}
+  - Player Controller 타입의 클래스로, <u>현재의 카메라(혹은 기본 카메라)로부터 다른 카메라로 뷰를 변경하고자 할 때</u> 사용하는 노드이다.
+    - **타겟**
+      - Player Controller
+      - `Get Player Controller` 노드로 "Player Index 0 (로컬 플레이어)" 에 대한 플레이어 컨트롤러를 가져와 연결
+    - **New View Target**
+      - 변경하고자 하는 뷰를 찍는 카메라를 여기에 연결해주어야 한다.
+      - 되고자 하는 뷰를 가진 카메라의 레퍼런스 혹은 카메라를 담고 있는 변수를 여기에 연결해주자.
 
 ***
 <br>
