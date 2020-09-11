@@ -73,15 +73,28 @@ last_modified_at: 2020-09-05
 - 노드 추가시 원하는 노드가 검색해도 안나오는 이유는 `맥락 의존적(Context Sensitive)`에 체크가 되어 있어서 현재 맥락과 관련있는 노드만 검색되기 때문이다.
   - 따라서 이를 체크 해제해주면 검색이 될 것이다.
 
-### Event
+<br>
+
+### 🔔 변수
+
+변수를 노드로 끌어오면 변수 값을 설정할 수 있는 Setter 노드와 Getter 노드를 선택해서 만들 수 있다. 
+
+<br>
+
+### 🔔 Event
+
+> 이벤트가 발생할 때 실행 핀이 활성화된다.
 
 - `BeginPlay`
   - 게임이 실행되자마자 가장 먼저 실행됨
   - 1회 실행
+- 키보드/마우스 입력 이벤트
+- 캐릭터들만 타겟이 되는 이벤트
+  - 땅에 착지한다던지 등등 Character 항목 참고
 
 <br>
 
-### Input
+### 🔔 Input
 
 - 키보드 이벤트
   - 예를들어 `A` 노드를 추가하면 `A` 키보드 키에 대한 레퍼런스 노드가 생성됨. 
@@ -107,14 +120,14 @@ last_modified_at: 2020-09-05
 
 <br>
 
-### String
+### 🔔 String
 
 - `PrintString`
   - 노드에 적힌 메세지를 화면에 출력한다.
 
 <br>
 
-### Transform
+### 🔔 Transform
 
 - `SetActorLocation`
   - 액터의 트랜스폼 위치를 지정한다
@@ -126,14 +139,18 @@ last_modified_at: 2020-09-05
 
 <br>
 
-### Utility
+### 🔔 Utility
 
 - `Delay`
   - 지연 시간을 둔다
+- `Branch`
+  - if 문과 같다. Boolean 타입을 리턴하는 것과 Condition 핀을 연결하고 True, False 에 따라 실행시킬 노드를 연결한다.
+- `형변환` `cast`
+  - 입력으로 들어온 오브젝트를 해당 유형으로 형변환하여 리턴할 수 있다.
 
 <br>
 
-### Physics
+### 🔔 Physics
 
 - `Set Simulate Physics`
   - 유니티의 Rigidbody처럼 중력, 마찰력 같은 물리 효과를 적용한다.
@@ -141,7 +158,7 @@ last_modified_at: 2020-09-05
 
 <br>
 
-### Math
+### 🔔 Math
 
 - `Vector + Vector`
   - A + B
@@ -151,10 +168,18 @@ last_modified_at: 2020-09-05
   - A + B
     - 벡터가 되는 핀과 float이 되는 핀을 각각 연결해와서 결과를 도출해도 되고
     - 연결 되지 않은 피연산자 핀은 입력하면 된다.
+- `float >= float`
+
+#### Vector
+
+- `Get Velocity` 노드
+  - 입력 액터의 속도를 Vector3 로 리턴한다.
+- `Vector Length`
+  - 입력 Vector3 의 스칼라 float 크기를 리턴한다.
 
 <br>
 
-### Game
+### 🔔 Game
 
 - `GetPlayerController`
   - Player Controller를 리턴하는데 플레이어 컨트롤러는 플레이어에게서 받은 입력을 어떤 동작으로 변환하는 함수성을 구현하는, 사람 플레이어의 의지를 나타낸다
@@ -168,6 +193,32 @@ last_modified_at: 2020-09-05
     - **New View Target**
       - 변경하고자 하는 뷰를 찍는 카메라를 여기에 연결해주어야 한다.
       - 되고자 하는 뷰를 가진 카메라의 레퍼런스 혹은 카메라를 담고 있는 변수를 여기에 연결해주자.
+
+<br>
+
+### 🔔 Character
+
+- `Jump`
+  - 타겟으로 할당된 캐릭터에게 점프를 요청하는 함수
+- `Stop Jumping`
+  - 타겟으로 할당된 캐릭터에게 점프를 중지하는 함수
+- `OnLanded`
+  - 캐릭터가 낙하 하다가 착지하면 자동으로 발생하는 이벤트
+
+<br>
+
+### 🔔 Animation
+
+- `Get Owining Actor` 
+  - 이 애니메이션 블루프린트(Animinstance)를 소유하고 있는 액터를 리턴한다. 
+- `Play Anim Montage`
+  - 애님 몽타주를 재생시킨다.
+    - Anim Montage에 재생시킬 애님 몽타주를 할당한다.
+- `Stop Anim Montage`
+  - 애님 몽타주를 재생을 멈춘다.
+    - Anim Montage에 멈출 애님 몽타주를 할당한다.
+- `Try Get Pawn Owner`
+  - 이 애니메이션 블루프린트를 가지고 있는 폰을 리턴한다.
 
 ***
 <br>
