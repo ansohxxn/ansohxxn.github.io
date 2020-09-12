@@ -88,6 +88,10 @@ last_modified_at: 2020-09-05
 - `BeginPlay`
   - 게임이 실행되자마자 가장 먼저 실행됨
   - 1회 실행
+- `Tick`
+  - 유니티의 Update() 함수처럼 매 프레임마다 발생하는 이벤트다.
+  - <u>Delta seconds</u>를 출력한다.
+    - 프레임간의 사이에 경과된 시간을 초 단위로 출력한다. 첫번째 프레임과 두번째 프레임 사이에 20ms가 경과 되었다면 Delta Seconds는 0.02로 출력된다. 
 - 키보드/마우스 입력 이벤트
 - 캐릭터들만 타겟이 되는 이벤트
   - 땅에 착지한다던지 등등 Character 항목 참고
@@ -172,10 +176,18 @@ last_modified_at: 2020-09-05
 
 #### Vector
 
-- `Get Velocity` 노드
+- `Get Velocity` 
   - 입력 액터의 속도를 Vector3 로 리턴한다.
 - `Vector Length`
   - 입력 Vector3 의 스칼라 float 크기를 리턴한다.
+- `Lerp` 
+  - Vector 간의 선형 보간.
+    - A 벡터 값에서 B 벡터 값 사이에서 `alpha` 비율(보통 0~1 사이의 실수)에 해당하는 곳을 리턴
+  - `alpha` 값에 `Delta Seconds`를 사용하면 매 프레임마다 부드럽게 A 벡터에서 B 벡터로 변화하게끔 만들 수 있다. 
+    - `Delta Seconds`란 현재 프레임과 다음 프레임과의 간격을 초 단위로 표현한 것이다.
+      - 프레임간의 간격이 20ms 이라면 `Delta Seconds` 값은 0.02가 된다.
+    - 유니티 C# 코드로 따지면 *transform.position = Vector3.Lerp(transform.position, standardPos.position, Time.fixedDeltaTime * smooth);*
+      - smooth는 부드럽게 하는 정도를 뜻하겠다. 
 
 <br>
 
