@@ -81,6 +81,7 @@ last_modified_at: 2020-09-05
   - 노드에서 어떤 데이터를 입력(Input) 받거나 데이터를 리턴(Output)하는데 사용된다.
   - 다른 노드와 데이터 핀끼리 연결할 수 있다.
   - 데이터 유형에 따라 와이어 색깔이 다르다.
+  - 데이터 핀끼리 연결할때 형변환이 가능한 경우엔 자동으로 형변환을 해준다.
 
 <br>
 
@@ -139,11 +140,12 @@ last_modified_at: 2020-09-05
     - "LeftRight" 이벤트를 이제 노드로 추가할 수 있다!
   - 이런 <u>Axix Mapping 이벤트 노드는 매 프레임마다 실행이 된다</u>
     - 따라서 '누르는 동안' 이런거 구현하기 좋다.
-- `AddMovementInput`
+- `Add Movement Input`
   - 캐릭터 같은 `Pawn`의 경우 `SetActorLocation`처럼 트랜스폼 벡터 위치값을 변경해주는 방식이 아닌 이 노드를 사용하여 이동해야 액터끼리의 충돌 처리가 된다.
     - 타겟은 `Pawn`만 연결 가능하다.
   - 입력 값을 리턴하는 핀과 `Scale Value` 핀과 연결해주면 입력에 따라 움직일 수 있게 된다.
-  - `Scale Value`의 크기만큼 `World Direction` 방향으로 현재 위치로부터 이동하게 된다.
+  - 현재 위치로부터  `Scale Value`(float)의 크기만큼 `World Direction` 방향으로 이동하게 된다.
+    - 보통 `World Direction`에 Normalized 한 방향 벡터를 연결해준다.
 
 <br>
 
@@ -176,10 +178,14 @@ last_modified_at: 2020-09-05
   - 입력으로 들어온 오브젝트를 해당 유형으로 형변환하여 리턴할 수 있다.
 - `Print String`
   - 입력 받은 string을 화면에 출력한다. 
+  - ✨디버깅 해볼 때 편리할 것 같다. 노드가 잘 동작하는지!✨
 - `Get Display Name`
   - 입력 받은 Object의 이름을 리턴한다.
 - `Destroy Actor`
   - 입력 받은 액터를 삭제한다.
+- `스위치`
+  - 입력으로 들어온 **Enum** 변수의 값에 따라 이 Enumeration에 속한 모든 **Enum** 상태들 중, 입력으로 들어온 **Enum** 변수의 값과 일치하는 상태와 연결된 실행 핀 와이어를 실행한다.
+  - <u>입력으로 들어온 Enum 변수 값이 바뀌면 이 스위치가 다시 실행된다.</u>
 
 <br>
 
@@ -274,6 +280,12 @@ last_modified_at: 2020-09-05
     - Anim Montage에 멈출 애님 몽타주를 할당한다.
 - `Try Get Pawn Owner`
   - 이 애니메이션 블루프린트를 가지고 있는 폰을 리턴한다.
+
+#### 애니메이션 블루프린트의 이벤트 그래프에서만 사용할 수 있는 노드
+
+- `Blueprint Update Animation`
+  - 애니메이션 블루프린트 에 필요한 값 계산이나 업데이트를 할 수 있도록 하기 위해 매 프레임 실행되는 이벤트.
+  - 애니메이션 블루프린트의 `Tick` 같은 이벤트.
 
 <br>
 
