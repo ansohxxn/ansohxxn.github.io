@@ -95,10 +95,13 @@ last_modified_at: 2020-09-05
 
 - `변수`를 노드로 끌어오면 변수 값을 설정할 수 있는 Setter 노드와 Getter 노드를 선택해서 만들 수 있다. 
 - `self` 자기 자신(이 블루프린트가 붙어있는 액터/오브젝트)을 노드로 만들 수 있다. self 검색하면 나오는 "자기 자신 레퍼런스" 선택
+- 커스텀 이벤트는 해당 커스텀 이벤트를 호출해주는 함수 노드를 추가해 주어야 이벤트를 발생시킬 수 있다.
 
 <br>
 
 ### 🔔 Event
+
+[이벤트 노드 종류 문서](https://docs.unrealengine.com/ko/Engine/Blueprints/UserGuide/Events/index.html)
 
 > 이벤트가 발생할 때 실행 핀이 활성화된다.
 
@@ -109,6 +112,9 @@ last_modified_at: 2020-09-05
   - 유니티의 Update() 함수처럼 매 프레임마다 발생하는 이벤트다.
   - <u>Delta seconds</u>를 출력한다.
     - 프레임간의 사이에 경과된 시간을 초 단위로 출력한다. 첫번째 프레임과 두번째 프레임 사이에 20ms가 경과 되었다면 Delta Seconds는 0.02로 출력된다. 
+- `Any Damage`
+  - 나 자신에게 어떤 데미지를 가하는 이벤트가 들어왔을 때
+    - **Damage** 👉 들어온 데미지 양을 나타낸다. 
 - 키보드/마우스 입력 이벤트
 - 캐릭터들만 타겟이 되는 이벤트
   - 땅에 착지한다던지 등등 Character 항목 참고
@@ -235,6 +241,11 @@ last_modified_at: 2020-09-05
     - **New View Target**
       - 변경하고자 하는 뷰를 찍는 카메라를 여기에 연결해주어야 한다.
       - 되고자 하는 뷰를 가진 카메라의 레퍼런스 혹은 카메라를 담고 있는 변수를 여기에 연결해주자.
+- `Apply Damage` 노드
+  - 데미지를 가한다.
+    - **Damaged Actor** 👉 데미지를 가할 대상. 
+    - **Base Damage** 👉 데미지양 
+    - **Damage Causer** 👉 데미지를 가하는 대상 
 
 <br>
 
@@ -263,6 +274,14 @@ last_modified_at: 2020-09-05
     - Anim Montage에 멈출 애님 몽타주를 할당한다.
 - `Try Get Pawn Owner`
   - 이 애니메이션 블루프린트를 가지고 있는 폰을 리턴한다.
+
+<br>
+
+## 🔔 Material
+
+- `Vector Parameter`
+  - Material Instance를 만드는데 필요한 파라미터로, 색상 값을 다르게 하는 파라미터다.
+  - [참고](https://ansohxxn.github.io/ue4%20lesson%201/ch4-1/#material과-material-innstance)
 
 ***
 <br>
