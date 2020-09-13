@@ -156,7 +156,13 @@ Collider는 <u>물리적으로 오브젝트끼리 표면에 충돌이 일어났�
   - 두번째 매개변수 : 폭발 지점
   - 세번째 매개변수 : 폭발 반경 반지름
 
+#### MovePosition(Vector3)
 
+- 인수로 들어온 그 위치로 이동한다.
+
+#### MoveRotation(Quaternion)
+
+- 인수로 들어온 그 회전값이 되게끔 회전한다.
 
 <br>
 
@@ -362,9 +368,9 @@ Collider는 <u>물리적으로 오브젝트끼리 표면에 충돌이 일어났�
     - `isStopped`과의 차이
       - <u>Nav Mesh Agent들끼리는 내비게이션 추적에 있어 서로를 장애물로 인식하고 피하고 다니기 때문에</u> 완전히 비활성화 해주지 않고 그냥 추적만 멈추는 `isStopped = true`를 사용해주게 되면 나중에 좀비가 많이 죽었을 때 쓸데없이 크게 돌아와야 하기 때문에 이런 경우에는 아예 `enabled = false`를 통해 완전히 비활성화 해주는 것이 좋다.
 
-  ### 함수
+### 함수
 
-  #### `SetDestination(Vector3 target)` 
+#### `SetDestination(Vector3 target)` 
     - 목표 위치를 인수로 넘기면 agent가 해당 목표 지점까지 움직이게 하는 함수.
 
 

@@ -33,8 +33,20 @@ last_modified_at: 2020-09-04
   - `magnitude` : 벡터의 길이 및 크기. float
   - `sqrMagnitude` : 벡터의 길이 제곱. float
   - `normalized` : 해당 벡터의 방향 벡터. (길이 1)
-  - `forward` : 해당 벡터의 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
-  - `right` : 해당 벡터의 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+  - 방향 (right, left, forward, back, up, down)
+    - Local
+      - `transform.forward` : 오브젝트의 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+        - 오브젝트의 로컬 z 축 기준에서의 양의 방향 벡터
+      - `transform.right` : 오브젝트의 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+    - World
+        - 오브젝트의 로컬 x 축 기준에서의 양의 방향 벡터
+      - `Vector3.forward` : 월드 좌표계 상에서의 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+        - 언제나 Vector3(0, 0, 1)과 같다. 
+          - 월드 회전값이 변해도 로컬로서의 앞쪽 방향은 변함없이 늘 같다. 차는 여러 방향으로 달리지만 운전하는 당사자 입장에서는 늘 앞만 보고 있는 것처럼.
+      - `Vector3.right` : 월드 좌표계 상에서의 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+        - 언제나 Vector3(1, 0, 0)과 같다.
+
+ 
   - `up` : 해당 벡터의 ***위 쪽*** (y 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
   - `zero` : 원점. 
     - `Vector2.zero` 👉 (0, 0)
@@ -101,6 +113,8 @@ a, b 둘 중 더 큰 것을 리턴한다.
 
 ### `Clamp(float target, float a, float b);`
 - target 이 a ~ b 범위를 벗어나지 않도록 한다. 
+  - target이 a보다 작으면 a 로 설정되고
+  - target이 b보다 크면 b 로 설정된다.
 
 ### `RoundToInt(float)`
 - 인수를 정수로 반올림
@@ -234,9 +248,11 @@ a, b 둘 중 더 큰 것을 리턴한다.
       - `0` : 마우스 좌클
       - `1` : 마우스 우클
 
-  #### `Input.GetAxis("Horizontal")`
+#### `Input.GetAxis("Horizontal")`
 
-    - `GetKey`와 다르게 <u>문자열을 매개변수로 받으며</u> <u>float 값을 리턴한다.</u>
+> -1.0f ~ 1.0f 까지의 범위의 값을 리턴한다. float 값을 리턴하기 때문에 부드러운 이동이 필요한 경우에 사용된다.
+
+  - `GetKey`와 다르게 <u>문자열을 매개변수로 받으며</u> <u>float 값을 리턴한다.</u>
       - ex) "Horizontal"
       - <u>수평 방향</u>에 대해서 키보드나 조이스틱으로 입력을 했을때 <u>-1 ~ +1</u> 사이의 <u>float 값을 리턴한다.</u>
         - 즉 키보드 수평방향에 대응되는 키들이 "Horizontal"에 맵핑되어 있다.
@@ -261,6 +277,35 @@ a, b 둘 중 더 큰 것을 리턴한다.
         - 조이스틱은 키보드와 다르게 딱 눌렀다 뗏다 같이 이분법적으로 생각할 수가 없기 때문.
         - 조이스틱은 아주 살짝만 밀거나 많이 밀거나 미는 정도에 따라 입력의 정도가 다른 것! 
           - 오른쪽으로 살짝 밀면 0.2 이런게 가능
+- Input.GetAxis("Horizontal")
+- Input.GetAxis("Vertical")
+- Input.GetAxis("Mouse X")
+- Input.GetAxis("Mouse Y")
+- Input.GetAxis("Fire")
+- 등등 그 밖에도 project settings - input - axis 에서 확인할 수 있다.
+
+#### `Input.GetAxis("Horizontal")`
+
+> `-1`, `0`, `1` 셋 중 하나가 리턴된다. 즉시 반응해야 한다면 GetAxisRaw 를 사용하는게 낫다.
+
+- 사용 방법은 **Input.GetAxis**와 같다.
+- `-1`, `0`, `1` 셋 중 하나가 리턴되므로
+  - Input.GetAxis("Horizontal")
+    - A 입력시 -1 리턴
+    - 입력 X시 0 리턴
+    - D 입력시 1 리턴
+  - Input.GetAxis("Vertical")
+    - S 입력시 -1 리턴
+    - 입력 X시 0 리턴
+    - W 입력시 1 리턴
+  - Input.GetAxis("Mouse X")
+    - 마우스가 아래로 움직였으면 -1 리턴
+    - 마우스가 위아래로 움직이지 않았으면 0
+    - 마우스가 위로 움직이면 1
+  - Input.GetAxis("Mouse Y")
+    - 마우스가 왼쪽으로 움직였으면 -1 리턴
+    - 마우스가 좌우로 움직이지 않았으면 0
+    - 마우스가 오른쪽로 움직이면 1
 
 <br>
 
@@ -316,6 +361,10 @@ a, b 둘 중 더 큰 것을 리턴한다.
   - 변수다. `Quaternion.eulerAngles`이렇게 쓰는게 아니라 `Quaternion타입을 참조하는 변수.eulerAngles` 이렇게 쓴다.
   - 쿼터니언을 오일러각으로 변환시킨다. 즉 Vector3로 변환한다. 
     - Quaternion.Euler(Vector3)와 반대.
+  - 월드 좌표 회전값
+- `localEulerAngles`
+  - 쿼터니언을 오일러각으로 변환시킨다. 즉 Vector3로 변환한다. 
+  - 로컬 회전값
 - `identity`
   - 변수다. 
   - 0도, 0도, 0도로 회전한 쿼터니언 값.
