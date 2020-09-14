@@ -34,17 +34,19 @@ last_modified_at: 2020-09-04
   - `sqrMagnitude` : 벡터의 길이 제곱. float
   - `normalized` : 해당 벡터의 방향 벡터. (길이 1)
   - 방향 (right, left, forward, back, up, down)
-    - Local
-      - `transform.forward` : 오브젝트의 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+    - Local 👉 <u>left, back, down 이 없다.</u> -right, -forward, -up 으로 표현.
+      - `transform.forward` : 오브젝트 입장에서의 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
         - 오브젝트의 로컬 z 축 기준에서의 양의 방향 벡터
-      - `transform.right` : 오브젝트의 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+      - `transform.right` : 오브젝트의 입장에서의 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
     - World
         - 오브젝트의 로컬 x 축 기준에서의 양의 방향 벡터
-      - `Vector3.forward` : 월드 좌표계 상에서의 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+      - `Vector3.forward` : 월드 좌표계 상에서의 적대적인 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
         - 언제나 Vector3(0, 0, 1)과 같다. 
-          - 월드 회전값이 변해도 로컬로서의 앞쪽 방향은 변함없이 늘 같다. 차는 여러 방향으로 달리지만 운전하는 당사자 입장에서는 늘 앞만 보고 있는 것처럼.
-      - `Vector3.right` : 월드 좌표계 상에서의 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+      - `Vector3.right` : 월드 좌표계 상에서의 절대적인 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
         - 언제나 Vector3(1, 0, 0)과 같다.
+    - 만약 오브젝트가 회전해 있는 상태여서 위치 축이 월드 좌표 축과 일치하지 않는다면 오브젝트의 위쪽 방향과 절대 적인 위쪽 방향은 다르다.
+      - ![image](https://user-images.githubusercontent.com/42318591/93081328-1424bc80-f6ca-11ea-8a48-f79355216c04.png){: width="60%" height="60%"}
+     
 
  
   - `up` : 해당 벡터의 ***위 쪽*** (y 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
@@ -180,11 +182,14 @@ a, b 둘 중 더 큰 것을 리턴한다.
 
 >  레이캐스트. 눈에 보이지 않는 광선을 쏴서 물리적 충돌을 감지한다.
 
-- `Physics.Raycast(발사위치 Vector3, 발사방향 Vector3, 광선길이 float, 감지할 레이어 Layer)`
+> 물리적인 충돌이 있다면 True 리턴, 없다면 False 리턴.
+
+- `Physics.Raycast(발사 위치 Vector3, 발사 방향 Vector3, 광선 길이 float, 감지할 레이어 Layer)`
+    - 발사 위치로부터 발사 방향으로 float 길이의 광선을 쐈을 때 물리적인 충돌이 감지되면 True 리턴, 없으면 Flase 리턴
     - 발사 위치와 발사 방향은 필수 매개변수다.
 - `Physics.Raycast(광선 Ray, 충돌 정보 RaycastHit, 광선길이 float, 감지할 레이어 Layer)`
     - Boolean 타입을 리턴한다. `Raycast`에 걸린게 있다면 true 리턴.
-    - `Ray`는 광선의 바랏 위치와 발사 방향을 담고 있는 광선이다.
+    - `Ray`는 광선의 발사 위치와 발사 방향을 담고 있는 광선이다.
     - 광선과 충돌한 Collider의 정보를 담는 역할을 하는 `RaycastHit` 타입의 변수도 매개변수로 넘겨준다. 이때 `out`을 함께 써서 바로 적용될 수 있게 해주기.
       - *if (Physics.Raycast(ray, `out hit`, distance, whatIsTarget))*
         - 광선에 충돌이 감지되는 순간, 이 if 조건문이 실행되자마자 RaycastHit 타입의 hit 변수에 충돌한 Collider의 정보가 들어간다. 
