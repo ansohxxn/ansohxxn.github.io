@@ -1,5 +1,5 @@
 ---
-title:  "Unity C# > Object 내장 함수/변수들 정리" 
+title:  "Unity C# > GameObject 내장 함수/변수들 정리" 
 
 categories:
   -  UnityDocs
@@ -20,16 +20,16 @@ last_modified_at: 2020-09-04
 - Scripting Overview <http://www.devkorea.co.kr/reference/Documentation/ScriptReference/index.html>
 
 
-# 오브젝트
+# GameObject 클래스
 
-- 오브젝트를 참조하고 있는 변수로 함수를 호출할 수 있다. *ex) winUI.SetActive(true);*
-- 오브젝트들의 내장되어 있는 변수나 함수들.
+- UnityEnine에 내장되어 있다.
+- 모든 오브젝트는 이 GameObject 타입이다.
 
 ## 변수/프로퍼티
 
 - `gameObject` 
-  - 자기 자신(컴포넌트 or 스크립트)가 붙은 오브젝트를 뜻함. 
-  - 그러니 자기 자신이라고 해석해도 괜춘!
+  - **자기 자신**(컴포넌트 or 스크립트)가 붙은 오브젝트를 뜻함. 
+    - *GameObject gameObject = new GameObject()*이 숨겨져 있다고 보면 된다.
 - `name`
   - 해당 오브젝트의 이름.
 
@@ -37,7 +37,9 @@ last_modified_at: 2020-09-04
 
 ### GetComponent<Component>()
 - `GetComponent<컴포넌트 이름>()`
-  - UnityEngine에서 지원하는 함수다.
+  - 두 가지 호출 방법
+    - 그냥 *GetComponent\<컴포넌트 이름>()*만 쓰면 **이 스크립트가 붙어 있는 오브젝트(나 자신)**에 붙어 있는 모든 컴포넌트들 중에서 해당 컴포넌트를 찾음
+    - *obj.GetComponent\<컴포넌트 이름>()* 처럼 어떤 게임 오브젝트에서 호출한거면 호출한 그 게임오브젝트의 컴포넌트들에서 찾는다.
   - 이 스크립트가 붙어 있는 오브젝트에 `<>`안에 적혀 있는 컴포넌트가 실존하여 오브젝트에 붙어 있는 상태라면 그 <u>붙어 있는 컴포넌트를 리턴해준다.</u>
   - 이 방법을 사용하면 슬롯 없이 그냥 코드에서 바로 해당 컴포넌트를 변수에 연결시킬 수 있다.
 
@@ -85,11 +87,18 @@ last_modified_at: 2020-09-04
 
 <br>
 
-### FindObjectOfType<Object>();
-- 씬 상의 모든 오브젝트들을 뒤져서 직접 `<>`안에 있는 이름과 일치하는 오브젝트를 찾아서 <u>리스트로</u>리턴해준다.
+### FindObjectsOfType<Object>();
+- 씬 상의 모든 오브젝트들을 뒤져서 직접 `<>`안에 있는 <u>타입(오브젝트 형이라던가 컴포넌트 형)과 일치하는 오브젝트</u>들을 찾아서 **리스트**로 리턴해준다.
 - 느리다. 이런 성능상에 문제 때문에
-  - Awake() 함수 안에서만 구현되거나
-  - 아주 적은 횟수로 호출되게끔 해야한다.
+  - Awake() 함수 안에서만 구현되거나 아주 적은 횟수로 호출되게끔 해야한다. 매프레임 실행되는 Update() 같은 함수에서는 호출 하지 말자 !
+- 's'가 빠진 FindObjectOfType\<Object>() 함수는 처음 나오는 오브젝트 하나만 리턴해준다.
+
+<br>
+
+### Find(string)
+
+- 클래스 함수라 `GameObject.Find(string)`으로 호출해야 한다.
+- **활성화 되어 있는** 오브젝트들을 뒤져서 직접 `<>`안에 있는 <u>이름(string)과 일치하는 오브젝트</u>를 찾아 리턴해준다.
 
 <br>
 

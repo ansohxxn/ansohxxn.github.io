@@ -88,6 +88,20 @@
             </ul>
             <ul>
                 {% for category in site.categories %}
+                    {% if category[0] == "Unity Lesson 2" %}
+                        <li><a href="/categories/unity-lesson-2" class="">유니티 강의2 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Unity Lesson 3" %}
+                        <li><a href="/categories/unity-lesson-3" class="">유니티 강의3 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
                     {% if category[0] == "UnityDocs" %}
                         <li><a href="/categories/unity-docs" class="">내 유니티 문서 ({{category[1].size}})</a></li>
                     {% endif %}
