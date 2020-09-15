@@ -124,11 +124,15 @@ last_modified_at: 2020-09-05
 
 ### 🔔 Input
 
+
 - 키보드 이벤트
   - 예를들어 `A` 노드를 추가하면 `A` 키보드 키에 대한 레퍼런스 노드가 생성됨. 
 - `Enable Input`
   - 기본적으로 언리얼은 액터가 Input을 받아들이는게 비활성화 되어있는 상태라 키보드 입력을 받으려면 이 노드를 추가해 주어야 한다.
     - 컨트롤러로 `Get Player Controller` 리턴값을 연결해주어야 함
+- `Disable Input`
+  - 타겟으로 들어온 Actor 의 Player Controller에 대하여 입력을 비활성화 한다.
+  - 이 노드를 연결해주면 해당 액터는 더 이상 키보드, 마우스 입력을 받을 수 없다.
 - 사용자 지정 입력 축 (Axis Mapping)
   -  Axis Mapping 추가하기
   - 블루프린트창 - 편집 - 프로젝트 세팅 - 입력 - Axis Mappings + 추가 버튼 누르기. 
