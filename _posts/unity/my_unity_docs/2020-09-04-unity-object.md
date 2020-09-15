@@ -23,7 +23,11 @@ last_modified_at: 2020-09-04
 # GameObject 클래스
 
 - UnityEnine에 내장되어 있다.
-- 모든 오브젝트는 이 GameObject 타입이다.
+- 모든 오브젝트는 동일하게 이 GameObject 타입이다.
+  - 오브젝트는 컴포넌트들을 부품으로서 가진다 (Has-A)
+  - 모든 오브젝트들은 Transform 컴포넌트를 가진다. 
+- 반면에 컴포넌트들은 서로 각각 다양하고 다른 타입이다.
+  - 모든 컴포넌트는 자신의 주인인 오브젝트에 접근할 수 있다.  
 
 ## 변수/프로퍼티
 
@@ -34,6 +38,11 @@ last_modified_at: 2020-09-04
   - 해당 오브젝트의 이름.
 
 ## 함수
+
+- 그냥 호출하면 👉 이 스크립트가 붙어 있는 오브젝트(나 자신)에 대해 함수 호출
+  - GetCOmponent\<Rigidbody>();
+- 다른 오브젝트로 호출하면 👉 그 오브젝트에 대해 함수 호출
+  - obj.GetCOmponent\<Rigidbody>();
 
 ### GetComponent<Component>()
 - `GetComponent<컴포넌트 이름>()`
@@ -99,11 +108,13 @@ last_modified_at: 2020-09-04
 
 - 클래스 함수라 `GameObject.Find(string)`으로 호출해야 한다.
 - **활성화 되어 있는** 오브젝트들을 뒤져서 직접 `<>`안에 있는 <u>이름(string)과 일치하는 오브젝트</u>를 찾아 리턴해준다.
+- 오브젝트가 많다면 느리다.
 
 <br>
 
 ### DontDestroyOnLoad(GameObject) 함수
 - 다른 Scene으로 변경되더라도 파괴되지 않고 유지할 오브젝트를 지정하는 함수다.
+- 인수로 넘긴 오브젝트가 절대 삭제되지 않도록 한다.
 
 ***
 <br>
