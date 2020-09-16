@@ -277,7 +277,8 @@ last_modified_at: 2020-09-05
   - 이 애니메이션 블루프린트(Animinstance)를 소유하고 있는 액터를 리턴한다. 
 - `Play Anim Montage`
   - 애님 몽타주를 재생시킨다.
-    - Anim Montage에 재생시킬 애님 몽타주를 할당한다.
+    - Anim Montage : 재생시킬 애님 몽타주를 할당한다.
+    - Return Value : 애님 몽타주 총 재생 길이 초단위로 float으로 리턴한다.
 - `Stop Anim Montage`
   - 애님 몽타주를 재생을 멈춘다.
     - Anim Montage에 멈출 애님 몽타주를 할당한다.
