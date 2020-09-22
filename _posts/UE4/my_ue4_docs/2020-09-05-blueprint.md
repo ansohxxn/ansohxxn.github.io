@@ -187,6 +187,8 @@ last_modified_at: 2020-09-05
   - 입력 받은 Object의 이름을 리턴한다.
 - `Destroy Actor`
   - 입력 받은 액터를 삭제한다.
+- `Actor Has Tag`
+  - 입력 받은 액터의 Tag 배열에 해당 원소가 있다면 True 리턴, 없다면 False 리턴.
 - `스위치`
   - 입력으로 들어온 **Enum** 변수의 값에 따라 이 Enumeration에 속한 모든 **Enum** 상태들 중, 입력으로 들어온 **Enum** 변수의 값과 일치하는 상태와 연결된 실행 핀 와이어를 실행한다.
 
@@ -255,6 +257,13 @@ last_modified_at: 2020-09-05
     - **Damaged Actor** 👉 데미지를 가할 대상. 
     - **Base Damage** 👉 데미지양 
     - **Damage Causer** 👉 데미지를 가하는 대상 
+
+<br>
+
+### 🔔 Component
+
+- `Component Has Tag`
+  - 입력 받은 컴포넌트의 Tag 배열에 해당 원소가 있다면 True 리턴, 없다면 False 리턴.
 
 <br>
 
