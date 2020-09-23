@@ -131,7 +131,7 @@ last_modified_at: 2020-09-05
   - 기본적으로 언리얼은 액터가 Input을 받아들이는게 비활성화 되어있는 상태라 키보드 입력을 받으려면 이 노드를 추가해 주어야 한다.
     - 컨트롤러로 `Get Player Controller` 리턴값을 연결해주어야 함
 - `Disable Input`
-  - 타겟으로 들어온 Actor 의 Player Controller에 대하여 입력을 비활성화 한다.
+  - '타겟'으로 들어온 Actor 의 Player Controller에 대하여 입력을 비활성화 한다.
   - 이 노드를 연결해주면 해당 액터는 더 이상 키보드, 마우스 입력을 받을 수 없다.
 - 사용자 지정 입력 축 (Axis Mapping)
   -  Axis Mapping 추가하기
@@ -150,6 +150,7 @@ last_modified_at: 2020-09-05
   - 입력 값을 리턴하는 핀과 `Scale Value` 핀과 연결해주면 입력에 따라 움직일 수 있게 된다.
   - 현재 위치로부터  `Scale Value`(float)의 크기만큼 `World Direction` 방향으로 이동하게 된다.
     - 보통 `World Direction`에 Normalized 한 방향 벡터를 연결해준다.
+
 
 <br>
 
@@ -189,6 +190,8 @@ last_modified_at: 2020-09-05
   - 입력 받은 액터를 삭제한다.
 - `Actor Has Tag`
   - 입력 받은 액터의 Tag 배열에 해당 원소가 있다면 True 리턴, 없다면 False 리턴.
+- `Get All Actors with Tag`
+  - 해당 액터 Tag를 가진 **모든 액터들을 배열에 담아** 리턴한다. 
 - `스위치`
   - 입력으로 들어온 **Enum** 변수의 값에 따라 이 Enumeration에 속한 모든 **Enum** 상태들 중, 입력으로 들어온 **Enum** 변수의 값과 일치하는 상태와 연결된 실행 핀 와이어를 실행한다.
 
@@ -252,11 +255,16 @@ last_modified_at: 2020-09-05
     - **New View Target**
       - 변경하고자 하는 뷰를 찍는 카메라를 여기에 연결해주어야 한다.
       - 되고자 하는 뷰를 가진 카메라의 레퍼런스 혹은 카메라를 담고 있는 변수를 여기에 연결해주자.
-- `Apply Damage` 노드
+- `Apply Damage` 
   - 데미지를 가한다.
     - **Damaged Actor** 👉 데미지를 가할 대상. 
     - **Base Damage** 👉 데미지양 
     - **Damage Causer** 👉 데미지를 가하는 대상 
+- `Get Game Mode` 
+  - 게임 모드 블루프린트를 부모 클래스 GameModeBase로서 가져온다.
+- `Open Level`
+  - 레벨을 불러오고 열어준다. (LoadScene 같은 느낌)
+  - Level Name 에 해당 레벨 이름을 입력하면 그 레벨이 열리게 할 수 있다.
 
 <br>
 
@@ -307,6 +315,24 @@ last_modified_at: 2020-09-05
 - `Vector Parameter`
   - Material Instance를 만드는데 필요한 파라미터로, 색상 값을 다르게 하는 파라미터다.
   - [참고](https://ansohxxn.github.io/ue4%20lesson%201/ch4-1/#material과-material-innstance)
+
+<br>
+
+## 🔔 User Interface (UI)
+
+- `Create Widget`
+  - 위젯을 생성한다.
+  - Player Controller가 HUD를 소유하므로 Player Controller를 Owining Player를 통해 입력 받아야 한다.
+  - Class에 생성할 위젯 블루프린트를 할당한다.
+- `Add to Viewport`
+  - 생성한 위젯을 화면상에 띄운다.
+
+<br>
+
+## 🔔 Player Controller
+
+- `Set Show Mouse Cursor`
+  - Player Controller를 입력으로 받으며, 마우스 커서를 보이게 할건지 아닌지를 설정할 수 있다. 
 
 ***
 <br>
