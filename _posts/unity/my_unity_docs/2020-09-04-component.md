@@ -46,6 +46,7 @@ last_modified_at: 2020-09-04
 
 #### Translate(Vector3)
 - 매개변수로 들어온 벡터값 만큼 평행이동 시킨다.
+- 기본적으로 Local 좌표계를 기준으로 평행이동한다. (Space.Self가 디폴트)
 - `Translate(Vector3), Space.World)`
   - Translate 함수 매개변수로 Space.World를 넘기면 Global 좌표계를 기준으로 평행이동한다.
   - 매개변수 디폴트 값은 Space.self (Local)
@@ -61,6 +62,14 @@ last_modified_at: 2020-09-04
   ```c#
   effect.transform.SetParent(parent);
   ```
+
+#### TransformDirection(Vector3)
+  
+  - 인수로 받은 좌표 Vector3 를 로컬 좌표계 기준에서 월드 좌표계 기준으로  방향만 변환하여 이를 리턴해준다.(벡터 길이는 변하지 않음)
+
+#### InverseTransformDirection(Vector3)
+  
+  - 인수로 받은 좌표 Vector3 를 월드 좌표계 기준에서 로컬 좌표계 기준으로  방향만 변환하여 이를 리턴해준다.(벡터 길이는 변하지 않음)
 
 <br>
 
