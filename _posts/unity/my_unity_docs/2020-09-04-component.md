@@ -41,11 +41,24 @@ last_modified_at: 2020-09-04
   - `localPosition`, `localRotation`, `localScale`은 Local좌표계에서의 위치.
 - ✨ <u>부모 자식 관계</u> 또한 Transform이 관리한다.
   - `transform.parent` : 내 부모 오브젝트를 뜻한다.
+- `eulerAngles`
+  ```c#
+  transform.eulerAngles = new Vector3(0.0f, _yAngle, 0.0f);  // Y 축으로 _yAngle 각도 만큼 회전한다.
+  ```
+  - 오일러 각도의 회전 값을 나타내며 Vector3 를 사용해 회전 값을 설정할 수 있다.
+  - 📢 주의 사항
+    - 밑에 코드와 같이 절대적인 회전 Vector3 값으로 설정하는 것이 아닌, 이만큼 더 회전해라! 하는 델타 값 의미로 `eulerAngles`에 Vector3를 더하고 빼주는건 안된다.
+    - 오일러 각도는 360도를 넘어가면 값의 계산에 실패하기 때문에 `eulerAngles`를 얼만큼 더 회전할지의 델타 회전값으로 사용하는 것은 권장하지 않는다.
+      ```c#
+      transform.eulerAngles += new Vector3(0.0f, _yAngle, 0.0f);  // '+=' ❌❌❌
+      ```
 
 ### 함수
 
 #### Translate(Vector3)
-- 매개변수로 들어온 벡터값 만큼 평행이동 시킨다.
+- 매개변수로 들어온 현재 위치로부터 해당 벡터만큼 평행이동 시킨다.
+- <u>상대적인 벡터의 방향으로</u> 평행 이동 한다.
+  - 예를 들어 인수로 들어온 Vector3의 방향이 Vector3.forward 라면 절대적인 월드 좌표계 기준에서의 forward 방향이 아니라 자신을 기준으로 한 forward 방향힘을 나타낸다.
 - 기본적으로 Local 좌표계를 기준으로 평행이동한다. (Space.Self가 디폴트)
 - `Translate(Vector3), Space.World)`
   - Translate 함수 매개변수로 Space.World를 넘기면 Global 좌표계를 기준으로 평행이동한다.
@@ -54,7 +67,7 @@ last_modified_at: 2020-09-04
       - 다만 부모가 있는 자식 오브젝트라면 `Local`임
 
 #### Rotate(Vector3)
-- <u>현재 회전에서</u> 매개변수로 들어온 Vector3만큼 <u>더</u> x, y, z 방향으로 각각 a, b, c도 만큼 <u>회전</u>을 시킨다.
+- <u>현재 회전에서</u> 매개변수로 들어온 상대적인 Vector3만큼 <u>더</u> x, y, z 방향으로 각각 a, b, c도 만큼 <u>회전</u>을 시킨다.
 - Translate과 마찬가지로 Space.Self가 디폴트라 로컬 좌표계를 기준으로 회전한다.
 
 #### SetParent(object)
