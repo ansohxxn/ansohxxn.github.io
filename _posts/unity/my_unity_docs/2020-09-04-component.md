@@ -37,7 +37,8 @@ last_modified_at: 2020-09-04
 
 ### 변수/프로퍼티
 
-- 오브젝트의 `position`, `rotation`, `scale` 즉 위치, 회전, 크기를 담당한다. 
+- 오브젝트의 `position`, `rotation`, `scale` 는 월드 좌표계 위치, 회전, 크기를 담당한다. 
+  - `transform.position = Vector3(...)` 이런 식은 현재 위치와 상관 없이 오브젝트의 월드 좌표계 위치를 바꿔버리는 셈이 된다.
   - `localPosition`, `localRotation`, `localScale`은 Local좌표계에서의 위치.
 - ✨ <u>부모 자식 관계</u> 또한 Transform이 관리한다.
   - `transform.parent` : 내 부모 오브젝트를 뜻한다.
