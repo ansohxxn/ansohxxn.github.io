@@ -89,10 +89,11 @@ last_modified_at: 2020-09-04
 
 ### Instantiate(GameObject)
 - 게임 플레이 도중에 매개변수에 들어온 <u>오브젝트를 복사</u>하여 게임 도중에 생성해낸다.
-  - 생성한 오브젝트를 리턴함.
-- Instantiate(GameObject, Vector3(position), Vector3(rotation))
+  - <u>생성한 오브젝트를 리턴</u>함.
+- Instantiate(GameObject, Vector3(position), Quaternion(rotation))
   - 위치와 회전 벡터를 추가로 매개변수로 넣어주어 찍어낼 오브젝트의 위치와 회전값을 설정할 수도 있다.
   - 위치, 회전 지정 안해주면 랜덤 위치나 원점에서 생성됨.
+
 
 <br>
 

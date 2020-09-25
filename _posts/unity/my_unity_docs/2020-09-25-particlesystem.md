@@ -1,0 +1,147 @@
+---
+title:  "Unity C# > 파티클 시스템" 
+
+categories:
+  -  UnityDocs
+tags:
+  - [Game Engine, Unity]
+
+toc: true
+toc_sticky: true
+
+date: 2020-09-25
+last_modified_at: 2020-09-25
+---
+
+- 유니티 공식 매뉴얼 <https://docs.unity3d.com/kr/current/Manual/UnityManual.html>
+- Scripting Overview <http://www.devkorea.co.kr/reference/Documentation/ScriptReference/index.html>
+
+<br>
+
+![image](https://user-images.githubusercontent.com/42318591/94247622-58c91700-ff58-11ea-8d4d-1edb4452aba1.png)
+
+## 메인 모듈
+
+- Duration 
+  - 파티클 시스템이 실행되는 지속 시간
+- Looping 
+  - 반복 재생 
+- Play On Awake 
+  - 이걸 체크하면 해당 파티클 시스템이 **활성화 되자마자 바로 재생**된다.
+  - 이게 체크 되어있지 않으면 개발자가 수동적으로 코드를 통해 Play() 시켜야 한다. 
+- Start Lifetime 
+  - 파티클의 초기 수명.
+    - *0.15 로 크게 낮춰서 파티클 입자들이 눈깜짝할 새에 사라지는 것을 볼 수 있다. 역시 총 발사 이펙트 효과에 적합할 것 같다!*
+- Start Speed 
+  - 해당 방향으로 작용하는 파티클 초기 속도
+- Start Color
+  - 파티클 입자의 초기 색깔
+- Gravity Modifier
+  - 파티클 입자에게 미치는 중력의 영향 정도.
+  - 이 값이 클 수록 빨리 떨어진다.
+  - 이 값이 작을 수록 중력의 영향을 받지 않는다.
+
+## Emissions 모듈
+
+> 한 순간에 빵 터지듯이 동시에 방출될 입자 수. *한발에 동시에 총알 여러발 나가는 총의 이펙트 효과를 구현할 때 좋을 것 같다.*
+
+
+- Rate over Time 
+  - 시간 단위 당 방출되는 파티클 수
+- Bursts 👉 파티클을 생성하는 이벤트
+  - Count
+    - 동시에 한번에 방출되는 파티클 수
+
+
+## Shape 모듈
+
+> 파티클 입자들이 생성 및 방출되는 모양을 결정한다. 구라면 구 모양으로 파티클 입자들이 방출되는 식이다. 
+
+- Shape
+  - **이 모양 내에서 랜덤한 위치에서 파티클 입자들이 방출된다.**
+    - Sphere 라면  
+      - *총구는 동그랗기 때문에 역시 총 발사 이펙트 효과에 적합할 것 같다!*
+    - Cone 이라면 원뿔 모양
+      - Angle
+        - 파티클 입자가 더 넓게 튀도록
+        - Cone 원뿔 꼭지점의 각도로, 각도가 0 이면 원기둥이 되고 90 이면 평면 원반이 된다.
+- Radius 
+  - 위에서 설정한 Shpae의 반지름이 된다. 이 반경 내에서 입자들이 태어난다.
+
+
+## Color Over Lifetime 모듈
+
+> 수명 주기에 따라 파티클의 색깔과 투명도가 어떻게 변하는지를 설정할 수 있다.
+
+![image](https://user-images.githubusercontent.com/42318591/94117399-1d124c80-fe87-11ea-8a46-0f22494a717e.png)
+
+- 저 직사각형 가로 길이가 파티클 입자의 전체 수명 주기이다.
+    - 우클로 섹션을 추가할 수 있는데, 이 섹션들을 누르면 섹션이 위치한 주기의 구간 별로 색상 혹은 투명도를 다르게 지정할 수 있다. 
+        - 위의 섹션 👉 투명도
+        - 아래 섹션 👉 색상 
+    - *파티클이 점점 노래지다가 중간즈음부터 점점 투명해져 자연스럽게 수명을 다하는 컬러를 나타냈다.*
+        - 1 번 섹션의 투명도를 256으로 한 후 수명 주기의 중간에 위치하게 하고 2 번 섹션의 투명도를 0 으로 한 후 수명 끝에 위치하게 하면 수명의 중간까진 불투명했다가 중간 이후부턴 점점 투명해지게 만들 수 있다.
+        - 3, 4 번 섹션의 색상을 노란색으로 추가해서 수명에서 3,4 번 주변 주기 땐 노랗게 변하게 할 수 있다. 
+
+
+## Size Over LifeTime 모듈
+
+> 수명 주기에 따라 파티클의 크기가 어떻게 변하는지도 설정할 수 있다.
+
+![image](https://user-images.githubusercontent.com/42318591/94119812-5b5d3b00-fe8a-11ea-85b6-42440c2706c7.png)
+
+위 그래프는 예를 들어 사이즈가 처음엔 최대이다가 수명 주기 동안 점점 곡선을 그리는 형태로 작아지고 사라지는 형태다.
+
+
+## Renderer 모듈
+
+> 파티클의 이미지나 메시가 어떻게 변환되고 응영처리 되고 덮어 쓰여지는지를 결정한다.
+
+- Render Mode
+  - 렌더링 된 이미지가 생성되는 방식이다.
+  - Stretched Billboard 로 설정하면 
+    - 파티클은 항상 카메라를 향하지만 다양한 Scale 이 적용 된다. 다양한 모양으로 입자가 뻗친다.
+      - Speed Scale 속도에 비례하여 파티클이 뻗어진다. (음수, 양수로 방향 설정)
+- Material
+  - 파티클 입자의 Material
+- Trails Material
+  - 파티클 입자의 잔상의 Material
+  - Trails 모듈을 사용할거라면 지정해주어야 한다.
+
+
+## Texture Sheet Animation 모듈
+
+> 파티클 입자에 텍스처 또는 애니메이션을 넣을 수 있다!
+
+- Grid 모드 : 일반 적인 입자
+- <u>Sprite 모드</u> : 특정 Sprite 이미지로 대체
+  - 인스펙터에서 파티클 입자에 입힐 이미지 파일의 Texture Type을 Sprite(2D and UI)로 바꿔준 후 이미지 파일을 할당해 준다.
+  - Sprite 에 맞게 입자의 Material도 바꿔주는게 자연스럽다. **Renderer 모듈**의 Material을 "Sprites-Default" 로 바꿔준다. (스프라이트에 맞는 Material)
+
+    
+## Trails 모듈
+
+> 파티클 입자에 기다란 잔상을 남긴다. 
+
+- Ratio 
+  - 잔상을 남길 입자 비율
+    - 파티클 모든 입자에게 100 퍼 잔상을 생성한다. 
+    - 만약 0.5 라면 입자 개수의 절반에 해당하는 랜덤한 입자들만 잔상을 생성한다. 
+- Lifetime
+  - 잔상의 수명 
+- Minimum Vertex Distance
+  - 잔상이 어느 거리만큼 가야 Vertex 가 업데이트 될지를 나타내는 설정 값이다.
+  - 이 값이 작으면 작을 수록, 0 에 가까울 수록 자주 업데이트 되므로 잔상이 자연스럽다. 
+  - 크면 클수록 잔상이 업데이트 되는 거리가 길어져 뚝뚝 끊길 것이다.
+- Color Over LifeTime
+  - 잔상의 수명 주기에 따른 색깔 변화
+- Renderer 모듈에서 Metrial 지정해주기
+
+
+***
+<br>
+
+    🌜 개인 공부 기록용 블로그입니다. 오류나 틀린 부분이 있을 경우 
+    언제든지 댓글 혹은 메일로 지적해주시면 감사하겠습니다! 😄
+
+[맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
