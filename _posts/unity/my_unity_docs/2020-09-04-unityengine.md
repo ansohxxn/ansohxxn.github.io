@@ -379,21 +379,56 @@ a, b 둘 중 더 큰 것을 리턴한다.
 ### 함수
 
 #### `Quaternion.Euler(Vector3)`
-  - 매개변수로 받은 Vector3를 Quaternion타입으로 변환하여 리턴해주는 함수
+
+- 매개변수로 받은 Vector3를 Quaternion타입으로 변환하여 리턴해주는 함수
+
+인수로 받은 Vector3 를 쿼터니언으로 변환하고 이를 리턴해준다. Euler() 함수로 Vector3를 쿼터니언으로 변환하면, 쿼터니언 타입은 `transform.rotation`에 할당이 가능해진다.
+
+```c#
+transform.rotation = Quaternion.Euler(new Vector3(0.0f, _yAngle, 0.0f));
+```
 
 #### `Quaternion.LookRotation(Vector3)`
   - 벡터를 매개변수로 넣어주면 오브젝트가 그 벡터의 방향을 쳐다보게끔 자기 자신의 방향을 회전한다.
   - 현재 위치좌표에서 매개변수로 들어온 <u>벡터만큼 더한 목적지 위치 좌표를 바라보게</u> 된다. 
     - 따라서 `벡터의 뺄셈`으로 `목적지 위치좌표 - 출발지 위치좌표` 해주어 필요한 방향과 거리를 나타낼 벡터를 구해주는 것이 좋다. 그리고 매개변수로 넘기기.
 
-#### `Quaternion.Lerp(Vector3, Vector3, float)`
-  - 두 개의 회전 값(Vector3)을 정하면 float 비율만큼의 적당한 회전값을 리턴
+우리가 원하는 방향을 쳐다 보는 회전 값을 쿼터니언으로 리턴한다. Vector3를 인수로 넘기면 인수로 넘긴 Vector3의 방향을 쳐다보는 회전값(쿼터니언)을 리턴한다.
 
-#### `Quaternion.Lerp(aRotation, bRotation, 0.5f);`
+```c#
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.back);
+        }
+```
+
+`S`키를 누르면 Vector3.back 방향을 바라보는 회전 상태를 쿼터니언으로 반환한다. 이를 `transform.rotation`으로 설정하면 그 방향으로 오브젝트가 회전할 것이다.
+
+#### `Quaternion.Lerp(Vector3, Vector3, float)`
+
+  - 두 개의 회전 값(Vector3)을 정하면 float 비율만큼의 적당한 회전값을 리턴
+  - `Quaternion.Lerp(aRotation, bRotation, 0.5f);`
   - `0.5f`면 딱 중간
   - `1.0f`면 bRotation을 그대로 따름
   - `0.0f`면 aRotation을 그대로 따름
   - `0.2f`면 aRotation에 좀 더 가깝게 회전
+
+#### Quaternion.Slerp(Vector3 a, Vector3 b, float t)
+
+A 에서 B 까지 0.0 ~ 1.0 퍼센트 비율로 보간. Lerp 와 같다!
+
+- 🎈 Lerp 와의 차이점
+  - Lerp 
+    - 선형 보간법
+  - **Slerp** 
+    - 구면 선형 보간법
+    - <u>회전이나 방향을 보간할 때 주로 쓰인다.</u>
+
+Lerp와 마찬가지로 좀 더 부드럽게 회전시킬 수 있다. A 벡터와 B 벡터 사이를 `t` 퍼센트로 보간한 결과를 쿼터니언으로 리턴한다.
+
+```c#
+transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), Time.time * speed);
+```
 
 #### `Quaternion.AngleAxis(float angle, Vector3 axis);`
   - 축 axis 주위를 angle 만큼 회전한 rotation을 생성하고 리턴한다.
