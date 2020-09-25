@@ -165,6 +165,9 @@ last_modified_at: 2020-09-05
 
 - `PrintString`
   - 노드에 적힌 메세지를 화면에 출력한다.
+- `Build String` 
+  - 문자열로 변환해주고 또한 이를 Append To 문자열에 이를 붙여 준다. 
+  - Append To + Prefix + (문자열로 변환하고자 하는 데이터) + Suffix 순으로 붙여진 하나의 문자열을 리턴한다.
 
 <br>
 
