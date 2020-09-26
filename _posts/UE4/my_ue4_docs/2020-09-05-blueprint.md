@@ -374,6 +374,9 @@ last_modified_at: 2020-09-05
 
 ## 🔔 User Interface (UI)
 
+- 이벤트
+  - `Contruct`
+    - BeginPlay 와 같이 이 위젯 블루프린트가 활성화될 때 처음 발생하는 이벤트.
 - `Create Widget`
   - 위젯을 생성한다.
   - Player Controller가 HUD를 소유하므로 Player Controller를 Owining Player를 통해 입력 받아야 한다.
@@ -386,6 +389,10 @@ last_modified_at: 2020-09-05
     - 타겟으로 들어온 위젯을 완전히 삭제, 제거 한다는 것은 아닌 듯 하며 단순히 위젯이 표시되시 않도록 하는 것 같다.
 - `Set Is Enabled`
   - 타겟으로 들어온 위젯을 `Is Is Enabled` 입력 핀으로 들어온 Boolean 값이 True 면 활성화 하고 False 면 비활성화 한다.
+- `Play Animation`
+  - In Animation으로 들어온 위젯(애니메이션이 있는) 타겟으로 들어온 위젯으로 하여금 그 애니메이션을 재생시킨다. 
+  - Num Loops to Play 를 0 으로 해주면 무한 반복 재생한다. 그외에는 재생 횟수가 된다.
+
 
 <br>
 
