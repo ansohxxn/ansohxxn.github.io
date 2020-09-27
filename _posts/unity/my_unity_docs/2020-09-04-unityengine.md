@@ -38,12 +38,8 @@ last_modified_at: 2020-09-04
       - `transform.forward` : 오브젝트 입장에서의 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
         - 오브젝트의 로컬 z 축 기준에서의 양의 방향 벡터
       - `transform.right` : 오브젝트의 입장에서의 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
-    - World
-        - 오브젝트의 로컬 x 축 기준에서의 양의 방향 벡터
-      - `Vector3.forward` : 월드 좌표계 상에서의 적대적인 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
-        - 언제나 Vector3(0, 0, 1)과 같다. 
-      - `Vector3.right` : 월드 좌표계 상에서의 절대적인 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
-        - 언제나 Vector3(1, 0, 0)과 같다.
+    - `Vector3.forward` 👉 언제나 Vector3(0, 0, 1)과 같다.
+    - `Vector3.right` 👉 언제나 Vector3(1, 0, 0)과 같다.
     - 만약 오브젝트가 회전해 있는 상태여서 위치 축이 월드 좌표 축과 일치하지 않는다면 오브젝트의 위쪽 방향과 절대 적인 위쪽 방향은 다르다.
       - ![image](https://user-images.githubusercontent.com/42318591/93081328-1424bc80-f6ca-11ea-8a48-f79355216c04.png){: width="60%" height="60%"}
      
@@ -372,6 +368,13 @@ a, b 둘 중 더 큰 것을 리턴한다.
   - 변수다. `Quaternion.eulerAngles`이렇게 쓰는게 아니라 `Quaternion타입을 참조하는 변수.eulerAngles` 이렇게 쓴다.
   - 쿼터니언을 오일러각으로 변환시킨다. 즉 Vector3로 변환한다. 
     - Quaternion.Euler(Vector3)와 반대.
+  - 오일러 각도의 회전 값을 나타내며 Vector3 를 사용해 회전 값을 설정할 수 있다.
+  - 📢 주의 사항
+    - 밑에 코드와 같이 절대적인 회전 Vector3 값으로 설정하는 것이 아닌, 이만큼 더 회전해라! 하는 델타 값 의미로 `eulerAngles`에 Vector3를 더하고 빼주는건 안된다.
+    - <u>오일러 각도는 360도를 넘어가면 값의 계산에 실패하기 때문에</u> `eulerAngles`를 얼만큼 더 회전할지의 델타 회전값으로 `+=` 사용하는 것은 권장하지 않는다.
+      ```c#
+      transform.eulerAngles += new Vector3(0.0f, _yAngle, 0.0f);  // '+=' ❌❌❌
+      ```
   - 월드 좌표 회전값
   - x, y, z 방향으로 얼마큼 회전 할 것인지
 - `localEulerAngles`
