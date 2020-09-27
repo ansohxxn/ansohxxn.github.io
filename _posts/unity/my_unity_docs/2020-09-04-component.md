@@ -53,6 +53,9 @@ last_modified_at: 2020-09-04
       ```c#
       transform.eulerAngles += new Vector3(0.0f, _yAngle, 0.0f);  // '+=' ❌❌❌
       ```
+- `transform.forward` : 월드 기준에서 오브젝트 입장에서의 ***앞 쪽*** (월드 기준 z 축) 을 향하는 <u>방향 벡터</u> (길이가 1인)
+  - 오브젝트의 로컬 z 축 기준에서의 양의 방향 벡터
+- `transform.right` : 월드 기준에서 오브젝트의 입장에서의 ***오른 쪽*** (월드 기준 x 축) 을 향하는 <u>방향 벡터</u> (길이가 1인)
 
 ### 함수
 
@@ -78,12 +81,18 @@ last_modified_at: 2020-09-04
   ```
 
 #### TransformDirection(Vector3)
+
+```c#
+
+Vector3 pos = transform.TransformDirection(Vector3.forward); // 내 로컬 좌표로서의 (0, 0, 1) 로컬 좌표 위치를 월드 좌표계 기준으로 변환하여 리턴해준다.
+```
   
-  - 인수로 받은 좌표 Vector3 를 로컬 좌표계 기준에서 월드 좌표계 기준으로  방향만 변환하여 이를 리턴해준다.(벡터 길이는 변하지 않음)
+  - 인수로 받은 좌표 Vector3 를 *로컬 좌표계 기준에서 월드 좌표계 기준으로*  방향만 변환하여 이를 리턴해준다.(벡터 길이는 변하지 않음)
+  - `transform.TransformDirection(Vector3.forward)`와 `transform.forward` 는 같다.
 
 #### InverseTransformDirection(Vector3)
   
-  - 인수로 받은 좌표 Vector3 를 월드 좌표계 기준에서 로컬 좌표계 기준으로  방향만 변환하여 이를 리턴해준다.(벡터 길이는 변하지 않음)
+  - 인수로 받은 좌표 Vector3 를 *월드 좌표계 기준에서 로컬 좌표계 기준으로*  방향만 변환하여 이를 리턴해준다.(벡터 길이는 변하지 않음)
 
 <br>
 
@@ -168,8 +177,11 @@ Edit Collider 버튼을 눌러 캡슐의 모양을 알맞게 손볼 수 있다.
  
 - <u>오브젝트가 중력의 영향을 받게 됨</u>
   - `Use Gravity` 체크 해제하면 중력 영향 안받게 됨
-- 중력 말고도 질량, 마찰력 등등 현실 세계에 존재하는 물리적인 힘들 설정 가능.
+- 중력 말고도 질량, 마찰력 등등 현실 세계에 존재하는 물리적인 힘들 설정 가능. 
+  -  `Is Kinematic`가 체크가 되어 있다면!! 중력은 물론이고 모든 물리적인 힘들을 받지 않게 된다.
 - <u>Collider에 물리학을 입힌다.</u>
+- `Constraints`로 특정 축으로는 이동, 회전 안되게 제한할 수 있다.
+
 
 ### 변수/프로퍼티
 

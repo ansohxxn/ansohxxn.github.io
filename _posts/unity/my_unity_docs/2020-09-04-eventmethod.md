@@ -78,12 +78,17 @@ last_modified_at: 2020-09-04
 - On<u>Trigger</u>Enter : `Trigger`인 Collider와 충돌할 때 자동으로 실행된다. 
   - `Is Trigger`가 <u>체크된 Collider와 충돌하는 경우 발생되는 메세지</u>
   - 사실 충돌하는 두 오브젝트 중 하나만 Trigger 라도 두 오브젝트 모두 이 함수가 실행된다.
-    - 즉 물리적 충돌은 일어나지 않고 뚫고 지나가지만 그래도 이벤트 발생은 시켜야 하는 경우.
+    - 즉 물리적 충돌은 일어나지 않고 닿기 만 하더라도, 뚫고 지나가지만 그래도 이벤트 발생은 시켜야 하는 경우.
 - <u>오브젝트끼리 충돌하면 유니티에서 OnTriggerEnter 메세지를</u> ***<u>충돌한 오브젝트들</u>*** 에게 브로드캐스팅 한다.
   - 충돌한 두 오브젝트끼리는 서로 독립적이고 연관이 없으니 서로 충돌한 사실을 모르지만 두 오브젝트가 충돌하면 유니티에서 두 오브젝트에게 OnTriggerEnter 메세지를 뿌리므로 두 오브젝트는 <u>OnTriggerEnter 함수 안에 구현한 내용대로 충돌 처리를 한다.</u>
 - 유니티는 충돌한 상대 오브젝트의 정보를`Collider`타입의 `other`가 참조하도록 넘겨준다.  
   - 충돌한 <u>상대 오브젝트에 붙어있는 Collider 컴포넌트</u> 
     - `Collider` 컴포넌트 👉🏻 <u>물리적 표면</u>
+- 이 스크립트가 붙은 오브젝트(나 자신)가 다른 오브젝트와 충돌시 `OnTriggerEnter` 이벤트가 발생하기 위한 조건. 아래 조건을 전부 만족해야 이 이벤트가 발생할 수 있다.
+  1. 내가 혹은 상대방 둘 중 하나는 꼭 Rigidbody 컴포넌트를 가지고 있어야 한다. 
+    - `IsKinematic` 체크 여부는 상관 없다.
+  2. 나 그리고 상대방 둘 다 모두 Collider 컴포넌트를 가지고 있어야 한다.
+    - 단, 둘 중 하나라도 `IsTrigger`는 반드시 켜져 있어야 함
 
 ```c#
 void OnTriggerEnter(Collider other)
@@ -104,8 +109,26 @@ void OnTriggerEnter(Collider other)
 
 ## 👩‍🦰 void OnCollisionEnter(Collision other)
 - On<u>Collision</u>Enter : Trigger가 체크되지 않은 <u>일반 Collider를 가진 오브젝트와 충돌한 경우</u> 자동으로 실행된다.
-- 매개변수 `Collider`와 `Collision`의 차이
-  - `Collision`이 좀 더 충돌에 대한 많은 정보를 담고 있다. 충돌 그 자체에 대한 물리적인 정보. 
+- `Collider`와 `Collision`의 차이
+  - `Collision`은 충돌한 상대 오브젝트에 대한 많은 정보를 담고 있다. 나랑 부딪친 오브젝트의 Transform, Collider, GameObject, Rigidbody, 상대 속도 등등이 `Collision`에 담겨서 들어 온다. 물리적인 정보가 더 많이 들어 있다.
+  - `Collider`는 `Collision`보다는 담고 있는 정보가 적다. 물리적인 정보는 담고 있지 않아서.
+
+```c#
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+    }
+```
+
+- 이 스크립트가 붙은 오브젝트(나 자신)가 다른 오브젝트와 충돌시 `OnCollisionEnter` 이벤트가 발생하기 위한 조건. 아래 조건을 전부 만족해야 이 이벤트가 발생할 수 있다.
+  1. 내가 혹은 상대방 둘 중 하나는 꼭 <u>Rigidbody 컴포넌트</u>를 가지고 있어야 한다. 
+    - `IsKinematic`은 꺼져 있어야 함
+    - 즉, 둘 중 하나는 꼭 충돌로 인한 물리적인 힘에 영향을 받을 수 있는 상태여야 함. 그래서 OnCollisionEnter는 뭔가 물리적인 힘에 의한 충돌 느낌
+  2. 나 그리고 상대방 둘 다 모두 Collider 컴포넌트를 가지고 있어야 한다.
+    - `IsTrigger`는 꺼져 있어야 함
+
+FPS 게임 같은데서 총알이 사람에게 맞으면 총알 입장에선 사람 오브젝트 정보가 Collision으로 들어오게 되므로 그 사람의 체력을 깎거나 하는 처리를 할 수 있다.
+
 
 <br>
 

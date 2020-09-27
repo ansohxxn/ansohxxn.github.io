@@ -34,12 +34,13 @@ last_modified_at: 2020-09-04
   - `sqrMagnitude` : 벡터의 길이 제곱. float
   - `normalized` : 해당 벡터의 방향 벡터. (길이 1)
   - 방향 (right, left, forward, back, up, down)
-    - Local 👉 <u>left, back, down 이 없다.</u> -right, -forward, -up 으로 표현.
-      - `transform.forward` : 오브젝트 입장에서의 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
-        - 오브젝트의 로컬 z 축 기준에서의 양의 방향 벡터
-      - `transform.right` : 오브젝트의 입장에서의 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
-    - `Vector3.forward` 👉 언제나 Vector3(0, 0, 1)과 같다.
-    - `Vector3.right` 👉 언제나 Vector3(1, 0, 0)과 같다.
+    - `transform.forward` : 월드 기준에서 오브젝트 입장에서의 ***앞 쪽*** (z 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+      - 오브젝트의 로컬 z 축 기준에서의 양의 방향 벡터
+    - `transform.right` : 월드 기준에서 오브젝트의 입장에서의 ***오른 쪽*** (x 축) 을 나타내는 <u>방향 벡터</u> (길이가 1인)
+    - `Vector3.forward` 👉 그저 언제나 Vector3(0, 0, 1) 값이다. 
+      - 이것을 Local로 쓸지, World로 쓸지는 개발자 선택
+    - `Vector3.right` 👉 그저 언제나 Vector3(0, 0, 1) 값이다. 
+      - 이것을 Local로 쓸지, World로 쓸지는 개발자 선택
     - 만약 오브젝트가 회전해 있는 상태여서 위치 축이 월드 좌표 축과 일치하지 않는다면 오브젝트의 위쪽 방향과 절대 적인 위쪽 방향은 다르다.
       - ![image](https://user-images.githubusercontent.com/42318591/93081328-1424bc80-f6ca-11ea-8a48-f79355216c04.png){: width="60%" height="60%"}
      
@@ -78,7 +79,15 @@ last_modified_at: 2020-09-04
 
 #### `Debug.DrawRay` 
 
+```c#
+ Vector3 look = transform.TransformDirection(Vector3.forward);
+Debug.DrawRay(transform.position, look * 10, Color.red);
+```
+
 - 레이캐스트 광선을 그려주어 개발자가 시각적으로 볼 수 있게끔 해준다.
+- `Raycast`와 다르게 두번째 벡터가 '방향'만 나타내는건아니다.
+  - 첫번재 인수 위치로부터 (첫번재 인수 + 두번째 인수) 위치까지를 광선으로 그린다.
+  - 따라서 `Raycast`와 다르게 방향 벡터만 넣으면 안되고 원하는 거리까지 고려한 벡터를 넣어주어야 함.
 
 #### `Debug.LogFormat` 
 
@@ -174,12 +183,17 @@ a, b 둘 중 더 큰 것을 리턴한다.
       - `out hits` 혹은 `ref hits` 이렇게 레퍼런스로 넘기지 않은 이유는 `hits` 배열 이름이 그 자체로 레퍼런스가 되기 때문이다. 따라서 그냥 `hits`로 인수 넘기면 됨.  
       - 배열이 아니라 그냥 `RaycastHit` 자체를 넘기는 것이였으면 value이므로 `out hit` 이런식으로 넘겨야 한다.
 
+  - 게임 속 물체를 클릭한다는 것은 클릭한 화면의 위치로부터, 즉 카메라의 위치로부터 레이저(Raycast)를 쏴서 닿은 물체를 활성화시키는 것과 같다. 
+  - 3인칭 카메라에서 플레이어를 향해 Raycast를 쐈을 때 장애물이 있다면 플레이어를 가리지 않고 제대로 찍을 수 있도록 카메라 위치를 장애물을 넘어가는 곳으로 이동시키는 식으로 구현할 수 도 있다.
+
 #### `Physics.Raycast`
 
 >  레이캐스트. 눈에 보이지 않는 광선을 쏴서 물리적 충돌을 감지한다.
 
-> 물리적인 충돌이 있다면 True 리턴, 없다면 False 리턴.
+> Boolean 리턴. 물리적인 충돌이 있다면 True 리턴, 없다면 False 리턴.
 
+- <u>하나만 부딪치면 끝난다. 하나 충돌되면 더 이상 관통하지 않는다.</u>
+  - 관통하고 싶으면 **Physics.RaycastAll**을 쓰면 된다.
 - `Physics.Raycast(발사 위치 Vector3, 발사 방향 Vector3, 광선 길이 float, 감지할 레이어 Layer)`
     - 발사 위치로부터 발사 방향으로 float 길이의 광선을 쐈을 때 물리적인 충돌이 감지되면 True 리턴, 없으면 Flase 리턴
     - 발사 위치와 발사 방향은 필수 매개변수다.
@@ -190,6 +204,16 @@ a, b 둘 중 더 큰 것을 리턴한다.
       - *if (Physics.Raycast(ray, `out hit`, distance, whatIsTarget))*
         - 광선에 충돌이 감지되는 순간, 이 if 조건문이 실행되자마자 RaycastHit 타입의 hit 변수에 충돌한 Collider의 정보가 들어간다. 
     - 감지할 레이어 마스크인 다섯번째 인수에 `~`을 붙여주면 그 레이어 마스크가 붙은 오브젝트들은 레이 캐스트 처리 하지 말고 무시하라는 뜻.
+
+```c#
+Physics.Raycast(transform.position + Vector3.up, Vector3.forward);
+```
+
+광선을 쏠 위치를 설정할 때 이 스크립트의 주인인 오브젝트의 Pivot 위치도 고려해야 한다.! 만약 이 스크립트의 주인이 사람 모양의 오브젝트고 피봇이 발에 있다면 `transform.position`은 오브젝트의 Pivot을 기준으로 하므로 발에서 Raycast가 나갈 것이다. 따라서 오브젝트의 Pivot 위치를 잘 고려해서 시작 위치를 잡는 것이 좋다. 예시에선 이 스크립트 주인 오브젝트의 Pivot이 발 위치에 있다고 가정할때 `Vector.up` 즉, `(0, 1, 0)`만큼만 더 해준 곳에서 Raycast를 쏘게끔 했다.
+
+
+#### `Physics.RaycastAll`
+
 
 #### `Physics.Linecast`
 
