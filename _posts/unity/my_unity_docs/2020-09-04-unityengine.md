@@ -65,6 +65,9 @@ last_modified_at: 2020-09-04
 #### `Angle(Vector a, Vector b)`
 - a 와 b 사이의 각도를 리턴한다. float 리턴.
 
+#### `Set(float new_x, float new_y, float new_z);`
+- 이 함수를 호출한 벡터의 x, y, z 요소를 설정한다.
+
 
 <br>
 
