@@ -92,6 +92,12 @@ Debug.DrawRay(transform.position, look * 10, Color.red);
   - 첫번재 인수 위치로부터 (첫번재 인수 + 두번째 인수) 위치까지를 광선으로 그린다.
   - 따라서 `Raycast`와 다르게 방향 벡터만 넣으면 안되고 원하는 거리까지 고려한 벡터를 넣어주어야 함.
 
+```c#
+Debug.DrawRay(Camera.main.transform.position, dir * 100.0f, Color.red, 1.0f); 
+```
+
+1 초동안 Camera.main.transform.position 위치로부터 dir * 100.0f 벡터 만큼을 더한 위치까지의 광선을 그림
+
 #### `Debug.LogFormat` 
 
 - 출력 포맷 설정
@@ -214,9 +220,60 @@ Physics.Raycast(transform.position + Vector3.up, Vector3.forward);
 
 광선을 쏠 위치를 설정할 때 이 스크립트의 주인인 오브젝트의 Pivot 위치도 고려해야 한다.! 만약 이 스크립트의 주인이 사람 모양의 오브젝트고 피봇이 발에 있다면 `transform.position`은 오브젝트의 Pivot을 기준으로 하므로 발에서 Raycast가 나갈 것이다. 따라서 오브젝트의 Pivot 위치를 잘 고려해서 시작 위치를 잡는 것이 좋다. 예시에선 이 스크립트 주인 오브젝트의 Pivot이 발 위치에 있다고 가정할때 `Vector.up` 즉, `(0, 1, 0)`만큼만 더 해준 곳에서 Raycast를 쏘게끔 했다.
 
+```c#
+        if (Input.GetMouseButton(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
+
+            Debug.DrawRay(Camera.main.transform.position, ray.direction * 100.0f, Color.red, 1.0f);
+
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 100.0f))
+            {
+                Debug.Log(hit.collider.gameObject.name);
+            }
+        }
+
+```
+
+  ```c#
+  Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
+  ```
+  - 호출한 카메라 위치로부터 픽셀 단위의 화면상 좌표의 실제 월드 좌표로 향하는 방향의 `Ray` (광선)을 리턴한다.
+    - 아래 과정은 위 함수 한 줄과 비슷하다. 아래 과정에다가 추가로 해당 `dir`로 향하는 `Ray`를 직접 리턴한다.
+      ```c#
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+            Vector3 dir = mousePos - Camera.main.transform.position;
+            dir = dir.normalized;
+      ```
+  - 마찬가지로 화면상 좌표(X, Y)와 함께 월드 좌표의 Z 값을 계산할 때 고려할 카메라와의 거리 또한 Z 로 함께 Vector3로 묶어 넘겨 준다.
+- *Raycast* 에 시작 위치와 방향을 넘기는 대신 광선 자체인 `ray`를 넘겨준다.
 
 #### `Physics.RaycastAll`
 
+```c#
+    void Update()
+    {
+
+        Vector3 look = transform.TransformDirection(Vector3.forward);
+
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(transform.position + Vector3.up, look, 20);
+
+        foreach (RaycastHit hit in hits)  // 관통되서 광선에 닿은 모든 물체들이 hits 배열에 담긴다. for문으로 모든 원소에 접근
+        {
+            Debug.Log("Raycast!");
+        }
+    }
+```
+
+> 그냥 `Raycast`는 하나만 충돌되면 더 이상 관통되지 않기 때문에 광선이 관통되게 하고 충돌한 모든 오브젝트를 알고 싶다면 **RaycastAll** 함수를 써야 한다.
+
+- <u>Raycast와 다르게 광선에 관통된 모든 오브젝트의 배열을 리턴한다.</u>
+  ```c#
+          RaycastHit[] hits;
+        hits = Physics.RaycastAll(transform.position + Vector3.up, look, 20);
+  ```
 
 #### `Physics.Linecast`
 
@@ -256,6 +313,13 @@ Physics.Raycast(transform.position + Vector3.up, Vector3.forward);
 ## 👩‍🦰 Input
 
 >  UnityEngine에서 제공하는 <u>입력</u>과 관련된 집합. 키보드, 모바일, 조이스틱의 입력을 받을 수 있는 여러 함수들의 집합.
+
+### 변수/프로퍼티
+
+- `mousePosition`
+  - 현재 마우스 위치를 (0, 0) ~ (Screen.width, Screen.height) 로 나타낼 수 있는 픽셀 좌표(Screen)로서의 나타낸다.
+  - 즉, 현재 마우스 위치를 해상도를 기준으로 한 화면상의 좌표로 나타낸다.
+    - 좌측 하단을 (0, 0) 우측 상단을 (Screen.width, Screen.height)으로 한 화면 좌표계
 
 ### 함수
 

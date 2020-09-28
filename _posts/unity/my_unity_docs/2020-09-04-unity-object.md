@@ -113,9 +113,18 @@ last_modified_at: 2020-09-04
 
 <br>
 
-### DontDestroyOnLoad(GameObject) 함수
+### DontDestroyOnLoad(GameObject) 
 - 다른 Scene으로 변경되더라도 파괴되지 않고 유지할 오브젝트를 지정하는 함수다.
 - 인수로 넘긴 오브젝트가 절대 삭제되지 않도록 한다.
+
+<br>
+
+### GameObject.FindGameObjectWithTag(String)
+
+```c#
+GameObject.FindGameObjectWithTag("Monster");
+```
+해당 태그가 붙은 오브젝트를 찾아서 리턴한다.
 
 ***
 <br>
