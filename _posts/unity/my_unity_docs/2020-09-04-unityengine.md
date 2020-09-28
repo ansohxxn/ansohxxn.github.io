@@ -276,10 +276,14 @@ Physics.Raycast(transform.position + Vector3.up, Vector3.forward);
   - `GetKey` : 키를 누르는 동안
   - `GetKeyUp` : 키를 떼는 순간
   - `GetKeyDown` : 키를 누르는 순간 
-    - `GetMouseButtonDown(0)`
-      - GetMouseButton<u>Down</u> : 마우스를 누르는 순간
-      - `0` : 마우스 좌클
-      - `1` : 마우스 우클
+    - 
+      
+
+#### `Input.GetMouseButtonDown(int)`
+
+- GetMouseButton<u>Down</u> : 마우스를 누르는 순간
+    - `GetMouseButtonDown(0)` : 마우스 좌클
+    - `GetMouseButtonDown(1)` : 마우스 우클
 
 #### `Input.GetAxis("Horizontal")`
 
