@@ -63,6 +63,11 @@ last_modified_at: 2020-09-04
 
 <br>
 
+### GetComponentsInChildren<Component>()
+- <u>내 자식 오브젝트들 중에서</u> `<>`안에 적혀 있는 컴포넌트가 실존하여 오브젝트에 붙어 있는 상태라면 그 <u>붙어 있는 컴포넌트들을 모두 모아 배열로 리턴해준다.</u>
+
+<br>
+
 ### AddComponent<Component>()
 - `AddComponent<추가할 컴포넌트 이름>()`
   - 오브젝트이름.AddComponent\<ScoreManager>() 
