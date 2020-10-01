@@ -134,9 +134,16 @@ transform.LookAt(_player.transform);
 
 > 캡슐 모양의 Collider로 주로 인체, 나무, 가로등과 같은 긴 형태의 모델의 Collider로 사용 된다. 
 
-Collider는 <u>물리적으로 오브젝트끼리 표면에 충돌이 일어났을 때를 감지</u>하고 이를 처리하는 컴포넌트다. 
+- Collider는 <u>물리적으로 오브젝트끼리 표면에 충돌이 일어났을 때를 감지</u>하고 이를 처리하는 컴포넌트다. 
+- Edit Collider 버튼을 눌러 캡슐의 모양을 알맞게 손볼 수 있다.
+- **Direction**으로 축을 변경할 수 있다. 크기의 기준이 되는 축.
+  - Z-Axis 앞뒤 크기 
+  - X-Axis 좌우 크기
+  - Y-Axis 위아래 크기
 
-Edit Collider 버튼을 눌러 캡슐의 모양을 알맞게 손볼 수 있다.
+
+
+
 
 
 <br>
