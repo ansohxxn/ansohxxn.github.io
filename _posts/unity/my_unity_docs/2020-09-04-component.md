@@ -94,6 +94,14 @@ Vector3 pos = transform.TransformDirection(Vector3.forward); // 내 로컬 좌�
   
   - 인수로 받은 좌표 Vector3 를 *월드 좌표계 기준에서 로컬 좌표계 기준으로*  방향만 변환하여 이를 리턴해준다.(벡터 길이는 변하지 않음)
 
+#### LookAt(Vector3)
+
+```c#
+transform.LookAt(_player.transform);
+```
+
+인수로 들어온 해당 Vector3 위치값을 바라보게끔 회전시킨다. `Quaternion.LookRotation` 함수는 회전시키는 것이 아닌, 해당 방향을 바라보게끔 회전하려면 얼만큼 회전해야하는지 그 회전값을 리턴해주는 함수고 `Transform`의 `LookAt`은 <u>직접 인수로 들어온 그 '위치'를 바라보게끔 회전시킨다.</u>
+
 <br>
 
 <br>

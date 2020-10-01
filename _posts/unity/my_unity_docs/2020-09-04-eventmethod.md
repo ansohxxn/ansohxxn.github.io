@@ -27,6 +27,10 @@ last_modified_at: 2020-09-04
 - 오타여도 사용자 지정 함수인 줄 알고 잡아주지도 않음 ㅠ ㅠ OnTriggerEnter 인데 onTriggerEnter 라고 소문자로 써서 계속 실행되지 않았었는데 한참을 헤맸다...
 - 이름 실수 하지 않도록 주의 하자!!
 
+## 이벤트 함수 실행 순서
+
+[유니티 공식 문서 <이벤트 함수의 실행 순서> 참고](https://docs.unity3d.com/kr/2018.4/Manual/ExecutionOrder.html#InBetweenFrames)
+
 <br>
 
 ## 👩‍🦰 void Start()
@@ -86,6 +90,10 @@ last_modified_at: 2020-09-04
   - 유니티 함수로, <u>매 프레임마다 실행되지만 Update()함수 보다 늦게 실행된다.</u>
     - <u>Update() 함수 실행이 다 끝난 후에, Update()함수의 종료 시점에 맞춰서 LateUpdate() 가 실행</u>된다.
   - 예를 들어 캐릭터의 이동 방향 계산은 Update() 에서 끝내준 후,Update()에서 계산 끝낸 캐릭터의 이동 방향에 따라 LateUpdate()에서 카메라가 캐릭터를 따라가도록 하는 식으로 구현한다.
+    - ⭐ 만약 Update() 함수로 했다면, 📜PlayerController.cs 에서  플레이어의 위치와 회전값을 업데이트 하는 것과 📜CameraController.cs 에서 플레이어의 위치와 회전을 업데이트 하는 것이 같은 *Update()*로서 동시에 섞여 실행되기 때문에 아직 업데이트 되지 않은 플레이어의 위치와 회전값으로 카메라가 따라가게 되는 프레임이 발생할 수 있다.
+      - 정확히 말하자면 📜PlayerController.cs 에서 `플레이어의 위치와 회전값을 업데이트 하는 OnKeyboard() 함수는 액션에 등록되어 📜Manager.cs 의 *Update()* 에서 실행 됨
+    - 따라서 <u>반드시 플레이어의 위치와 회전값을 업데이트 하는 일은 📜PlayerController.cs 에서 먼저 이루어지고 난 후에</u> 업데이트 된 플레이어의 위치와 회전 값을 가지고 <u>카메라의 위치와 회전 값을 업데이트 해야 한다.</u>
+      - 그래서 📜CameraController.cs 에선 카메라의 위치와 회전값을 업데이트 하는 일을 Update 보다 더 늦게 호출되는 *LateUpdate()* 안에서 한다. 📜PlayerController.cs 에서 플레이어의 위치와 회전값 업데이트를 마친 후에 그 업데이트 된 값을 `_delta` 여유를 두고 따라가도록 하기 위하여 
 
 <br>
 
@@ -158,7 +166,7 @@ FPS 게임 같은데서 총알이 사람에게 맞으면 총알 입장에선 사
   - 컴포넌트나 스크립트를 끌 때는 `enabled = false`
 - **Start 와의 차이점**
   - 둘 다 오브젝트가 활성화 될 때마다 1 회 실행 함
-  - 그러나 
+  - <u>OnEnable()이 Start()보다 먼저 실행된다.</u>
     - Start() 👉 코루틴 함수 실행 가능
     - OnEnable 👉 코루틴 함수 실행이 불가능
 
