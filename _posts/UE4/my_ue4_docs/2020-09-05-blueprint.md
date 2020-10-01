@@ -339,6 +339,8 @@ last_modified_at: 2020-09-05
   - 캐릭터가 낙하 하다가 착지하면 자동으로 발생하는 이벤트
 - `isFalling`
   - 타겟으로 할당된 캐릭터가 낙하중이면 True 아니면 False 리턴
+- `Launch Character`
+  - 타겟으로 들어온 캐릭터를 Lauch Velocity 벡터값 만큼 강제로 이동시킨다.  
 
 <br>
 
