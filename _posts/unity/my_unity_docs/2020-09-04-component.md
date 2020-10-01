@@ -419,6 +419,14 @@ transform.LookAt(_player.transform);
 
 #### Play(string)
 
+```c#
+anim.Play("WAIT");
+anim.Play("RUN");
+```
+
+![image](https://user-images.githubusercontent.com/42318591/94799473-228b0c00-041e-11eb-89f1-9ae3994abffa.png)
+
+
 인수로 들어간 애니메이션 클립을 재생시킨다.(애니메이터 컨트롤러의 재생 시킬 상태의 이름)
 
 #### 파라미터 관련 
