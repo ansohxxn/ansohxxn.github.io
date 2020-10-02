@@ -430,6 +430,17 @@ last_modified_at: 2020-09-05
   - 거리를 고려하지 않고 사운드를 재생한다.
   - 주로 UI 소리 같은 것을 재생할 때 사용한다.
 
+<br>
+
+## 🔔 Particle System
+
+- `Spawn Emitter Attached` 👉 파티클 시스템을 생성
+  - Emitter Emplate
+    -  생성할 파티클 시스템 파일
+  - Attach to Component
+    - 어떤 컴포넌트에 생성시킬 것인지.
+      - 예를 들어 CapsuleComponent 즉, 몬스터의 전체적인 캡슐 콜리전을 할당해 주면 👉 CapsuleComponent 의 기준점 위치에서 파티클 시스템이 생성 됨
+
 ***
 <br>
 
