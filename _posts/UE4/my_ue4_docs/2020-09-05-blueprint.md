@@ -60,6 +60,9 @@ last_modified_at: 2020-09-05
   - 게임 상태를 로컬 환경에 저장하고 불러오는 기능을 쓸 수 있다.
   - 게임 데이터를 저장하면 📂Saved/SaveGames 폴더에 게임 데이터가 저장된다.
   - 이 블루프린트 안에서 작성하는 변수들의 상태는 로컬 환경에도 그대로 보존이 된다.
+- CameraShake
+  - 카메라가 흔들리는 효과를 줄 수 있는 부모 클래스다.
+    - 플레이어가 때리거나 보스가 걸어올 때 등등 카메라를 흔들리게 할 수 있다.
 
 <br>
 
@@ -319,6 +322,11 @@ last_modified_at: 2020-09-05
   - 입력 받은 SaveGame 타입 블루프린트 인스턴스의 변수 혹은 설정 값들을 Slot Name 이름의 로컬 파일로 저장한다.
 - `Load Game Slot`
   - Slot Name 이름의 로컬 파일을 SaveGame 타입으로 불러온다.
+- `Client Play Camera Shake`
+  - 카메라를 진동시킨다.
+    - 타겟은 Player Controller
+    - Shake 에 CameraShake 부모클래스를 상속 받는 블루프린트를 할당한다.
+    - Scale로 카메라 진동 세기를 설정
 
 <br>
 
