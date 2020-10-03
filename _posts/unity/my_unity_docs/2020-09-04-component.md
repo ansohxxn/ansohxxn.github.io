@@ -393,11 +393,53 @@ transform.LookAt(_player.transform);
 ## 👩‍🦰 Horizontal Layout Group
 > 이 컴포넌트가 붙은 오브젝트의 자식 오브젝트들을 수평 정렬 시켜준다.
 
+<br>
+
 ## 👩‍🦰 Vertical Layout Group
 > 이 컴포넌트가 붙은 오브젝트의 자식 오브젝트들을 수직 정렬 시켜준다.
 
+<br>
+
 ## 👩‍🦰 Grid Layout Group
 > 이 컴포넌트가 붙은 오브젝트의 자식 오브젝트들을 바둑판처럼 하나하나를 cell로 하여 정렬 시켜준다.
+
+> 👉 이 컴포넌트가 붙는 오브젝트의 자식 오브젝트들을 부모인 자신을 기준으로 하여 Grid 로 관리할 수 있다.
+
+- 부모 오브젝트에 붙은 Grid Layout Component 컴포넌트 설정을 통해 <u>자식 오브젝트들은 이 설정 값에 따라 부모 오브젝트 크기와 위치를 기준으로 자동으로 위치가 정해지고 크기가 정해진다.</u>
+  - 따라서 자식 오브젝트의 Rect Transform 수정은 불가능해진다. 
+
+![image](https://user-images.githubusercontent.com/42318591/94982145-398f4280-0573-11eb-91bf-f9bc46c96d5c.png)
+
+- *Cell Size*
+  - 격자 한칸 당 크기
+    - 모든 자식 오브젝트의 크기가 이 사이즈로 정해진다.
+- *Spacing*
+  - X, Y축 간의 간격
+  - Y 에 15 값을 주어 세로 간격, 즉 한 줄의 간격을 15 로 하였다.
+- *Start Corner*
+  - *Upper Left* 
+    - Grid Layout Component 컴포넌트가 현재 붙어 있는 이 부모 오브젝트의 왼쪽 윗부분을 시작 코너로 하여 여기를 시작점으로 자식 오브젝트들을 배치하기 시작 
+- *Start Axis*
+  - *Horizontal* 
+    - 수평 👉 방향으로 자식 오브젝트들을 차례로 배치
+- *Child Alignment*
+  - *Upper Center*
+    - 자식 오브젝트들을 윗부분 정렬 + 가운데 정렬
+    - *Start Corner*을 기준으로 하여 정렬
+- *Constraint* 
+  - 행이나 열을 특정 수로 제한할 때 사용한다.
+  - *Fixed Column Count*
+    - 열을 10 으로 제한 해주어 한 줄에 열개가 채워지면 자동으로 줄이 바뀌게 하였다.
+
+![image](https://user-images.githubusercontent.com/42318591/94985313-846b8300-0590-11eb-8d90-03f315885d7f.png)
+
+큰 네모가 부모 오브젝트이고 여기에 Grid Layout Component 컴포넌트가 붙어 있다면 동그라미가 되는 자식 오브젝트들을 단지 추가만 해줘도 부모 오브젝트의 Grid Layout Component 컴포넌트 설정 값에 따라 알아서 적절한 위치에 배치가 된다.
+
+![image](https://user-images.githubusercontent.com/42318591/94985333-b67ce500-0590-11eb-89c3-3647397ebd27.png)
+
+위 예시 설정값에 따르면 가운데서부터 이런 순서로 채워지게 된다. 10개마다 한 줄 바뀜.
+
+<br>
 
 ## 👩‍🦰 Layout Element 컴포넌트
 > 이 컴포넌트가 붙은 오브젝트의 자식 오브젝트들의 최소 크기, 최대 크기 등등을 지정해준다. 
