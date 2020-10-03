@@ -47,11 +47,22 @@ using UnityEngine.EventSystems;
 
 [참고 링크](https://answers.unity.com/questions/1077069/implementing-ipointerclickhandler-interface-does-n.html)
 
+
+  - 이벤트에 대한 Raycast는 Canvas의 Graphic Raycaster 컴포넌트에서 쏴주고
+  - 어떤 종류의 이벤트인지에 대한 답을 Raycast 로 쏴주는건 `EventSystem` 오브젝트이다.
+  - 이 이벤트에 대한 Raycast를 받기 위해선 UI들은 `Raycast Target` 가 체크 되어 있어야 하며 일반 오브젝트들은 Collider 가 붙어 있어야 한다.
+
 <br>
 
 # ⭐ 이벤트 인터페이스 종류
 
 <u>반드시 해당 인터페이스의 함수를 오버라이딩 해야 한다.</u> 인터페이스니까..
+
+<br>
+
+## PointerEventData
+
+마우스 혹은 터치 입력 이벤트에 관한 정보들이 담겨 있다. 이벤트가 들어온 버튼, 클릭 수, 마우스 위치, 현재 마우스 움직이고 있는지 여부 등등 여라가지를 담고 있다. [공식 문서 참고](https://docs.unity3d.com/kr/530/ScriptReference/EventSystems.PointerEventData.html)
 
 <br>
 
@@ -131,9 +142,11 @@ public class Test : MonoBehaviour, IDropHandler
 
 - *OnEndDrag* 👉 나 자신을 드래그 하는 것을 끝냈을 때 호출
   - 내가 드래그 되는 것이 끝났을 때!
-- *OnDrop* 👉 누군지 모르겠지만 내 자신한테 다른게 드롭 됐을 때 호출. 
+  - 드래그가 종료했을 때, 드래그 대상이 되었던 오브젝트에서 호출 됨.
+- *OnDrop* 👉 누군지 모르겠지만 내 자신한테 드롭 된 무언가가 있을 때 호출. 
   - 나한테 누가 드롭 되었을 때!
-
+  - 드래그를 멈춘 위치에 있는 오브젝트에서 호출 됨.
+- <u>드롭 된 다른 곳의 OnDrop 이, 드래그를 끝낸 내 OnEndDrag 보다 먼저 실행된다.</u>
 
 ***
 <br>
