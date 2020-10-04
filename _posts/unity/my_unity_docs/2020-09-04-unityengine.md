@@ -613,6 +613,19 @@ GameObject obj = Resources.Load<GameObject>("Prefabs/Tank");
 - 프리팹을 직접 유니티 에디터에서 일일이 변수에 할당해줄 필요 없이 게임 중에 코드상으로 불러올 프리팹이 있다면 📂Resources 폴더 안에 넣어두고 Resources.Load 함수를 사용하여 할당하자.
   - GetComponent 와 비슷한 것 같다. 에셋을 로컬 폴더에서 찾아서 불러오는 에셋 버전 GetComponent
 
+<br>
+
+## 👩‍🦰 Rect
+
+![image](https://user-images.githubusercontent.com/42318591/95005851-2e521a80-0638-11eb-88ec-3063af8f9c37.png)
+
+- RectTransform 은 Rect 를 가진다.
+- 호출한 오브젝트의 2 D 사각형 정보를 `Rect`로 가져 온다.
+  - 2 D 사각형으로서의 넓이, 높이 등등의 정보가 담겨 있다.
+- UI 의 가로, 세로 등등의 정보를 알고자 할 때 사용된다.
+- 왼쪽 상단을 x, y 시작점으로 한다.
+  - x 는 👉 방향으로 +
+  - y 는 👇 방향으로 + 
 
 ***
 <br>
