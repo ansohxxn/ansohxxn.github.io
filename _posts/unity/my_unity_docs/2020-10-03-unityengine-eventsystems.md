@@ -121,7 +121,7 @@ public class Test : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
 <br>
 
-## IPointerClickHandler - 마우스 클릭 
+## 마우스 드롭 - IDropHandler
 
 ```c#
 using UnityEngine;
@@ -147,6 +147,46 @@ public class Test : MonoBehaviour, IDropHandler
   - 나한테 누가 드롭 되었을 때!
   - 드래그를 멈춘 위치에 있는 오브젝트에서 호출 됨.
 - <u>드롭 된 다른 곳의 OnDrop 이, 드래그를 끝낸 내 OnEndDrag 보다 먼저 실행된다.</u>
+
+<br>
+
+## 마우스 커서가 해당 오브젝트 위에 있을 때 - IPointerEnterHandler
+
+```c#
+using UnityEngine;
+using UnityEngine.EventSystems;
+public class Test : MonoBehaviour, IPointerEnterHandler
+{
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        
+    }
+}
+```
+
+- **IPointerEnterHandler** 인터페이스 
+  - *<u>OnPointerEnter</u>(PointerEventData eventData)*
+    - 마우스 커서가 이 스크립트가 붙은 오브젝트에 들어갈 때 발동
+<br>
+
+## 마우스 커서가 해당 오브젝트 위에 있을 때 - IPointerExitrHandler
+
+```c#
+using UnityEngine;
+using UnityEngine.EventSystems;
+public class Test : MonoBehaviour, IPointerExitrHandler
+{
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        
+    }
+}
+```
+
+
+- **IPointerExitHandler** 인터페이스 - 
+  - *<u>OnPointerExit</u>(PointerEventData eventData)*
+    - 마우스 커서가 이 스크립트가 붙은 오브젝트에서 빠져나올 때 발동
 
 ***
 <br>
