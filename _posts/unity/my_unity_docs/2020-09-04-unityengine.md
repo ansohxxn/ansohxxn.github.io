@@ -303,6 +303,9 @@ Physics.Raycast(transform.position + Vector3.up, Vector3.forward);
 #### Random.`Range(int min, int max)`
 - [min, max) 범위내에서 <u>int 타입의 랜덤한 정수</u>를 리턴한다.
     - max는 포함되지 않는다. 
+  
+- 단, `Range(float min, float max)`
+  - 인수가 float 이라면 max 도 포함된다. [min, max] 에서 랜덤한 float 리턴
 
 #### Random.`ColorHSV()`
 - 랜덤한 컬러를 리턴한다.
