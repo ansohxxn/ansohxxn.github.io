@@ -350,6 +350,24 @@ transform.LookAt(_player.transform);
   - `Play On Awake` : 게임 시작하자 마자 재생할건지
   - `Loop` : 음악이 끝나도 다시 반복할건지
   - 볼륨 크기 설정도 가능
+  - **3D Sound Settings**
+    - `Min Distance`
+      - 이 컴포넌트가 붙은 오브젝트를 기준으로 하여 Min Distance 내에서는 최고 음량을 유지한다. (이 거리 내에선 돼지 소리가 최대로 들림)
+      - 이 컴포넌트가 붙은 오브젝트를 기준으로 하여 Min Distance 을 벗어나면 서서히 음량이 감소한다. (벗어나면 돼지 소리가 거리에 따라 서서히 작게 들리기 시작)
+    - `Max Distance`
+      - 이 컴포넌트가 붙은 오브젝트를 기준으로 하여 Max Distance 내에서는 서서히 음량이 감소한다. (이 거리 내에선 거리에 따라 돼지 소리가 서서히 작게 들리기 시작)
+      - 이 컴포넌트 오브젝트를 기준으로 하여 Max Distance 을 벗어나면 소리가 완전히 들리지 않는다. (벗어나면 돼지 소리가 아예 들리지 않음)
+
+![image](https://user-images.githubusercontent.com/42318591/95420188-09321480-0976-11eb-940e-3a3ae415ea8c.png)
+
+작은 원이 Min Distance 범위이고 큰 원이 Max Distance 범위다. Min Distance 거리 내에 있을 땐 돼지의 Audio Source 가 재생하는 소리를 최대 볼륨으로 들을 수 있으며 Min Distance ~ Max Distance 범위 안의 거리에서는 돼지의 소리가 거리에 반비례하여 들린다. 멀 수록 돼지 소리가 작게 들림. Max Distance 거리 밖에서는 돼지의 소리를 아예 들을 수가 없게 된다.
+
+- 디버그 모드
+  - `Pan Level Custom Curve`
+    - 1 에 가까운 커브일 수록 3 D 로 소리를 재생한다.
+      - 가까이 있을 수록 크게, 멀리 있을 수록 작게
+    - 0 에 가까운 커브일 수록 2 D 로 소리를 재생한다.
+      - 거리에 따른 볼륨 차별화가 없음.
 
 ### 함수
 
