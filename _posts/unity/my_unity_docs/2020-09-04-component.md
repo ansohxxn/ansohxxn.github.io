@@ -555,6 +555,19 @@ anim.Play("RUN");
 
 - 지나갈 수 있는 영역과 없는 영역을 미리 구워 놔서 `NavMesh` 데이터들을 만들어 놔야 한다. 
 
+![image](https://user-images.githubusercontent.com/42318591/95546570-ea965100-0a3b-11eb-9568-8632804a72c5.png)
+
+원기둥 같은 이 영역의 크기를 기준으로 돼지가 통과할 수 있는 곳 인지를 연산하게 된다. 이 원기둥이 돼지의 `Nav Mesh Agent` 이다.
+
+![image](https://user-images.githubusercontent.com/42318591/95546698-3ea13580-0a3c-11eb-9995-11cc7184a57d.png)
+
+- Base Offset 
+  - `Nav Mesh Agent`이 Y 축 방향 위치. 
+- Radius
+  - `Nav Mesh Agent` 반지름
+- Height
+  - `Nav Mesh Agent` 높이
+
 ### 변수/프로퍼티
 
   - `radius`
@@ -581,7 +594,23 @@ anim.Play("RUN");
 ### 함수
 
 #### `SetDestination(Vector3 target)` 
-    - 목표 위치를 인수로 넘기면 agent가 해당 목표 지점까지 움직이게 하는 함수.
+
+- 목표 위치를 인수로 넘기면 agent가 해당 목표 지점까지 움직이게 하는 함수.
+- <u>인수로 들어간 Vector3 를 목적지</u>로 하여 그 위치로 `Nav Mesh Agent`가 붙어있는 오브젝트가 이동하게 한다. 
+- 해당 목적지로 이동하기 위해 새로운 Path 경로를 최단경로로 찾아 설정한다. 
+- <u>이 함수를 사용하면 회전도 자동으로 이루어진다.</u> 목적지를 바라보도록 자연스럽게 회전도 같이 이루어짐.
+- 해당 목적지로 갈 수 있는 <u>최단 경로로 이동한다.</u>
+  - Bake 한 지형들을 바탕으로 해당 목적지까지의 최단 경로를 계산 함. 
+- `Nav Mesh Agent` 컴포넌트에 속성으로 있는 최대 이동 속도 `Speed`, 회전 속도 `Angular Speed` 값을 <u>속도</u>로 하여 목적지로 알아서 이동한다.
+
+<u>Rigidbody 보다 Nav Mesh Agent 가 우선시 되기 때문에</u>,  Nav Mesh Agent 컴포넌트가 붙게 되면 **더 이상 rigid.MovePosition, rigid.MoveRotation 함수로 이동, 회전 할 수 없게 된다.** ⭐이 Rigidbody 함수들이 freeze 되어 먹히지 않는다.⭐ <u>따라서 돼지를 Nav Mesh Agent 전용 이동 함수를 사용하여 이동시켜야 한다.</u> 👉 **SetDestination(Vector3)**
+
+
+#### ResetPath()
+
+- SetDestination(Vector3) 함수로 인하여 현재 설정되어 있던 경로를 지운다. 
+  - 이에 따라, <u>현재 이동중이었다면 이동을 멈추게 된다.</u>
+- 해당 `Nav Mesh Agent`는 새로운 SetDestination(Vector3) 호출이 있을 때까지 경로를 찾지 않는다. 이동도 하지 않는다.
 
 
 ***

@@ -26,6 +26,10 @@ last_modified_at: 2020-09-04
 
 > AI와 관련된 `NavMesh` 등등에 관련된 작업을 하고 싶을 때 사용
 
+## 👩‍🦰 NavMeshAgent
+
+`using UnityEngine.AI`을 해주어야 `NavMeshAgent` 컴포넌트를 가져올 수 있다. 
+
 ## 👩‍🦰 NavMesh
 
 > AI 에이전트가 걸어다닐 수 있는 표면. 네비게이션 경로를 계산할 수 있는 표면이 된다.
