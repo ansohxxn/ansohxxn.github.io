@@ -88,8 +88,9 @@ Debug.DrawRay(transform.position, look * 10, Color.red);
 ```
 
 - 레이캐스트 광선을 그려주어 개발자가 시각적으로 볼 수 있게끔 해준다.
-- `Raycast`와 다르게 두번째 벡터가 '방향'만 나타내는건아니다.
-  - 첫번재 인수 위치로부터 (첫번재 인수 + 두번째 인수) 위치까지를 광선으로 그린다.
+- `Raycast`와 다르게 두번째 벡터가 '방향'만 나타내는 것이 아니다.
+  - 첫번재 인수 위치로부터 <u>(첫번재 인수 + 두번째 인수) 위치까지를</u> 광선으로 그린다.
+    - 즉, 두번째 인수는 델타 벡터임.
   - 따라서 `Raycast`와 다르게 방향 벡터만 넣으면 안되고 원하는 거리까지 고려한 벡터를 넣어주어야 함.
 
 ```c#
@@ -108,38 +109,66 @@ Debug.DrawRay(Camera.main.transform.position, dir * 100.0f, Color.red, 1.0f);
 
 > 수학과 관련된 함수들이 미리 들어있는 함수 집합
 
-### `Max(a, b)` 
+### 변수/프로퍼티
+
+#### Mathf.Deg2Rad
+
+> `π / 180` 값을 가진다. 일반 각도(몇 도 몇 도 하는 그 Degree)에 `Mathf.Deg2Rad`을 곱하면 라디안으로 변환한 값을 구할 수 있다.
+
+- 라디안 👉 Degree
+  - Degree = 라디안 * (180 / π)
+- Degree 👉 라디안 `Mathf.Deg2Rad`
+  - 라디안 = Degree * `(π / 180)` 
+
+```c#
+Mathf.Sin(_angle * Mathf.Deg2Rad)
+```
+
+### 함수
+
+#### `Max(a, b)` 
 a, b 둘 중 더 큰 것을 리턴한다.
 
-### `sqrt(a)` 
+#### `sqrt(a)` 
 루트 a 
 
-### `Floor(float)`
+#### `Floor(float)`
 내림. 소수점 버림
 
-### `SmoothDamp(float, float, ref float, float)` 
+#### `SmoothDamp(float, float, ref float, float)` 
 - 매개변수 첫번째 값이
 - 매개변수 두번째 값으로 되기까지
 - 네번째 매개변수인 시간(float)동안 스무스하게 변화하는 값을 리턴한다.
 - 세번째 매개변수는 Call by reference인 ref 참조 변수로서 직전, 마지막 프레임에서의 속도를 나타낸다. 함수 안에서 계산되어 바깥으로 꺼내짐.
 
-### `SmoothDampAngle(float, float, ref float, float)`
+#### `SmoothDampAngle(float, float, ref float, float)`
 - 👉 SmoothDamp 함수와 기능은 동일하나 <u>각도를 고려해서 스무스하게 변경시킨다.</u>
   - 360도 체계에서는 예를들어 -270도와 90도는 같은 회전값임을 의미하니까 사실 -270도면 90도만 돌면 되는건데 일반 SmoothDamp 함수를 사용하면 270도씩 돌아버리니까 SmoothDampAngle을 사용하면 <u>의도와 달리 더 많이 회전하는 경우를 막아 줌</u> !
 
-### `Clamp(float target, float a, float b);`
+#### `Clamp(float target, float a, float b);`
 - target 이 a ~ b 범위를 벗어나지 않도록 한다. 
   - target이 a보다 작으면 a 로 설정되고
   - target이 b보다 크면 b 로 설정된다.
 
-### `RoundToInt(float)`
+#### `RoundToInt(float)`
 - 인수를 정수로 반올림
 
-### Lerp(float a, float b, float t)
+#### Lerp(float a, float b, float t)
 
 > a, b 사이의 t (0~1)만큼 위치한 값을 리턴한다.
 
 - t 가 0.5라면 리턴되는 값은 a 와 b 의 중간값!
+
+#### Sin(라디안)
+
+- 해당 라디안 각도의 sin 값(float) 리턴
+- 삼각함수는 인수를 라디안(float)으로 받는다.
+
+#### Cos(라디안)
+
+- 해당 라디안 각도의 cos 값(float) 리턴
+- 삼각함수는 인수를 라디안(float)으로 받는다.
+
 
 <br>
 

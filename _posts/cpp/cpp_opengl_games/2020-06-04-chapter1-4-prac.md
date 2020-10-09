@@ -260,7 +260,7 @@ int main(void)
 
 - `rotate(180 / 3.141592f*atan2f(mouse_pos.y, mouse_pos.x));`
 - 각도(세타) = arctan(y / x)
-- `라디안` 에서 `도`로 변환하기 : <u>degree(도) = 180 * π * radian (라디안)</u>
+- `라디안` 에서 `도`로 변환하기 : <u>degree(도) = ( 180 / π ) * radian (라디안)</u>
 - atan 과 atan2는 아크 탄젠트 값을 구해주는 함수인데 
   - `atan`은 0~360도 범위를 리턴하고 매개변수를 y/x 한개만 필요로 하며 
   - `atan2`는 -180~180도 범위로 매개변수를 y, x 두개 받는다. 
