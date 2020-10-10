@@ -613,6 +613,34 @@ anim.Play("RUN");
 - 해당 `Nav Mesh Agent`는 새로운 SetDestination(Vector3) 호출이 있을 때까지 경로를 찾지 않는다. 이동도 하지 않는다.
 
 
+#### CalculatePath(출발지, 목적지, Nav mesh Area, Nav Mesh Path)
+
+> Nav Mesh Agent 는 최단 경로로 목적지에 도달하려고 한다. 
+
+- 출발지는 필수 인수는 아닌듯 하다. Raycast 처럼 오버로딩 종류 여러가지임.
+
+```c#
+        NavMeshPath _path = new NavMeshPath();
+        nav.CalculatePath(_targetPos, _path);
+```
+
+- Nav Mesh Agent 의 *CalculatePath* 함수
+  - Nav Mesh Agent 위치로부터 목적지 `_targetPos`까지의 최단 경로를 계산한 후
+  - `Nav Mesh Path` 타입의 데이터 `_path`에 <u>최단 경로의 코너(정점)들을 배열로 저장한다.</u>
+    - 정확히는 `_path.corners` 배열에 최단 경로의 코너들의 위치 벡터가 저장됨
+      - 단, 출발지와 목적지는 저장되지 않는다.
+  - 최단 경로 코너들을 저장하기 위해선 `Nav Mesh Path` 타입의 객체를 미리 생성해주어야 한다.
+
+![image](https://user-images.githubusercontent.com/42318591/95650785-b21c7300-0b20-11eb-839e-54001ae8ac81.png)
+
+Nav Mesh Agent 는 갈 수 있는 지형을 판단하고 연산한 Bake 된 지형에만 갈 수 있다. 그림 속 가운데 장애물을 갈 수 없다면 Nav Mesh Agent 는 <u>돌아가야 하며 이를 감안한 최단 경로를 찾는다.</u>
+
+- *CalculatePath* 함수
+  - 최단 경로를 구한다.
+  - 연산된 최단 경로에서 꺾이는 부분의 위치 벡터들을 `Nav Mesh Path` 타입의 객체의 `corners` 멤버 배열에 저장한다. 
+    - 즉, 길을 저장함
+- 그림과 같이 꺾이는 두 부분의 좌표가 `corners` 배열에 저장 된다.
+
 ***
 <br>
 
