@@ -402,6 +402,11 @@ last_modified_at: 2020-09-05
 - `Play Animation`
   - In Animation으로 들어온 위젯(애니메이션이 있는) 타겟으로 들어온 위젯으로 하여금 그 애니메이션을 재생시킨다. 
   - Num Loops to Play 를 0 으로 해주면 무한 반복 재생한다. 그외에는 재생 횟수가 된다.
+- **Progress Bar**
+  - `Set Percent`
+    - Progress Bar UI 의 값을 설정한다.
+    - 이 설정된 값만큼 Progress Bar UI에 채워지게 된다.
+    - 최대 값은 1.0 이며 0.0 ~ 1.0 에 해당하는 값이 들어와야 한다. 
 
 
 <br>
