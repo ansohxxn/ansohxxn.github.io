@@ -4,7 +4,7 @@ title:  "(C++) Union-Find 알고리즘"
 categories:
   - Algorithm
 tags:
-  - [Algorithm, Coding Test, Cpp, Graph, STL]
+  - [Algorithm, Coding Test, Cpp, Graph]
 
 toc: true
 toc_sticky: true
