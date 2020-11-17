@@ -22,6 +22,8 @@ last_modified_at: 2020-09-04
 
 # 이벤트 함수
 
+> they are not 'real' methods that you have to override, they are messages that are called only if they were implemented.
+
 > 실수로 이름 오타나면 절대 실행 안된다!! (당연한 얘기지만.. 😂)
 
 - 오타여도 사용자 지정 함수인 줄 알고 잡아주지도 않음 ㅠ ㅠ OnTriggerEnter 인데 onTriggerEnter 라고 소문자로 써서 계속 실행되지 않았었는데 한참을 헤맸다...
