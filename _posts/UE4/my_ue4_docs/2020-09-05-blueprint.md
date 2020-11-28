@@ -196,7 +196,7 @@ last_modified_at: 2020-09-05
 
 <br>
 
-### 🔔 Transform
+### 🔔 Transform 
 
 - `SetActorLocation`
   - 액터의 트랜스폼 위치를 지정한다
@@ -205,6 +205,10 @@ last_modified_at: 2020-09-05
   - 액터의 현재 위치를 리턴한다.
 - `AddActorWorldRotation`
   - 해당 값만큼 더하여 회전한다.
+- `Make Transform`
+  - 트랜스폼을 생성한다. (Location, Rotation, Scale)을 입력으로 받아 하나의 Transform으로 생성 및 리턴
+- `GetWorldLocation`
+  - 입력 받은 컴포넌트의 위치를 리턴.
 
 <br>
 
@@ -327,6 +331,9 @@ last_modified_at: 2020-09-05
     - 타겟은 Player Controller
     - Shake 에 CameraShake 부모클래스를 상속 받는 블루프린트를 할당한다.
     - Scale로 카메라 진동 세기를 설정
+- `Spawn Actor from Class`
+  - 지정한 블루프린트(Class)로 액터를 생성한다.(스폰)
+  - Spawn Transform 입력 받아 해당 Transform 을 가진 액터로 생성시킬 수 있다.
 
 <br>
 
@@ -334,6 +341,8 @@ last_modified_at: 2020-09-05
 
 - `Component Has Tag`
   - 입력 받은 컴포넌트의 Tag 배열에 해당 원소가 있다면 True 리턴, 없다면 False 리턴.
+- `GetWorldLocation`
+  - 입력 받은 컴포넌트의 위치를 리턴.
 
 <br>
 
@@ -407,7 +416,9 @@ last_modified_at: 2020-09-05
     - Progress Bar UI 의 값을 설정한다.
     - 이 설정된 값만큼 Progress Bar UI에 채워지게 된다.
     - 최대 값은 1.0 이며 0.0 ~ 1.0 에 해당하는 값이 들어와야 한다. 
-
+- `Get User Widget Object` 
+  - 입력 받은 위젯 **컴포넌트**를 오브젝트Object 로서 리턴한다.
+  - 오브젝트로서 리턴하는 이유는 컴포넌트가 참조하는 위젯 블루프린트를 Object로 가져오고 본인 타입으로 형변환하여 위젯 블루프린트의 함수나 변수 등을 호출하기 위하여 (컴포넌트 상태로는 못 가져오나보다.)
 
 <br>
 
