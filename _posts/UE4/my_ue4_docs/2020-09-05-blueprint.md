@@ -198,16 +198,16 @@ last_modified_at: 2020-09-05
 
 ### 🔔 Transform 
 
-- `SetActorLocation`
+- `Set Actor Location`
   - 액터의 트랜스폼 위치를 지정한다
     - 타겟의 위치를 New Location 위치로 지정한다.
-- `GetActorLocation`
+- `Get Actor Location`
   - 액터의 현재 위치를 리턴한다.
 - `AddActorWorldRotation`
   - 해당 값만큼 더하여 회전한다.
 - `Make Transform`
   - 트랜스폼을 생성한다. (Location, Rotation, Scale)을 입력으로 받아 하나의 Transform으로 생성 및 리턴
-- `GetWorldLocation`
+- `Get World Location`
   - 입력 받은 컴포넌트의 위치를 리턴.
 
 <br>
@@ -289,6 +289,12 @@ last_modified_at: 2020-09-05
       - 프레임간의 간격이 20ms 이라면 `Delta Seconds` 값은 0.02가 된다.
     - 유니티 C# 코드로 따지면 *transform.position = Vector3.Lerp(transform.position, standardPos.position, Time.fixedDeltaTime * smooth);*
       - smooth는 부드럽게 하는 정도를 뜻하겠다. 
+  - `Break Vector`
+    - Vector를 입력 받아 해당 벡터의 x, y, z 값을 각각 출력한다. 3 가지 float 값으로.
+    - x, y, z 값 중 한 두개만 추출하려고 할 때 사용.
+    - 말 그대로 벡터를 분해!
+  - `Make Vector`
+    - 반대로 3 가지 float 값을 입력받아 이 3 가지 값으로 하나의 Vector를 만들어 이를 리턴한다.
 
 <br>
 
@@ -341,8 +347,10 @@ last_modified_at: 2020-09-05
 
 - `Component Has Tag`
   - 입력 받은 컴포넌트의 Tag 배열에 해당 원소가 있다면 True 리턴, 없다면 False 리턴.
-- `GetWorldLocation`
+- `Get World Location`
   - 입력 받은 컴포넌트의 위치를 리턴.
+- `Set World Location`
+  - 입력 받은 컴포넌트(타겟)을 입력 받은 Vector인 New Location 위치로 세팅한다.
 
 <br>
 
@@ -419,6 +427,10 @@ last_modified_at: 2020-09-05
 - `Get User Widget Object` 
   - 입력 받은 위젯 **컴포넌트**를 오브젝트Object 로서 리턴한다.
   - 오브젝트로서 리턴하는 이유는 컴포넌트가 참조하는 위젯 블루프린트를 Object로 가져오고 본인 타입으로 형변환하여 위젯 블루프린트의 함수나 변수 등을 호출하기 위하여 (컴포넌트 상태로는 못 가져오나보다.)
+- **Text**
+  - `Set Text`
+- **여러 Slate들**
+  - `Set 슬레이트이름`
 
 ### Slate 
 
@@ -481,6 +493,12 @@ last_modified_at: 2020-09-05
   - Attach to Component
     - 어떤 컴포넌트에 생성시킬 것인지.
       - 예를 들어 CapsuleComponent 즉, 몬스터의 전체적인 캡슐 콜리전을 할당해 주면 👉 CapsuleComponent 의 기준점 위치에서 파티클 시스템이 생성 됨
+
+<br>
+
+## 🔔 Timeline
+
+키를 만들어 간단한 애니메이션 구현 가능한 노드. [Timeline]() 포스트 참고.
 
 ***
 <br>
