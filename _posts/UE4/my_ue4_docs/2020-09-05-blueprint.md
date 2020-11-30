@@ -214,9 +214,12 @@ last_modified_at: 2020-09-05
 - `Set Actor Location`
   - 액터의 트랜스폼 위치를 지정한다
     - 타겟의 위치를 New Location 위치로 지정한다.
+- `Set Actor Rotation`
+  - 액터의 트랜스폼 회전 값을 지정한다.
+    - 타겟의 회전값을 New Rotation 값으로 지정한다.
 - `Get Actor Location`
   - 액터의 현재 위치를 리턴한다.
-- `AddActorWorldRotation`
+- `Add Actor World Rotation`
   - 해당 값만큼 더하여 회전한다.
 - `Make Transform`
   - 트랜스폼을 생성한다. (Location, Rotation, Scale)을 입력으로 받아 하나의 Transform으로 생성 및 리턴
