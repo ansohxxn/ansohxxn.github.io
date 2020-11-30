@@ -145,6 +145,8 @@ last_modified_at: 2020-09-05
   - 유니티의 Update() 함수처럼 매 프레임마다 발생하는 이벤트다.
   - <u>Delta seconds</u>를 출력한다.
     - 프레임간의 사이에 경과된 시간을 초 단위로 출력한다. 첫번째 프레임과 두번째 프레임 사이에 20ms가 경과 되었다면 Delta Seconds는 0.02로 출력된다. 
+- `Actor Begin Overlap`
+  - 유니티에서의 **Trigger 충돌 이벤트**처럼 이 액터가 다른 액터와 겹칠 때 발생하는 이벤트. (물리적 충돌로 튕겨지는게 아니라 통과될 때, 즉 겹칠 때)
 - `Any Damage`
   - 나 자신에게 어떤 데미지를 가하는 이벤트가 들어왔을 때
     - **Damage** 👉 들어온 데미지 양을 나타낸다. 
@@ -240,11 +242,25 @@ last_modified_at: 2020-09-05
 - `배열 만들기`
   - 입력 핀으로 원소들을 각각 지정한다.
   - 입력 받은 원소들로 배열을 만든 후 Array 출력 핀으로 이를 출력한다.
-- `ForEachLoop`
+- `ForEach`
   - For문 돌릴 배열을 입력 받는다.
-  - For 문을 돌리며 모든 원소에 접근할 수 있다.
-    - Array Element 원소 값
-    - Array Index 원소의 인덱스 
+  - 입력 받은 배열의 모든 원소들 하나 하나에 대해 반복을 진행한다. 배열의 모든 원소 순회가 끝나면 자연스레 종료 됨.
+    - Loop Body : 일반 실행 핀과 동일. foreahc 문이 돌건 말건 반복 시켜 놓고 바로 다음 실행. 
+    - Array Element : 매 반복의 원소
+    - Array Index : 매 반복의 인덱스 
+    - Completed : foreach 문이 다 끝나면 실행 되는 핀
+  - `Set Timer by Event`
+    - 시간(float)과 호출 시킬 이벤트를 입력 받는다.
+    - 시간(Float)을 입력 받아, 해당 시간을 타이머로 하여 **이 시간이 지나고난 후에 입력 받은 이벤트를 호출한다.**
+- `Get All Actors Of Class`
+  - 해당 레벨의 특정 클래스 타입인, 혹은 그 특정 클래스의 자식 타입인 모든 Actor 들을 찾아 배열에 담아 리턴한다.
+    - 따라서 레벨에 액터가 많다면 성능에 부하가 생길 것이다.
+  - 유니티의 FindObjectOfType 같은 함수인듯 하다.
+- `Set Actor Tick Enabled`
+  - 입력 받은 액터의 Tick 이벤트를 활성화/비활성화 할 수 있다.
+  - 즉, 입력 받은 액터들이 매 프레임마다 하는 기능들을 정지시킬 수 있다.
+
+
 
 <br>
 
@@ -260,6 +276,8 @@ last_modified_at: 2020-09-05
 
 - `Set Collision Enabled`
   - 타겟으로 들어온 Collision 컴포넌트를 끌건지 활성화시킬건지 노드에서 결정할 수 있다.
+- `Set Actor Enable Collision`
+  - 타겟으로 들어온 액터의 모든 컴포넌트를 활성화할건지 비활성화할건지 boolean 타입 입력을 받는다.
 
 <br>
 
@@ -500,6 +518,26 @@ last_modified_at: 2020-09-05
 ## 🔔 Timeline
 
 키를 만들어 간단한 애니메이션 구현 가능한 노드. [Timeline]() 포스트 참고.
+
+<br>
+
+## 🔔 Cinematic Sequence
+
+- `Create Level Sequence Player`
+  - 레벨 시퀀스를 재생하기 위해선 우선 만들어 둔 레벨 시퀀스를 생성해야 한다.
+- `Play`
+  - 위에서 생성한 레벨 시퀀스를 타겟으로 하여 영상 재생
+- `Get Length`
+  - 입력 받은 Level Sequence Player 의 전체 영상 길이를 float 로 리턴한다.
+  - 해당 시퀀스 시간을 구할 수 있다.
+
+<br>
+
+## 🔔 Rendering 
+
+- `Set Actor Hidden in Game`
+  - 입력으로 받은 액터를 렌더링 하지 않는다. 즉 보이지 않게 한다.
+
 
 ***
 <br>
