@@ -536,6 +536,10 @@ last_modified_at: 2020-09-05
   - Attach to Component
     - 어떤 컴포넌트에 생성시킬 것인지.
       - 예를 들어 CapsuleComponent 즉, 몬스터의 전체적인 캡슐 콜리전을 할당해 주면 👉 CapsuleComponent 의 기준점 위치에서 파티클 시스템이 생성 됨
+- `Activate` 
+  - 타겟으로 들어온 파티클 시스템 재생
+- `Deactivate` 
+  - 타겟으로 들어온 파티클 시스템 정지
 
 <br>
 
