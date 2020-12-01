@@ -161,9 +161,11 @@ last_modified_at: 2020-09-05
 
 #### 컴포넌트 이벤트
 
-- `On Component Begin Overlap`
-  - 컴포넌트 이벤트
-  - 해당 컴포넌트에 어떤 액터가 닿아서 충돌이 일어났을 때 자동으로 실행되는 이벤트
+- Collision 
+  - `On Component Begin Overlap`
+    - 해당 컴포넌트에 어떤 액터가 닿아서 충돌이 일어났을 때 자동으로 실행되는 이벤트
+  - `On Component End Overlap`
+    - 겹치던 액터가 더 이상 겹치지 않고 빠져나갈 때 발생하는 이벤트
 
 <br>
 
@@ -266,6 +268,12 @@ last_modified_at: 2020-09-05
   - `Set Timer by Event`
     - 시간(float)과 호출 시킬 이벤트를 입력 받는다.
     - 시간(Float)을 입력 받아, 해당 시간을 타이머로 하여 **이 시간이 지나고난 후에 입력 받은 이벤트를 호출한다.**
+  - `Set Timer by Function Name`
+    - 입력 받은 시간이 지나고 난 후에 입력 받은 이름을 가진 함수를 실행한다. 
+    - Looping에 체크 했다면 입력 받은 시간 주기마다 해당 함수를 실행시킨다.
+  - `Clear Timer by Funcion Name`
+    - Timer 를 중지시킨다.
+      - 돌아가고 있는 Timer가 있는 Object를 입력으로 받고(안 주면 기본적으로 self. 같은 블루프린트 內) 입력으로 받은 함수 Timer 를 더 이상 돌지 않게 한다. 
 - `Get All Actors Of Class`
   - 해당 레벨의 특정 클래스 타입인, 혹은 그 특정 클래스의 자식 타입인 모든 Actor 들을 찾아 배열에 담아 리턴한다.
     - 따라서 레벨에 액터가 많다면 성능에 부하가 생길 것이다.
@@ -348,7 +356,7 @@ last_modified_at: 2020-09-05
   - 데미지를 가한다.
     - **Damaged Actor** 👉 데미지를 가할 대상. 
     - **Base Damage** 👉 데미지양 
-    - **Damage Causer** 👉 데미지를 가하는 대상 
+    - **Damage Causer** 👉 데미지를 주는 대상. 
 - `Get Game Mode` 
   - 게임 모드 블루프린트를 부모 클래스 GameModeBase로서 가져온다.
 - `Open Level`
