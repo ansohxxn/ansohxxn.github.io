@@ -1,5 +1,5 @@
 ---
-title:  "UE4 Blueprint 정리" 
+title:  "UE4 여러 이벤트&함수들 정리" 
 
 categories:
   -  UE4Docs
@@ -13,7 +13,7 @@ date: 2020-09-05
 last_modified_at: 2020-09-05
 ---
 
-공부하면서 알게된 <u>Blueprint 정리</u>  
+공부하면서 알게된 <u>여러 이벤트&함수들 정리</u>  
 {: .notice--warning}
 
 ***
@@ -162,10 +162,12 @@ last_modified_at: 2020-09-05
 #### 컴포넌트 이벤트
 
 - Collision 
+  - Overlapped Actor : 해당 콜리전 컴포넌트 가진 액터
+  - Other Actor : 충돌한 다른 액터
   - `On Component Begin Overlap`
-    - 해당 컴포넌트에 어떤 액터가 닿아서 충돌이 일어났을 때 자동으로 실행되는 이벤트
+    - 호출한 콜리전 컴포넌트에 다른 액터가 겹치기 시작하는 순간에 1 번 발동되는 이벤트이다.
   - `On Component End Overlap`
-    - 겹치던 액터가 더 이상 겹치지 않고 빠져나갈 때 발생하는 이벤트
+    - 호출한 콜리전 컴포넌트에 다른 액터가 더 이상 겹치지 않고 빠져나가는 순간에 1 번 발동되는 이벤트이다.
 
 <br>
 
@@ -559,6 +561,12 @@ last_modified_at: 2020-09-05
 
 - `Set Actor Hidden in Game`
   - 입력으로 받은 액터를 렌더링 하지 않는다. 즉 보이지 않게 한다.
+- `Toggle Visibility`
+  - 입력으로 받은 컴포넌트의 Visible 값을 전환시킨다. 
+    - Visible 값이 체크 해제 상태였다면 체크하여 보이게 하고, Visible 값이 체크 상태였다면 해제하여 안보이게 한다.
+  - `Toggle`은 On/Off 이렇게 2 가지 값만 가진 스위치를 뜻한다. 
+  - 따라서 토글은 상황이 오직 두가지 밖에 없기 때문에 토글을 실행만 해도 상태가 전환된다. Off 상태였다면 On 으로, On 상태였다면 Off 로.
+    - Caps Lock 같은 것도 일종의 토글 스위치다. 체크 박스 같은 것도!
 
 
 ***
