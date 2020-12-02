@@ -112,7 +112,14 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "UE4 Lesson 1" %}
-                        <li><a href="/categories/ue4-lesson-1" class="">언리얼 블루프린트 강의1 ({{category[1].size}})</a></li>
+                        <li><a href="/categories/ue4-lesson-1" class="">언리얼 블루프린트 강의 1 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "UE4 Lesson 3" %}
+                        <li><a href="/categories/ue4-lesson-1" class="">언리얼 블루프린트 강의 2 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
