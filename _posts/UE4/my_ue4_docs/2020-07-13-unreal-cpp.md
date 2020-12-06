@@ -56,6 +56,17 @@ last_modified_at: 2020-07-13
 <br>
 <br>
 
+## 👩‍🦰 언리얼의 자료형
+
+- 문자열
+  - `FName`
+  - `FText` 👉 언리얼의 자동 현지화(번역)를 지원한다. 
+  - `FString` 👉 C++ 에서의 `string`처럼 문자열 처리와 관련된 메서드들 사용 가능
+- 언리얼에선 `int` 말고 `int32`를 쓴다.
+
+<br>
+<br>
+
 ## 👩‍🦰 매크로
 
 ### UPROPERTY()
@@ -72,8 +83,6 @@ last_modified_at: 2020-07-13
   - UPROPERTY(EditAnywhere, Category = Stat, <u>Meta = (AllowPrivateAccess = true)</u>)
     - `priavte` 은닉성을 유지하나 에디터에서 편집할 수 있게 해주는 키워드
 
-<br>
-
 ### UE_LOG
 > `UE_LOG`(카테고리, 로깅 수준, 형식 문자열, 인자...)
 
@@ -81,6 +90,18 @@ last_modified_at: 2020-07-13
 
 ### ABLOG
 - 특정 카테고리를 고정으로 하고 로그를 남길 때 제작하는 매크로.
+
+### TEXT 매크로
+
+```cpp
+PrintLine(TEXT("Wecome to Bull Cows!"));
+FString HiddenWord = TEXT("cake");
+```
+
+- `TEXT` 매크로 ([참고](https://docs.unrealengine.com/ko/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/StringHandling/index.html))
+  - 언리얼에서는 문자열 리터럴을 TEXT 매크로 안에 넣어서 넘기는게 좋다.
+    - 모든 플랫폼에서 2 바이트 문자열로 동작하게끔 해준다.
+  - 어떤 플랫폼에서든 동작할 수 있도록 언리얼이 인코딩을 해주기 때문이다.
 
 
 <br>
