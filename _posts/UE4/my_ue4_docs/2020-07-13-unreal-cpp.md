@@ -91,18 +91,6 @@ last_modified_at: 2020-07-13
 ### ABLOG
 - 특정 카테고리를 고정으로 하고 로그를 남길 때 제작하는 매크로.
 
-### TEXT 매크로
-
-```cpp
-PrintLine(TEXT("Wecome to Bull Cows!"));
-FString HiddenWord = TEXT("cake");
-```
-
-- `TEXT` 매크로 ([참고](https://docs.unrealengine.com/ko/ProgrammingAndScripting/ProgrammingWithCPP/UnrealArchitecture/StringHandling/index.html))
-  - 언리얼에서는 문자열 리터럴을 TEXT 매크로 안에 넣어서 넘기는게 좋다.
-    - 모든 플랫폼에서 2 바이트 문자열로 동작하게끔 해준다.
-  - 어떤 플랫폼에서든 동작할 수 있도록 언리얼이 인코딩을 해주기 때문이다.
-
 
 <br>
 <br>
@@ -162,18 +150,7 @@ AddActorLocalRotation(FRotator(0.0f, RotateSpeed * DeltaTime, 0.0f));  // Z 축�
 
 StaticMesh 컴포넌트를 해당 포인터가 참조하는 에셋을 붙인 상태로 붙여준다.
 
-<br>
 
-### FString::printf
-
-- C언어의 printf와 비슷하다. 형식 문자열을 출력함.
-- 언리얼에서는 `%s` 부분에 함수를 사용한다면 함수앞에 꼭 `*`를 붙여주어야 한다.
-  - *GetName()
-- TEXT 매크로로 인수를 넘긴다.
-
-```cpp
- FString::printf(TEXT("Actor Name: %s, ID : %d, Location X : %.3f", *GetName(), ID, GetActorLocation().X);
-```
 
 <br>
 <br>
