@@ -669,6 +669,53 @@ GameObject obj = Resources.Load<GameObject>("Prefabs/Tank");
   - 원점이 중앙이라면 `yMin`은 음수가 된다.
 - `yMax`은 앵커(원점)을 기준으로 `height/2` 만큼 아래쪽으로 떨어진 곳의 x 좌표라고 할 수 있겠다.
 
+<br>
+
+## 👩‍🦰 Cursor
+
+마우스 커서 관련.
+
+### 변수/프로퍼티
+
+#### lockState, visible
+
+```c#
+Cursor.lockState = CursorLockMode.Locked; 
+Cursor.lockState = CursorLockMode.Confined; 
+Cursor.lockState = CursorLockMode.None; 
+```
+
+- `Locked`
+  - 마우스 커서를 게임 중앙 좌표에 고정시키고 잠궈버린다.
+  - 마우스 커서도 보이지 않게 한다. 그래도 보통 `Cursor.visible = false;`와  같이 쓴다고 한다.
+- `Confined`
+  - 마우스 커서가 게임의 창 밖으로 이탈되지 않도록 함
+- `None`
+  - 마우스 커서 정상 상태
+  - 게임 중에도 커서가 보임
+
+```c#
+Cursor.lockState = CursorLockMode.Locked; 
+Cursor.visible = false;
+```
+
+마우스 커서를 안보이게 하고 동시에 잠그는 것을 보통 위와 같이 쓴다.
+
+- `Cursor.visible`
+  - `false`로 해놓으면 단순히 커서의 렌더링만 안될 뿐이다. 커서는 동작한다. 
+    - 따라서 마우스 커서 비활성화 하려고 할 때 이것만 false로 바꿔선 안된다.
+  - 커서 잠글 때 `Cursor.lockState` 와 같이 사용되는 경우가 많다.
+
+### 함수
+
+#### SetCursor
+
+```c#
+Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+```
+
+커서의 이미지를 사용자 지정 텍스처로 바꿔준다.
+
 ***
 <br>
 
