@@ -465,6 +465,10 @@ Physics.Raycast(transform.position + Vector3.up, Vector3.forward);
   - `Time.timeScale`을 통해 시간이 흘러가는 속도를 변경한다면 `Time.fixedDeltaTime`도 그에 맞게 변경해줄 것을 권장한다.
   - `Time.fixedDeltaTime = 0.02f * Time.timeScale`
   - `Time.timeScale`이 2.0f이면 디폴트에 비해 두배로 시간이 빨리 흘러간다는 의미고 0.0f면 시간이 아예 흐르지 않고 정지 상태라는 것을 의미한다.
+  - 🌼`Time.timeScale = 0f` 👉 0 배속. 즉 시간을 멈춘다. `Time.deltaTime`이 0 이 된다.
+    - `Time.deltaTime`, `Time.TimeScale`에 의존하는 모든 것들이 멈추게 된다.
+      - 코루틴 함수(WaitForSeconds) 멈춘다. 반면 WaitForSeondsRealTIme은 멈추지 않는다.
+      - Update 함수는 멈추지 않는다. 반면 FixedUpdate 함수는 멈춘다.
 - `Time.fixedDeltaTime`
   - **FixedUpdate()** 함수가 실행되는 그 사이의 시간. 다음 **FixedUpdate()** 함수가 실행되기까지의 시간. 
   - **FixedUpdate()** 함수는 디폴트로 1/50초인 0.02초를 주기로 실행되기 때문에 디폴트론 `Time.fixedDeltaTime` 값은 `0.02`이다.
@@ -715,6 +719,22 @@ Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
 ```
 
 커서의 이미지를 사용자 지정 텍스처로 바꿔준다.
+
+<br>
+
+## 👩‍🦰 Application 
+
+게임을 최종 빌드 한 후 어플리케이션(응용 프로그램)으로서 실행될 때, 어플리케이션의 런타임 정보에 접근할 수 있다. 게임 어플리케이션을 실행 중에 게임을 종료하거나 웹 브라우저를 여는 등등을 할 수 있다. 
+
+### 함수
+
+#### Quit
+
+```c#
+Application.Quit();
+```
+
+게임 응용 프로그램을 종료한다. 유니티 에디터 상에서 실행 되는 것은 무시한다. 응용프로그램으로서 실행했을 때 종료한다는 의미.
 
 ***
 <br>
