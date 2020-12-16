@@ -772,6 +772,23 @@ saveData = JsonUtility.FromJson<SaveData>(loadJson);
   - 인수로 넘긴 Json 포맷의 문자열을 `T` 타입의 인스턴스로 리턴한다.
     - Json 포맷의 문자열인 `loadJson`에서 데이터들을 읽어 SaveData 클래스의 멤버 변수들에 저장하고 이를 객체 인스턴스로 만들어 `saveData`에 리턴한다.
 
+<br>
+
+## 👩‍🦰 RenderSettings
+
+- Fog 
+- Ambient Light
+
+위와 같은 씬의 시각적인 요소의 범위를 위한 값들을 포함한다.
+
+### 변수/프로퍼티
+
+#### Fog 안개 관련
+
+- `fog` : 안개 활성화 여부. bool
+- `fogColor` : 안개 색깔
+- `fogDensity` : 안개의 밀도.
+
 ***
 <br>
 
