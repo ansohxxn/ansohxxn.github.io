@@ -90,6 +90,21 @@ last_modified_at: 2020-09-04
   - 물리처리는 **FixedUpdate()** 안에서 해주기.
 - `Time.fixedDeltaTime` 의 시간 간격으로 실행이 된다. 디폴트로 `Time.fixedDeltaTime` 값은 0.02f 이다.
 
+> `FixedUpdate`와 `Update`의 차이점
+
+- **FixedUpdate**
+  - 프레임마다 호출되지 않는다. 독립적인 타이머가 존재하여 정해진, 고정적인 시간 간격으로 호출된다.
+    - 프레임과 관계없이 규칙적으로 호출되므로 물리적인 연산을 할 때 이 곳에서 하는게 좋다.
+      - 프레임은 시스템 환경을 따라가므로 컴퓨터 환경이 좋지 않으면 느리고 불규칙적으로 변할 수 있기 때문에 Rigidbody 같은 어떤 물리 효과가 적용된 움직임 처리를 *Update* 안에 구현하는건 좋지 않다.
+  - `TimeSCale`에 의존하기 때문에 `Time.timeScale = 0;`이 될 때 실행되지 않는다.
+    - `Time.fixedDeltaTime`마다 실행된다. 이는 `0.02`초로 고정되어 있다.
+- *Update*
+  - 프레임마다 호출된다. 
+  - `TimeSCale`에 의존하지 않기 때문에 `Time.timeScale = 0;`이 될 때도 Update 함수 자체는 실행이 된다.
+    - 다만 이 안에서 `deltaTime`을 사용하여 움직임을 제어한게 있었다면 멈추겠지! 
+
+*Except for realtimeSinceStartup and fixedDeltaTime, timeScale affects all the time and delta time measuring variables of the Time class. If you lower timeScale it is recommended to <u>also lower Time.fixedDeltaTime by the same amount.</u> FixedUpdate functions will not be called when timeScale is set to zero.* <https://docs.unity3d.com/ScriptReference/Time-timeScale.html>
+
 <br>
 
 ## 👩‍🦰 void LateUpate()
