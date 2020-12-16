@@ -736,6 +736,42 @@ Application.Quit();
 
 게임 응용 프로그램을 종료한다. 유니티 에디터 상에서 실행 되는 것은 무시한다. 응용프로그램으로서 실행했을 때 종료한다는 의미.
 
+<br>
+
+## 👩‍🦰 JsonUtility
+
+`JSON`은 텍스트로 되어 있어서 사람이 이해하기 쉽고 <u>직렬화</u> 되어 저장되기 때문에 통신에 있어 데이터를 스트림으로 주고받기 쉬운 포맷이다.
+
+### 함수
+
+#### ToJson
+
+```c#
+[System.Serializable] // 직렬화 해야 한 줄로 데이터들이 나열되어 저장 장치에 읽고 쓰기가 쉬워진다.
+public class SaveData
+{
+    // ... SaveData는 직렬화된 클래스
+}
+private SaveData saveData = new SaveData();
+string json = JsonUtility.ToJson(saveData);
+File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME, json);
+```
+
+- 인수로 넘긴 객체를 <u>직렬화된 Json 포맷의(String 텍스트)으로 리턴</u>한다.
+  - Json 은 직렬화 하여 저장되는 포맷이므로 인수로 넘긴 객체는 직렬화 가능한 객체여야 한다. 
+    - 객체 타입인 *SaveData* 는 직렬화한 클래스라 가능
+
+#### FromJson
+
+```c#
+string loadJson = File.ReadAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME); // 파일에서 Json 포맷의 문자열을 읽어 loadJson에 저장
+saveData = JsonUtility.FromJson<SaveData>(loadJson);
+```
+
+- `JsonUtility.FromJson<T>(string)`
+  - 인수로 넘긴 Json 포맷의 문자열을 `T` 타입의 인스턴스로 리턴한다.
+    - Json 포맷의 문자열인 `loadJson`에서 데이터들을 읽어 SaveData 클래스의 멤버 변수들에 저장하고 이를 객체 인스턴스로 만들어 `saveData`에 리턴한다.
+
 ***
 <br>
 
