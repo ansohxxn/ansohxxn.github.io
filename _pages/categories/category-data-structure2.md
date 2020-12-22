@@ -1,7 +1,7 @@
 ---
-title: "C로 배우는 자료 구조"
+title: "따라서 배우는 C (자료구조 부록편)"
 layout: archive
-permalink: categories/data-structure
+permalink: categories/data-structure2
 author_profile: true
 sidebar_main: true
 ---
@@ -10,5 +10,5 @@ sidebar_main: true
 
 ***
 
-{% assign posts = site.categories.['DataStructure'] %}
+{% assign posts = site.categories.['DataStructure2'] %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}

@@ -183,8 +183,15 @@
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Data Structure" %}
-                        <li><a href="/categories/data-structure" class="">자료구조 강의 ({{category[1].size}})</a></li>
+                    {% if category[0] == "DataStructure" %}
+                        <li><a href="/categories/data-structure" class="">C 자료구조 강의 1({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "DataStructure2" %}
+                        <li><a href="/categories/data-structure2" class="">C 자료구조 강의 2({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
