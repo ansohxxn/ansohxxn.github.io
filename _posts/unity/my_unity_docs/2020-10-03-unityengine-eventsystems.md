@@ -52,6 +52,34 @@ using UnityEngine.EventSystems;
   - 어떤 종류의 이벤트인지에 대한 답을 Raycast 로 쏴주는건 `EventSystem` 오브젝트이다.
   - 이 이벤트에 대한 Raycast를 받기 위해선 UI들은 `Raycast Target` 가 체크 되어 있어야 하며 일반 오브젝트들은 Collider 가 붙어 있어야 한다.
 
+
+<br>
+
+## 🚀 함수
+
+### ✈ IsPointerOverGameObject()
+
+```c#
+using UnityEngine.EventSystems;
+
+//..
+
+if (EventSystem.current.IsPointerOverGameObject())
+    return;
+```
+
+- `IsPointerOverGameObject()` 
+  - <u>마우스 클릭 이벤트가 UI 위에서 이루어졌다면</u> `true` 리턴
+    - 정확히 말하면 마우스 포인터가 EventSystem 오브젝트 위에 있다면 True
+  - 플레이어가 마우스 클릭한 곳으로 이동하는 로직이 있다면, 클릭 버튼을 누를 때 플레이어가 그 클릭 버튼으로 이동하면 안된다. 그냥 클릭 버튼 이벤트만 처리 되야 한다. 따라서 이럴때 마우스 클릭 이벤트가 UI 위에서 이루어진 것이라면 위와 같은 코드를 통해 플레이어 이동을 하지 않도록 할 수 있다.
+  - `current` 👉 현재 EventSystem 리턴
+- 파라미터로 마우스 포인터 ID가 들어갈 수 있다.
+  - `IsPointerOverGameObject(-1)` 마우스 좌클릭(디폴트)
+    - PC 혹은 유니터 상에서는 `-1`
+  - `IsPointerOverGameObject(0)` 첫 번째 터치
+    - 모바일 환경에서는 `0`
+  - `IsPointerOverGameObject(Input.GetTouch(0).fingerId))`
+
 <br>
 
 # ⭐ 이벤트 인터페이스 종류
