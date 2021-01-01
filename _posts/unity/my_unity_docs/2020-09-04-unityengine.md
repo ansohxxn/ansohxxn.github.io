@@ -673,6 +673,14 @@ GameObject obj = Resources.Load<GameObject>("Prefabs/Tank");
   - 원점이 중앙이라면 `yMin`은 음수가 된다.
 - `yMax`은 앵커(원점)을 기준으로 `height/2` 만큼 아래쪽으로 떨어진 곳의 x 좌표라고 할 수 있겠다.
 
+
+<br>
+
+## 👩‍🦰 Recttransform
+
+- <u>Recttransform도 Trasnform을 상속받는다.</u> 
+  - 그래서 UI 오브젝트들도 `go.transform`을 통해 Recttransform를 가져올 수 있다.
+
 <br>
 
 ## 👩‍🦰 Cursor

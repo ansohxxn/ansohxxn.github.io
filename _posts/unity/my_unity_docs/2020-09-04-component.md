@@ -90,6 +90,15 @@ Vector3 pos = transform.TransformDirection(Vector3.forward); // 내 로컬 좌�
   - 인수로 받은 좌표 Vector3 를 *로컬 좌표계 기준에서 월드 좌표계 기준으로*  방향만 변환하여 이를 리턴해준다.(벡터 길이는 변하지 않음)
   - `transform.TransformDirection(Vector3.forward)`와 `transform.forward` 는 같다.
 
+
+#### GetChild(int index)
+
+```c#
+Transform tf_child = trnasform.GetChild(1); // 두 번째 자식 리턴받기
+```
+
+직속 자식들 중 `index`에 해당하는 `index + 1` 번 째 오브젝트의 Transform 을 리턴 함.
+
 #### InverseTransformDirection(Vector3)
   
   - 인수로 받은 좌표 Vector3 를 *월드 좌표계 기준에서 로컬 좌표계 기준으로*  방향만 변환하여 이를 리턴해준다.(벡터 길이는 변하지 않음)
