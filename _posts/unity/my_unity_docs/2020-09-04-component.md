@@ -387,11 +387,21 @@ transform.LookAt(_player.transform);
 - 클립을 재생. 단, 인수를 필요로 하지 않으므로 미리 `clip`에 재생시킬 클립이 할당 되어 있어야 한다.
 - 소리를 중첩시키지 않기 때문에 이미 재생 중이었던 소리는 중지 시킨후 자신의 클립을 재생시킨다.
 
-#### `PlayOneShot(clip)`
+#### `PlayOneShot(AudioClip)`
 
 - 클립을 1회 재생. 단 Play()와는 다르게 재생시킬 `clip`을 인수로 받는다.
 - Play()와는 다르게 소리를 중첩해서 재생할 수 있다. 이미 재생 중이었던 소리를 중지시키지 않은 채로 자신의 클립을 같이 그 위에 재생시킨다.
+- 던져지는 개념이라 Play() 와 달리 중간에 멈출 수가 없다. 한번 던져지면 재생기 Audio Source가 꺼지는게 아닌 이상 끝까지 재생된다.
 
+##### PlayClipAtPoint(AudioClip, Vector3)
+
+> 거리에 따라 사운드 크기가 달라야 경우에는 <u>오브젝트에 Audio Source 를 붙여야한다.</u> 그 오브젝트 자체가 소리의 진원지가 될 수 있도록!
+
+- 오브젝트에 Audio Source 를 붙인다.
+- 근데 반드시 꼭 Audio Source 달고 있는 오브젝트에서만 소리가 나야하는건 아니다! <u>다른 좌표에서도 소리를 재생하게 할 수 있다.</u> 그 함수가 바로 *PlayClipAtPoint*
+  ```c#
+  audioSource.PlayClipAtPoint(clip, new Vector3(5, 1, 2));
+  ```
 
 <br>
 
@@ -401,6 +411,8 @@ transform.LookAt(_player.transform);
 
 한 Scene 안에 하나만 있으면 된다. 이게 있어야 소리를 들을 수 있다. **Main Camera에 기본적으로 붙어있다.**
 
+- 좀 더 3 D 현실감을 주고 싶다면 플레이어의 귀 부분에 Audio Listener 컴포넌트를 달 수도 있겠다! 
+- 단, 활성화 되어 있는 Audio Listener 컴포넌트 월드에서 하나만 존재해야 하기 때문에 이럴땐 메인 카메라의 Audio Listener 컴포넌트를 비활성화 해주자.
   
 
 <br>
