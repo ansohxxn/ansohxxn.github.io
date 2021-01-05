@@ -358,7 +358,8 @@ transform.LookAt(_player.transform);
 - 옵션 
   - `Play On Awake` : 게임 시작하자 마자 재생할건지
   - `Loop` : 음악이 끝나도 다시 반복할건지
-  - 볼륨 크기 설정도 가능
+  - `Pitch` : 재생 속도
+  - `Volume` : 재생 소리 크기
   - **3D Sound Settings**
     - `Min Distance`
       - 이 컴포넌트가 붙은 오브젝트를 기준으로 하여 Min Distance 내에서는 최고 음량을 유지한다. (이 거리 내에선 돼지 소리가 최대로 들림)
@@ -378,6 +379,7 @@ transform.LookAt(_player.transform);
     - 0 에 가까운 커브일 수록 2 D 로 소리를 재생한다.
       - 거리에 따른 볼륨 차별화가 없음.
 
+
 ### 함수
 
 #### `Play()`
@@ -390,7 +392,19 @@ transform.LookAt(_player.transform);
 - 클립을 1회 재생. 단 Play()와는 다르게 재생시킬 `clip`을 인수로 받는다.
 - Play()와는 다르게 소리를 중첩해서 재생할 수 있다. 이미 재생 중이었던 소리를 중지시키지 않은 채로 자신의 클립을 같이 그 위에 재생시킨다.
 
+
 <br>
+
+## 👩‍🦰 Audio Listner
+
+> Audio Source가 소리를 발생시키는 근원지라면 `Audio Listner` 컴포넌트는 소리를 듣는 관객, 듣는 사람, 귀.
+
+한 Scene 안에 하나만 있으면 된다. 이게 있어야 소리를 들을 수 있다. **Main Camera에 기본적으로 붙어있다.**
+
+  
+
+<br>
+
 
 ## 👩‍🦰 Particle System
 > 이 컴포넌트를 붙이면 오브젝트는 파티클 효과를 일으킬 수 있다.
