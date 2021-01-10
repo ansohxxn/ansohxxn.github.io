@@ -779,6 +779,8 @@ saveData = JsonUtility.FromJson<SaveData>(loadJson);
 - `JsonUtility.FromJson<T>(string)`
   - 인수로 넘긴 Json 포맷의 문자열을 `T` 타입의 인스턴스로 리턴한다.
     - Json 포맷의 문자열인 `loadJson`에서 데이터들을 읽어 SaveData 클래스의 멤버 변수들에 저장하고 이를 객체 인스턴스로 만들어 `saveData`에 리턴한다.
+- 주의 사항
+  - `saveData`의 멤버들은 반드시 public 하거나 혹은 `[SerializeField]`여야 한다. 그래야 저장 가능.
 
 <br>
 
