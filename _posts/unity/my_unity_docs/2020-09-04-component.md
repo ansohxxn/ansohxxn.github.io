@@ -519,6 +519,25 @@ anim.Play("WAIT");
 anim.Play("RUN");
 ```
 
+#### CrossFade(string, float)
+
+```c#
+anim.CrossFade("RUN", 0.1f);
+anim.CrossFade("ATTACK", 0.1f, -1, 0f); // layer -1 , 반복 재생.(0초로 돌아감)
+```
+
+  - *anim.CrossFade* 
+    - *anim.Play* 를 부드럽게 하는 것이라고 보면 된다. 부드럽고 자연스럽게 블렌딩되듯 애니메이션이 재생된다.
+      - *anim.Play*를 사용하면 재생할 애니메이션 클립이 바뀔 때 뚝뚝 끊기듯이 바뀌어 부자연스럽다. *anim.CrossFade* 는 애니메이션이 아주 자연스럽게 바뀌게 된다.
+    - 첫 번째 인수 : 재생할 클립 이름
+    - 두 번째 인수 : 지연 시간 (다음 애니메이션으로 바뀌는데 걸리는 fade 시간)
+      - 0.1f 라면 바뀔 애니메이션의 10 %는 부드럽게 애니메이션이 이어지는데 쓴다.
+    - 세 번째 인수 : layer. 애니메이션 레이어
+    - 네 번째 인수(normalizedTimeOffset) : 지연 시간 (초단위 추정)
+      - 이유는 잘 모르겠는데 0.0f 로 세팅하면 다시 처음으로 돌아가 재생한다. 
+      - 반복 재생인건가?
+      - 클립의 `Loop Time`이 체크되어 있지 않더라도 이렇게 코드로 반복 재생 시킬 수 있다.
+
 ![image](https://user-images.githubusercontent.com/42318591/94799473-228b0c00-041e-11eb-89f1-9ae3994abffa.png)
 
 
