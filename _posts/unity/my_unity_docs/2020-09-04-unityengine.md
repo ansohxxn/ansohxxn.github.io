@@ -460,7 +460,7 @@ Physics.Raycast(transform.position + Vector3.up, Vector3.forward);
     - 1초에 3m 가게 움직이고 싶은데 <u>1초에 60번 깜빡이는 60프레임 컴퓨터</u>라면 update함수 내에서 `3m * Time.deltaTime` 해주면 된다.
     - 매 프레임마다 `3m * Time.deltaTime`씩 움직여 최종적으로 1초에 3m 움직이게 되는 것.
 - `Time.time`
-  - 게임 시작 후 현재까지의 경과 시간(float 초 단위)
+  - 게임 시작 후 (Start 함수 실행 후) 현재까지의 경과 시간(float 초 단위)
 - `Time.timeScale`
   - `Time.timeScale`을 통해 시간이 흘러가는 속도를 변경한다면 `Time.fixedDeltaTime`도 그에 맞게 변경해줄 것을 권장한다.
   - `Time.fixedDeltaTime = 0.02f * Time.timeScale`
