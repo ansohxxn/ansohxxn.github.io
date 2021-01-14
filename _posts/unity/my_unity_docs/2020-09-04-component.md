@@ -664,6 +664,8 @@ anim.CrossFade("ATTACK", 0.1f, -1, 0f); // layer -1 , 반복 재생.(0초로 돌
 - NavMesh 로 구워진 갈 수 있는 경로 내에서만 이동하게 된다.
 - 그렇게까지 정밀하게 이동되진 않는다.
 
+<u>NavMeshAgent를 붙여서 이동하는 방식은 기본적으로 Agent들은 서로 피해가도록 되어 있어 너무 인접하게 붙으면 의도치 않게 상대를 밀치기도 한다.</u> Obstacle Avoidance 속성 때문이다. 이를 해결하는 방법 중 하나는 NavMeshAgent 의 *Move* 를 사용하지 않고 레이저를 쏴서 이동 가능한지를 확인 한 후 일반적인 플레이어 위치 세팅으로 이동을 하는 것이다. *-출처 : Rookiss님 답변-*
+
 #### `SetDestination(Vector3 target)` 
 
 - 목표 위치를 인수로 넘기면 agent가 해당 목표 지점까지 움직이게 하는 함수.
