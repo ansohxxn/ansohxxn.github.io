@@ -36,6 +36,8 @@ last_modified_at: 2020-09-04
     - *GameObject gameObject = new GameObject()*이 숨겨져 있다고 보면 된다.
 - `name`
   - 해당 오브젝트의 이름.
+- `activeSelf`
+  - 오브젝트가 활성화 상태면 True 리턴, 아니면 False 리턴.
 
 ## 함수
 
