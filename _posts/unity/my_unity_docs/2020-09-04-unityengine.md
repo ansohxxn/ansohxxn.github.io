@@ -325,11 +325,19 @@ Physics.Raycast(transform.position + Vector3.up, Vector3.forward);
 > 난수 생성과 관련된 함수들이 있는 집합
 
 ### 변수/프로퍼티
-  - Random.`insideUnitSphere`
-    - 반지름 1 을 갖는 구 안의 랜덤한 위치(Vector3)를 반환하는 프로퍼티. 
-      ```c#
+
+#### Random.`insideUnitSphere`
+
+> (0, 0, 0) 벡터를 기준으로 반지름 1 을 갖는 구 안에서 랜덤한 위치(Vector3)를 반환하는 프로퍼티. (읽기 전용)
+
+```c#
       var randomPos = Random.insideUnitSphere * distance + center;  // center를 중점으로 하여 반지름(반경) distance 내에 랜덤한 위치 리턴
-      ```
+```
+```c#
+  Vector3 randDir = Random.insideUnitSphere * Random.Range(0, _spawnRadius);
+  randDir.y = 0;
+  randPos = _spawnPos + randDir;
+```
     
 ### 함수
 
@@ -339,6 +347,7 @@ Physics.Raycast(transform.position + Vector3.up, Vector3.forward);
   
 - 단, `Range(float min, float max)`
   - 인수가 float 이라면 max 도 포함된다. [min, max] 에서 랜덤한 float 리턴
+
 
 #### Random.`ColorHSV()`
 - 랜덤한 컬러를 리턴한다.
