@@ -1,5 +1,5 @@
 ---
-title:  "Unity C# > 파티클 시스템" 
+title:  "Unity C# > 컴포넌트 : Particle System 와 프로퍼티/함수 모음" 
 
 categories:
   -  UnityDocs
@@ -9,18 +9,28 @@ tags:
 toc: true
 toc_sticky: true
 
-date: 2020-09-25
-last_modified_at: 2020-09-25
+date: 2021-01-17
+last_modified_at: 2021-01-17
 ---
 
-- 유니티 공식 매뉴얼 <https://docs.unity3d.com/kr/current/Manual/UnityManual.html>
-- Scripting Overview <http://www.devkorea.co.kr/reference/Documentation/ScriptReference/index.html>
+공부하면서 알게된 것만 정리합니다.😀
+{: .notice--warning}
 
-<br>
+# 👩‍🦰 Particle System
+
+> 이 컴포넌트를 붙이면 오브젝트는 파티클 효과를 일으킬 수 있다.
+
+## 🚀 에디터
+
+- `Stop action`
+    - 이펙트가 재생이 끝났을때 실행될 처리.
+      - `Destroy`를 할당해주면 이펙트 재생이 끝나자마 이펙트 오브젝트가 파괴된다.
+      - `Disable`을 할당해주면 이펙트 재생이 끝나자마 이펙트 오브젝트가 비활성화 된다.
+      - `Callback` 을 할당해주면 이펙트 재생이 끝나자마자 **OnParticleSystemStop** 이벤트 함수가 실행된다. 즉, **OnParticleSystemStop** 이벤트 함수안에 내가 원하는 처리 구현해놓아 실행시킬 수도 있다.
+
+### ✈ 메인 모듈
 
 ![image](https://user-images.githubusercontent.com/42318591/94247622-58c91700-ff58-11ea-8d4d-1edb4452aba1.png)
-
-## 메인 모듈
 
 - Duration 
   - 파티클 시스템이 실행되는 지속 시간
@@ -44,7 +54,10 @@ last_modified_at: 2020-09-25
   - 파티클 입자 초기 회전값
   - *Random Between Two Constants* 로 하여 두 회전값 사이에서 입자마다 랜덤한 회전값을 가지게 할 수 있다.
 
-## Emissions 모듈
+<br>
+
+
+### ✈ Emissions 모듈
 
 > 한 순간에 빵 터지듯이 동시에 방출될 입자 수. *한발에 동시에 총알 여러발 나가는 총의 이펙트 효과를 구현할 때 좋을 것 같다.*
 
@@ -55,8 +68,11 @@ last_modified_at: 2020-09-25
   - Count
     - 동시에 한번에 방출되는 파티클 수
 
+<br>
 
-## Shape 모듈
+
+
+### ✈  Shape 모듈
 
 > 파티클 입자들이 생성 및 방출되는 모양을 결정한다. 구라면 구 모양으로 파티클 입자들이 방출되는 식이다. 
 
@@ -71,8 +87,11 @@ last_modified_at: 2020-09-25
 - Radius 
   - 위에서 설정한 Shpae의 반지름이 된다. 이 반경 내에서 입자들이 태어난다.
 
+<br>
 
-## Color Over Lifetime 모듈
+
+
+### ✈  Color Over Lifetime 모듈
 
 > 수명 주기에 따라 파티클의 색깔과 투명도가 어떻게 변하는지를 설정할 수 있다.
 
@@ -86,8 +105,11 @@ last_modified_at: 2020-09-25
         - 1 번 섹션의 투명도를 256으로 한 후 수명 주기의 중간에 위치하게 하고 2 번 섹션의 투명도를 0 으로 한 후 수명 끝에 위치하게 하면 수명의 중간까진 불투명했다가 중간 이후부턴 점점 투명해지게 만들 수 있다.
         - 3, 4 번 섹션의 색상을 노란색으로 추가해서 수명에서 3,4 번 주변 주기 땐 노랗게 변하게 할 수 있다. 
 
+<br>
 
-## Size Over LifeTime 모듈
+
+
+### ✈  Size Over LifeTime 모듈
 
 > 수명 주기에 따라 파티클의 크기가 어떻게 변하는지도 설정할 수 있다.
 
@@ -95,16 +117,22 @@ last_modified_at: 2020-09-25
 
 위 그래프는 예를 들어 사이즈가 처음엔 최대이다가 수명 주기 동안 점점 곡선을 그리는 형태로 작아지고 사라지는 형태다.
 
+<br>
 
-## Light 모듈
+
+
+### ✈  Light 모듈
 
 > Light 컴포넌트가 붙은 프리팹을 할당해주면 파티클 입자 하나하나 마다 해당 빛을 가지게 된다. 
 
 - 프리팹으로 만들어 둔 `Light` 컴포넌트가 붙은 오브젝트를 할당해준다.
 - Ratio 0.1 👉 파티클 입자들의 10 % 정도는 이 빛을 가진다. 
 
+<br>
 
-## Renderer 모듈
+
+
+### ✈  Renderer 모듈
 
 > 파티클의 이미지나 메시가 어떻게 변환되고 응영처리 되고 덮어 쓰여지는지를 결정한다.
 
@@ -122,8 +150,11 @@ last_modified_at: 2020-09-25
   - 파티클 입자의 잔상의 Material
   - Trails 모듈을 사용할거라면 지정해주어야 한다.
 
+<br>
 
-## Texture Sheet Animation 모듈
+
+
+### ✈  Texture Sheet Animation 모듈
 
 > 파티클 입자에 텍스처 또는 애니메이션을 넣을 수 있다!
 
@@ -133,7 +164,10 @@ last_modified_at: 2020-09-25
   - Sprite 에 맞게 입자의 Material도 바꿔주는게 자연스럽다. **Renderer 모듈**의 Material을 "Sprites-Default" 로 바꿔준다. (스프라이트에 맞는 Material)
 
     
-## Trails 모듈
+<br>
+
+
+### ✈  Trails 모듈
 
 > 파티클 입자에 기다란 잔상을 남긴다. 
 
@@ -152,7 +186,10 @@ last_modified_at: 2020-09-25
 - Renderer 모듈에서 Metrial 지정해주기
 
 
-## Noise 모듈
+<br>
+
+
+### ✈  Noise 모듈
 
 > 파티클 움직임에 역동성을 더해준다. 
 
@@ -170,6 +207,24 @@ last_modified_at: 2020-09-25
     - 아래 그래프로 *Remap Curve*를 설정했다면 노이즈 모양은 위로 갔다가 아래로 갔다가 다시 위로 가는 형태로 노이즈가 작용할 것이다.
     ![image](https://user-images.githubusercontent.com/42318591/94633012-13656a80-0307-11eb-9b66-a8c4f8766277.png){: width="40%" height="40%"}{: .align-center}
 
+<br>
+
+## 🚀 변수/프로퍼티
+
+### ✈ duration
+
+Particle System 은 스스로의 러닝타임을 알고 있다. 
+
+<br>
+
+## 🚀 함수
+
+### ✈ Play
+
+> public void Play(bool withChildren = true);
+
+- 파티클 이펙트 재생
+
 
 ***
 <br>
@@ -177,4 +232,4 @@ last_modified_at: 2020-09-25
     🌜 개인 공부 기록용 블로그입니다. 오류나 틀린 부분이 있을 경우 
     언제든지 댓글 혹은 메일로 지적해주시면 감사하겠습니다! 😄
 
-[맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
+[맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}    
