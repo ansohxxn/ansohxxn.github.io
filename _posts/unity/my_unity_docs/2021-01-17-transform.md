@@ -1,5 +1,5 @@
 ---
-title:  "Unity C# > 컴포넌트 : Transform 의 프로퍼티/함수 모음" 
+title:  "Unity C# > 컴포넌트 : Transform 와 프로퍼티/함수 모음" 
 
 categories:
   -  UnityDocs
@@ -12,6 +12,9 @@ toc_sticky: true
 date: 2021-01-17
 last_modified_at: 2021-01-17
 ---
+
+공부하면서 알게된 것만 정리합니다.😀
+{: .notice--warning}
 
 # 👩‍🦰 Transform
 
