@@ -28,6 +28,27 @@ last_modified_at: 2021-01-17
       effect.transform.SetParent(parent);
       ```
 
+> Transform 타입의 오브젝트를 대상으로 하면 그 오브젝트의 자식들을 순회할 수 있다.
+
+```c#
+foreach(Transform tf_Child in transform)
+{
+      Material [] newMaterials = new Material[tf_Child.GetComponent<Renderer>().materials.Length];
+
+      for (int i = 0; i < newMaterials.Length; i++)
+      {
+          newMaterials[i] = mat;
+      }
+
+      tf_Child.GetComponent<Renderer>().materials = newMaterials;
+}
+```
+
+이 스크립트가 붙은 오브젝트를 Transform 타입으로 참조(`transform`)한 후 이를 순회하면 Transform 타입으로 <u>자식 오브젝트들에게 접근할 수 있다.</u>
+
+이렇게 `transform`을 foreach 문에서 순회할 수 있는 이유는, 그리고 자식 오브젝트들을 순회할 수 있는 이유는 <u>Transform 컴포넌트가 enumerator를 지원하기 때문이다.</u> foreach문을 객체에 대해서 순회하려면 그 객체는 GetEnumerator() 함수를 지원해야 한다. 자세한 이유는 [링크 참고](https://ansohxxn.github.io/c%20sharp/enumerate/)
+
+
 ## 🚀 변수/프로퍼티
 
 ### ✈ position, rotation, scale
