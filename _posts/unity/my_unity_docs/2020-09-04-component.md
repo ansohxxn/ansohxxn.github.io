@@ -39,7 +39,7 @@ last_modified_at: 2020-09-04
 
 - 오브젝트의 `position`, `rotation`, `scale` 는 월드 좌표계 위치, 회전, 크기를 담당한다. 
   - `transform.position = Vector3(...)` 이런 식은 현재 위치와 상관 없이 오브젝트의 월드 좌표계 위치를 바꿔버리는 셈이 된다.
-  - `localPosition`, `localRotation`, `localScale`은 Local좌표계에서의 위치.
+  - `localPosition`, `localRotation`, `localScale`은 Local좌표계에서의 위치. 부모로부터 떨어진 거리. 부모를 기준으로 한 회전 값. 부모를 기준으로 한 싱대적 크기.
 - ✨ <u>부모 자식 관계</u> 또한 Transform이 관리한다.
   - `transform.parent` : 내 부모 오브젝트를 뜻한다.
 - `eulerAngles`
@@ -60,7 +60,7 @@ last_modified_at: 2020-09-04
 ### 함수
 
 #### Translate(Vector3)
-- 매개변수로 들어온 현재 위치로부터 해당 벡터만큼 평행이동 시킨다.
+- 매개변수로 들어온 현재 위치로부터 해당 벡터만큼 평행이동 시킨다. <u>상대적인 이동</u>
 - <u>상대적인 벡터의 방향으로</u> 평행 이동 한다.
   - 예를 들어 인수로 들어온 Vector3의 방향이 Vector3.forward 라면 절대적인 월드 좌표계 기준에서의 forward 방향이 아니라 자신을 기준으로 한 forward 방향힘을 나타낸다.
 - 기본적으로 Local 좌표계를 기준으로 평행이동한다. (Space.Self가 디폴트)
@@ -73,6 +73,27 @@ last_modified_at: 2020-09-04
 #### Rotate(Vector3)
 - <u>현재 회전에서</u> 매개변수로 들어온 상대적인 Vector3만큼 <u>더</u> x, y, z 방향으로 각각 a, b, c도 만큼 <u>회전</u>을 시킨다.
 - Translate과 마찬가지로 Space.Self가 디폴트라 로컬 좌표계를 기준으로 회전한다.
+
+#### RotateAround(Vector3, Vector3, float)
+
+> public void RotateAround(Vector3 point, Vector3 axis, float angle);
+
+이 함수는 <u>공전</u>과 잘 어울린다. `point`지점을 지나는 `axis`축을 기준으로 `angle`만큼 회전한다. 
+
+```c#
+void Update()
+{
+    earth.RotateAround(sun.position, Vector3.up, 90f * Time.deltaTime);
+}
+```
+
+예를 들어 지구가 태양을 공전하게 하고 싶다면 위와 같이 짤 수 있을 것 같다. 지구는 태양의 Y 축을 기준으로 1초에 90도씩 회전한다. 
+
+```c#
+fakeCube.RotateAround(transform.position, rotDir, spinSpeed); //공전
+``` 
+
+`fakeCube`라는 오브젝트가 내 위치에서의 `rotDit`을 기준으로 1 프레임 당 `spinSpeed` 각도만큼 회전.
 
 #### SetParent(object)
 - 함수 `SetParent(부모 Transform)` 로 부모 오브젝트를 지정해줄 수 있다.

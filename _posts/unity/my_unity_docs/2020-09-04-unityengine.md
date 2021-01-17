@@ -68,6 +68,20 @@ last_modified_at: 2020-09-04
 #### `Set(float new_x, float new_y, float new_z);`
 - 이 함수를 호출한 벡터의 x, y, z 요소를 설정한다.
 
+#### `SqrMagnitude(Vector3)`
+- 벡터의 길이의 제곱 (루트는 취하지 않은 상태)
+- 그래서 완전히 루트 취한 길이를 구하는 것 보다 쪼끔 더 성능이 더 좋다.
+
+#### `MoveForwards`
+
+> public static Vector3 MoveTowards(Vector3 current, Vector3 target, float maxDistanceDelta);
+
+현재 위치 `current`에서 목표 위치 `target`까지 `maxDistanceDelta`의 속도로 이동한 결과인 **Vector3 를 리턴**한다.
+
+```c#
+transform.position = Vector3.MoveTowards(transform.position, destPos, moveSpeed * Time.deltaTime); 
+```
+
 
 <br>
 
@@ -430,25 +444,27 @@ Physics.Raycast(transform.position + Vector3.up, Vector3.forward);
 - Input.GetAxis("Fire")
 - 등등 그 밖에도 project settings - input - axis 에서 확인할 수 있다.
 
-#### `Input.GetAxis("Horizontal")`
+#### `Input.GetAxisRaw("Horizontal")`
 
-> `-1`, `0`, `1` 셋 중 하나가 리턴된다. 즉시 반응해야 한다면 GetAxisRaw 를 사용하는게 낫다.
+> `-1`, `0`, `1` 셋 중 하나가 리턴된다. 키보드처럼 즉시 반응해야 한다면 GetAxisRaw 를 사용하는게 낫다. 
+
+GetAxis 는 조이스틱에, GetAxisRaw 는 키보드에 적합.
 
 - 사용 방법은 **Input.GetAxis**와 같다.
 - `-1`, `0`, `1` 셋 중 하나가 리턴되므로
-  - Input.GetAxis("Horizontal")
+  - Input.GetAxisRaw("Horizontal")
     - A 입력시 -1 리턴
     - 입력 X시 0 리턴
     - D 입력시 1 리턴
-  - Input.GetAxis("Vertical")
+  - Input.GetAxisRaw("Vertical")
     - S 입력시 -1 리턴
     - 입력 X시 0 리턴
     - W 입력시 1 리턴
-  - Input.GetAxis("Mouse X")
+  - Input.GetAxisRaw("Mouse X")
     - 마우스가 아래로 움직였으면 -1 리턴
     - 마우스가 위아래로 움직이지 않았으면 0
     - 마우스가 위로 움직이면 1
-  - Input.GetAxis("Mouse Y")
+  - Input.GetAxisRaw("Mouse Y")
     - 마우스가 왼쪽으로 움직였으면 -1 리턴
     - 마우스가 좌우로 움직이지 않았으면 0
     - 마우스가 오른쪽로 움직이면 1
@@ -586,6 +602,19 @@ transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotatio
   - 축 axis 주위를 angle 만큼 회전한 rotation을 생성하고 리턴한다.
     - 예를 들어 중심 축이 되는 `axis`가 y 축이라면 회전 값이 y 값은 변하지않고 x, z 값만 변한다.
       - ![image](https://user-images.githubusercontent.com/42318591/91792755-40175b00-ec51-11ea-84b5-5537a296cdc3.png){: width="70%" height="70%"}{: .align-center}
+
+
+#### RotateTowards
+
+> public static Quaternion RotateTowards(Quaternion from, Quaternion to, float maxDegreesDelta);
+
+
+현재의 쿼터니언 회전값 `from`에서 목표 회전값 `to`까지 `maxDegreesDelta`의 속도로 회전한 결과인 **Quaternion 를 리턴**한다.
+
+```c#
+realCube.rotation = Quaternion.RotateTowards(realCube.rotation, destRot, spinSpeed * Time.deltaTime);
+```
+
 
 <br>
 
