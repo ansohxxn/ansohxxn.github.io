@@ -28,6 +28,10 @@ last_modified_at: 2021-01-17
       effect.transform.SetParent(parent);
       ```
 
+- ![image](https://user-images.githubusercontent.com/42318591/93081328-1424bc80-f6ca-11ea-8a48-f79355216c04.png){: width="60%" height="60%"}
+
+- 만약 오브젝트가 회전해 있는 상태여서 위치 축이 월드 좌표 축과 일치하지 않는다면 오브젝트의 위쪽 방향과 절대 적인 위쪽 방향은 다르다.
+
 > Transform 타입의 오브젝트를 대상으로 하면 그 오브젝트의 자식들을 순회할 수 있다.
 
 ```c#
