@@ -1,5 +1,5 @@
 ---
-title:  "Unity C# > UnityEngine : GameObject" 
+title:  "Unity C# > UnityEngine : GameObject & Component" 
 
 categories:
   -  UnityDocs
@@ -17,7 +17,7 @@ last_modified_at: 2021-01-17
 {: .notice--warning}
 
 
-# 👩‍🦰 GameObject
+# 👩‍🦰 GameObject/Component
 
 - UnityEnine에 내장되어 있다.
 - 유니티의 모든 게임 오브젝트들은 동일하게 이 GameObject 타입이다.
@@ -144,6 +144,21 @@ Rigidbody rb = GetComponent<Rigidbody>(); // 오브젝트가 Rigidbody 컴포넌
 GameObject.FindGameObjectWithTag("Monster");
 ```
 해당 태그가 붙은 오브젝트를 찾아서 리턴한다.
+
+<br>
+
+### ✈ CompareTag
+
+> public bool CompareTag(string tag);
+
+```c#
+if (t_hitInfo.transform.CompareTag("Monster"))
+{
+
+}
+```
+
+파라미터로 넘긴 태그와 이 함수를 호출한 오브젝트의 태그가 일치하면 True 리턴.
 
 
 ***
