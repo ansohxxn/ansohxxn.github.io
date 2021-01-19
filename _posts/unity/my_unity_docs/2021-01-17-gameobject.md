@@ -103,6 +103,15 @@ Rigidbody rb = GetComponent<Rigidbody>(); // 오브젝트가 Rigidbody 컴포넌
 
 <br>
 
+### ✈ GetComponentInParent
+
+> public Component GetComponentInParent(Type type);
+
+- `GetComponentInParent<컴포넌트 이름>()`
+  - <u>내 부모 오브젝트에</u> `<>`안에 적혀 있는 컴포넌트가 실존하여 오브젝트에 붙어 있는 상태라면 그 <u>붙어 있는 컴포넌트를 리턴해준다.</u>
+
+<br>
+
 ### ✈ AddComponent
 
 > public Component AddComponent(string className);
