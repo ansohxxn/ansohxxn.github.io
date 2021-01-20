@@ -23,6 +23,24 @@ last_modified_at: 2021-01-17
 
 - 이를 다루는 여러 함수들도 지원한다. Key 값만 알고 있다면 value를 찾을 수 있다. PlayerPref는 구조가 간단해서 해킹당하기 쉽다.
 
+## 🚀 변수/프로퍼티
+
+### ✈ HasKey
+
+> public static bool HasKey(string key);
+
+```c#
+        if (PlayerPrefs.HasKey("Score1"))
+        {
+            for (int i = 0; i < score.Length; i++)
+                PlayerPrefs.GetInt("Score1", score[i]);
+        }
+```
+
+해당 키가 존재하면 True 리턴하는 프로퍼티.
+
+<br>
+
 
 ## 🚀 함수
 
