@@ -336,7 +336,9 @@ c d e
 
 <br>
 
-## STL: prev_permutation으로 조합 구현하기
+## STL: prev_permutation으로 조합 구현하기 
+
+> bool 배열의 중복 순열을 구하고 이에 대응시키기
 
 ```cpp
 #include <iostream>
@@ -347,9 +349,9 @@ using namespace std;
 int main() {
     const int r = 2;
     
-    vector<char> arr{'b', 'a', 'd', 'c'};
-    vector<bool> temp(arr.size());
-    for(int i = 0; i < r; i ++)
+    vector<char> arr{'a', 'b', 'c', 'd'};
+    vector<bool> temp(arr.size(), false);
+    for(int i = 0; i < r; i ++) // 앞부터 r개의 true가 채워진다. 나머지 뒤는 false.
         temp[i] = true;
  
     do {
@@ -365,31 +367,163 @@ int main() {
 ```
 💎출력💎
 
-b a
-b d
-b c
-a d
+a b
 a c
-d c
+a d
+b c
+b d
+c d
 ```
 
-- `prev_permutation`의 특징 
-  - 모든 순열을 구하려면 <u>내림 차순 정렬이 되어 있어야 한다.</u>
+- 모든 순열을 구하려면 <u>bool 배열 초기 상태가 내림 차순 정렬이 되어 있어야 한다.</u>
+    - 👉 즉, `true`가 `false`보다 앞에 와야 한다. (`true`는 `r`개 존재)
+      - ex) 6C<u>2</u> 라면 {<u>true, true</u>, false, false, false, false} 모양이 초기값이어야 함. (내림 차순 되어 있는 형태. false < true 니까)
+        - 이건 내림 차순 정렬이 되어 있는 상태다. (`ture > false`니까!) 따라서 `true (=1)`와 `false (=0)` 끼리의 *"크기를 비교하여 이전 순열을 결정한다."*
+        - 따라서 4C2의 경우 bool배열은 아래와 같은 모양으로 while문이 진행될 것이다. 이 `ture` 값과 같은 인덱스에 대응하는 배열의 원소들끼리를 조합하면 된다.
+          ```
+          {true, true, false, false} 👉 'a' 'b' 에 대응시킴
+          {true, false, true, false} 👉 'a' 'c' 에 대응시킴
+          {true, false, false, true} 👉 'a' 'd' 에 대응시킴
+          {false, true, true, false} 👉 'b' 'c' 에 대응시킴
+          {false, true, false, true} 👉 'b' 'd' 에 대응시킴
+          {false, false, true, true} 👉 'c' 'd' 에 대응시킴
+          ```
+    - 그리고 **이 bool 배열을 바탕으로 prev_permutation 연산을 수행하며 이 때 True 가 되는 것에 대응시켜서 조합을 구하면 된다.**
   -  <u>중복이 있는 원소들은 제외하고 순열을 만들어준다.</u>
-  - 자세한 설명은 [순열 포스트](https://ansohxxn.github.io/algorithm/permutation/#prev_permutation) 참고
+    - 자세한 설명은 [순열 포스트](https://ansohxxn.github.io/algorithm/permutation/#prev_permutation) 참고
+- `do-while`문을 사용하는 이유는, 저 prev_permutation 연산을 수행하자마자 이전 순열로 모양이 바뀌어 버리기 때문이다. 초기 모양, 출발 모양 그대로 한번 연산 가야하므로 `do-while`문을 사용한 것이다.
 
-예를 들어 {'b', 'a', 'd', 'c'}의 `4C2` 조합들을 출력하려면 `r = 2` 개수 만큼의 `true` 값 원소를 가지고 {'b', 'a', 'd', 'c'}와 사이즈가 같은 bool타입의 `temp` 벡터를 선언한다. `temp`의 초기 값은 `r = 2`개의 `true` 원소를 맨 앞으로 보낸 것에서 시작한다. 이렇게 {true, true, false, false} 가 되는데 이는 `temp`를 내림 차순 정렬할 때 가장 처음으로 올 값이다. 즉 반대로 말하면 오름 차순 정렬시 가장 큰 값. 여기서 시작하여 <u>temp 를 대상으로 prev_permutation 실행한다.</u>
+예를 들어 {'a', 'b', 'c', 'd'}의 `4C2` 조합들을 출력하려면 `r = 2` 개수 만큼의 `true` 값 원소를 가지고 ✨{'a', 'b', 'c', 'd'}와 사이즈가 같은 bool타입의 `temp` 벡터를 선언한다.✨`temp`의 초기 값은 `r = 2`개의 💜<u>`true` 원소를 맨 앞</u> 으로 보낸 것에서 시작한다.💜 이렇게 {true, true, false, false} 가 되는데 이는 `temp`를 내림 차순 정렬할 때 가장 처음으로 올 값이다. 즉 반대로 말하면 오름 차순 정렬시 가장 큰 값. 여기서 시작하여 <u>temp 를 대상으로 prev_permutation 실행한다.</u>
 
 ```
-{true, true, false, false}
+{true, true, false, false} 👉 이 상태가 바로 내림 차순 정렬이 되어 있는 상태 (true가 false보다 앞섬)
 {true, false, true, false}
 {true, false, false, true}
 {false, true, true, false}
 {false, true, false, true}
-{false, false, true, true}
+{false, false, true, true} 👉 true 2개 , false 2개 조합에서 더 이상 이 것보다 더 작은 수를 만들 수 없음. 종료.
 ```
 
 위와 같이 중복을 제외하고 내림 차순으로 정렬이 된다. 매번 `temp`의 이전 순열을 구한 후 `temp`의 `true`인 자리에 일치하는 인덱스를 가진 `arr`의 원소만을 뽑는다! 현재 순열이 `{true, false, false, true}` 이라면 `arr[0]`, `arr[3]`인 'b'와 'c'를 출력한다.
+
+<br>
+
+## STL: next_permutation으로 조합 구현하기
+
+> bool 배열의 중복 순열을 구하고 이에 대응시키기
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+ 
+int main() {
+    const int r = 2;
+    
+    vector<char> arr{'a', 'b', 'c', 'd'};
+    vector<bool> temp(arr.size(), true);
+    for(int i = 0; i < arr.size() - r; i ++) // 뒤에 false가 n-r개 채워지고 뒤에 true 가 r개 채워진다.
+        temp[i] = false;
+ 
+    do {
+        for (int i = 0; i < arr.size(); ++i) {
+            if(temp[i]) 
+                cout << arr[i] << " ";
+        }
+        cout << endl;
+    } while (next_permutation(temp.begin(), temp.end()));
+}
+
+```
+```
+💎출력💎
+
+c d
+b d
+b c
+a d
+a c
+a b
+```
+
+- 모든 순열을 구하려면 <u>bool 배열 초기 상태가 오름 차순 정렬이 되어 있어야 한다.</u>
+    - 👉 즉, `false`가 `true`보다 앞에 와야 한다. (`true`는 `r`개 존재)
+      - ex) 6C<u>2</u> 라면 {false, false, false, false, <u>true, true</u>} 모양이 초기값이어야 함. (오름 차순 되어 있는 형태. false < true 니까)
+        - 이건 오름 차순 정렬이 되어 있는 상태다. 따라서 `true (=1)`와 `false (=0)` 끼리의 *"크기를 비교하여 다음 순열을 결정한다."*
+        - 따라서 4C2의 경우 bool배열은 아래와 같은 모양으로 while문이 진행될 것이다. 이 `ture` 값과 같은 인덱스에 대응하는 배열의 원소들끼리를 조합하면 된다.
+          ```
+          {false, false, true, true} 👉 'c' 'd' 에 대응시킴
+          {false, true, false, true} 👉 'b' 'd' 에 대응시킴
+          {false, true, true, false} 👉 'b' 'c' 에 대응시킴
+          {true, false, false, true} 👉 'a' 'd' 에 대응시킴
+          {true, false, true, false} 👉 'a' 'c' 에 대응시킴
+          {true, true, false, false} 👉 'a' 'b' 에 대응시킴
+          ```
+    - 그리고 **이 bool 배열을 바탕으로 next_permutation 연산을 수행하며 이 때 True 가 되는 것에 대응시켜서 조합을 구하면 된다.**
+  -  <u>중복이 있는 원소들은 제외하고 순열을 만들어준다.</u>
+    - 자세한 설명은 [순열 포스트](https://ansohxxn.github.io/algorithm/permutation/#prev_permutation) 참고
+- `do-while`문을 사용하는 이유는, 저 next_permutation 연산을 수행하자마자 이전 순열로 모양이 바뀌어 버리기 때문이다. 초기 모양, 출발 모양 그대로 한번 연산 가야하므로 `do-while`문을 사용한 것이다.
+
+예를 들어 {'a', 'b', 'c', 'd'}의 `4C2` 조합들을 출력하려면 `r = 2` 개수 만큼의 `true` 값 원소를 가지고 ✨{'a', 'b', 'c', 'd'}와 사이즈가 같은 bool타입의 `temp` 벡터를 선언한다.✨`temp`의 초기 값은 `r = 2`개의 💜<u>`true` 원소를 맨 뒤</u>로 보낸 것에서 시작한다.💜 이렇게 {false, false, true, true} 가 되는데 이는 `temp`를 오름 차순 정렬할 때 가장 처음으로 올 값이다. 여기서 시작하여 <u>temp 를 대상으로 next_permutation 실행한다.</u>
+
+```
+{false, false, true, true} 👉 이 상태가 바로 오름 차순 정렬이 되어 있는 상태 (true가 false보다 뒤에)
+{false, true, false, true}
+{false, true, true, false}
+{true, false, false, true}
+{true, false, true, false}
+{true, true, false, false} 👉 true 2개 , false 2개 조합에서 더 이상 이 것보다 더 큰 수를 만들 수 없음. 종료.
+```
+
+위와 같이 중복을 제외하고 오름 차순으로 정렬이 된다. 매번 `temp`의 다음 순열을 구한 후 `temp`의 `true`인 자리에 일치하는 인덱스를 가진 `arr`의 원소만을 뽑는다! 현재 순열이 `{true, false, false, true}` 이라면 `arr[0]`, `arr[3]`인 'b'와 'c'를 출력한다.
+
+<br>
+
+### 변형 (순서대로 조합)
+
+```cpp
+int main() {
+    const int r = 2;
+    
+    vector<char> arr{'a', 'b', 'c', 'd'};
+    vector<bool> temp(arr.size(), true);
+    for(int i = 0; i < r; i ++)
+        temp[i] = false;
+ 
+    do {
+        for (int i = 0; i < arr.size(); ++i) {
+            if (temp[i] == false)
+                cout << arr[i] << " ";
+        }
+        cout << endl;
+    } while (next_permutation(temp.begin(), temp.end()));
+}
+```
+```
+💎출력💎
+
+a b
+a c
+a d
+b c
+b d
+c d
+```
+
+*next_permutation*는 "다음 순열"로 정렬시키는 것을, 이 순열로 더 큰 수를 만들 수 있을 때까지 수행하기 때문에 해당 범위의 조합을 구하려면 해당 범위로 만들 수 있는 가장 작은 수열 형태가 초기값이 되야 하는 것이 불가피하다. 그래서 bool 배열에 대응시키려면 반드시 ⭐**`false`가 `ture`보다 앞선 오름 차순 정렬이 된 수열 최소값**⭐형태에서 시작해야한다는 것이다.
+
+```cpp
+    vector<bool> temp(arr.size(), true);
+    for(int i = 0; i < r; i ++)
+        temp[i] = false;
+
+    //...
+        if (temp[i] == false)
+            cout << arr[i] << " ";
+```
+
+따라서 "a b" 부터, 즉 <u>원소의 순서들을 지키면서 조합을 구하고 싶다면</u> `true`를 `r`개로 하는 것이 아닌 앞에 있는 `false`를 `r`개로 하고, `false` 값에 대응 시키면 범위의 순서 'a', 'b', 'c', 'd'} 대로 조합을 구할 수 있겠다! (앞 문항에선, 뒤에 있는 `true`를 `r`개로 하고 이 `true`에 대응시켰었기 때문에 순서가 다르게 나왔었다. 그래서 앞에선 "c d"부터 출력됐었음)
 
 <br>
 
