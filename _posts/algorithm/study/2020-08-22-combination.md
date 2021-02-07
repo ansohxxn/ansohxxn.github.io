@@ -104,11 +104,13 @@ c d e
 
 - `arr`에서 어떤 원소를 뽑은 경우
   ```cpp
+  // comb[index]에 arr[depth] 을 대입하고 이제 comb[index + 1] 대입하러 간다.
   comb[index] = arr[depth];
   Combination(arr, comb, r - 1, index + 1, depth + 1);
   ```
 - `arr`에서 어떤 원소를 뽑지 않기로 결정한 경우 
   ```cpp
+  // 위에서 comb[index]에 arr[depth]에 대입했었지만 comb[index]에 다시 덮어쓰러 가듯, comb[index] 대입하러 간다. (즉 arr[depth]를 뽑지 않은 것으로 간주)
   Combination(arr, comb, r, index, depth + 1);
   ```
 - 매개 변수 소개
