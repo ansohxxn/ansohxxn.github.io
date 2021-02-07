@@ -38,8 +38,8 @@ last_modified_at: 2020-10-22
 ```cpp
 int getRoot(vector<int>& parent, int x)  // 인수로 넘긴 정점의 부모 정점을 알려줌
 {
-    if (parent[x] == x) return x;
-    return parent[x] = getParent(parent, parent[x]);
+    if (parent[x] == x) return x; // 조상은 부모가 자기 자신. 조상을 찾았을 때 return
+    return parent[x] = getParent(parent, parent[x]); // parent[x] = parent[parent[x]] = parent[parent[parent[x]]] 이런식! x의 조상이 리턴됨. 
 }
 
 void unionParent(vector<int>& parent, int a, int b)  // 두 정점을 병합함. 부모가 같은, 같은 그룹으로.
