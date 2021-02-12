@@ -174,6 +174,15 @@ reverse(str.begin() + 3, str.end());  // abcgfed  인덱스 3~끝 부분만 순�
 
 > 어떤 값의 <u>하한선</u>
 
+- **이진 참색의 방법**으로 어떤 값의 하한선을 찾는다.
+- *lower_bound(v.begin(), v.end(), 150)*
+  - 👉 `v` 컨테이너에서 Key : `150` 과 <u>일치하면 그 Key의 반복자를 리턴하고 </u>, 일치 하는게 없다면 `150`을 <u>초과하는 것 중 가장 작은 것</u>의 반복자를 리턴한다.
+
+ - [1, 10, 20, 40, 50, 60, 70]
+   - `50`을 lower_bound 로 찾는다면 `50`의 반복자 리턴
+   - `65`을 lower_bound 로 찾는다면 `65`는 없으므로 `70`의 반복자 리턴
+   - `80`을 lower_bound 로 찾는다면 없으므로 `end()` 리턴
+
 ```cpp
 lower = lower_bound(myVector.begin(), myVector.end(), 7);
 ```
@@ -186,9 +195,46 @@ lower = lower_bound(myVector.begin(), myVector.end(), 7);
   - `lower_bound(arr, arr + 10, 6)`은 `6을 가리키는 반복자` 이다.
     - 6 보다 크거나 같은 첫번째 원소는 6
 
+##### lower_bound 를 직접 구현한 코드
+
+```cpp
+int start = 0;
+int end = n - 1;
+ 
+while(start < end){  
+    mid = (start + end) / 2;    
+ 
+    if(arr[mid] < key)
+        start = mid + 1;
+    else
+        end = mid;  
+}
+
+return end; // 시작 위치 == 끝 위치가 되면 빠져 나오며 이 위치가 바로 답이 된다. 
+```
+
+- Key 보다 *작은* 범위는 답이 될 수 없다. 👉 *start = mid + 1*
+- Key 보다 *크거나 같은* 범위는 답이 될 수 있다. 그러므로 현재의 `mid`가 또 답 후보가 될 수 있다. 👉 *end = mid*
+  - lower_bound 는 일치하는 것도 답이 될 수 있다.
+
+
 <br>
 
 #### upper_bound 
+
+> 어떤 값의 <u>상한선</u>
+
+- **이진 참색의 방법**으로 어떤 값의 상한선을 찾는다.
+- *lower_bound(v.begin(), v.end(), 150)*
+  - 👉 `v` 컨테이너에서 `150`을 <u>초과하는 것 중 가장 작은 것</u>의 반복자를 리턴한다.
+  - **uppder_bound 는 lower_bound 와는 다르게 일치하는건 찾지 않는다.**
+    - lower_bound 👉 일치 or 초과하는 것 중 가장 작은 것
+    - upper_bound 👉 초과하는 것 중 가장 작은 것
+
+ - [1, 10, 20, 40, 50, 60, 70]
+   - `50`을 upper_bound 로 찾는다면 `60`의 반복자 리턴 👉 <u>lower_bound 와의 차이!</u>
+   - `65`을 upper_bound 로 찾는다면 `70`의 반복자 리턴
+   - `80`을 upper_bound 로 찾는다면 없으므로 `end()` 리턴
 
 ```cpp
 upper = upper_bound(myVector.begin(), myVector.end(), 7);
@@ -197,10 +243,29 @@ upper = upper_bound(myVector.begin(), myVector.end(), 7);
 - 두 반복자로 나타낸 해당 범위 안의 원소들 중 <u>세번째 인수 값보다 <u>큰</u> 첫번째 원소의 반복자를 리턴</u>한다.
   - 없다면 범위의 끝을 나타내는 반복자를 리턴한다. 
 - `sort`와 마찬가지로 비교를 위한 비교 함수 포인터도 인자로 넣어줄 수 있다.
-- 예시
-  - arr = [1, 2, 3, 4, 5, 6, 7] 일때
-  - `upper_bound(arr, arr + 10, 6)`은 `7 을 가리키는 반복자` 이다.
-    - 6 보다 큰 첫번째 원소는 7
+
+##### upper_bound 를 직접 구현한 코드
+
+```cpp
+int start = 0;
+int end = n - 1;
+ 
+while(start < end)){  
+    mid = (start + end) / 2;    
+ 
+    if(arr[mid] <= key) // ⭐lower_bound랑 다른점은 여기뿐!!!!!
+        start = mid + 1;
+    else
+        end = mid;  
+}
+
+return end; // 시작 위치 == 끝 위치가 되면 빠져 나오며 이 위치가 바로 답이 된다. 
+```
+
+- Key 보다 *작거나 같은* 범위는 답이 될 수 없다. 👉 *start = mid + 1*
+  - uppder_bound 는 lower_bound 와 다르게 일치하는 것은 답이 될 수 없음
+- Key 보다 *큰* 범위는 답이 될 수 있다. 그러므로 현재의 `mid`가 또 답 후보가 될 수 있다. 👉 *end = mid*
+
 
 <br>
 
