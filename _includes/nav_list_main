@@ -5,10 +5,7 @@
   <label for="ac-toc">{{ site.data.ui-text[site.locale].menu_label }}</label>
   <ul class="nav__items" id="category_tag_menu">
       <li>
-            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fansohxxn.github.io&count_bg=%23FFCC35&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false">
-      </li>
-      <li>
-            🌙 전체 글 수 <u>{{sum}}</u> 개
+            ✔ 전체 글 수 <u>{{sum}}</u> 개
       </li>
       <li>
         <span class="nav__sub-title">C/C++/C#</span>
