@@ -1,7 +1,4 @@
-{% assign sum = 0 %}
-{% for category in site.categories %} 
-    {% assign sum = sum | plus: category[1].size %}
-{% endfor %}
+{% assign sum = site.posts | size %}
 
 <nav class="nav__list">
   <input id="ac-toc" name="accordion-toc" type="checkbox" />
