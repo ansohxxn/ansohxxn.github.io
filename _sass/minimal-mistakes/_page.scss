@@ -315,6 +315,7 @@ body {
   }
 
   strong {
+    
     margin-right: 10px;
   }
 }
@@ -411,6 +412,7 @@ body {
     color: mix(#fff, $primary-color, 60%);
     text-decoration: none;
     border-bottom: 1px solid $border-color;
+    font-family: $serif;
   }
 }
 
