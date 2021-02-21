@@ -96,7 +96,7 @@ analytics:
 # Site Author
 author:
   name             : "공부하는 식빵맘 👱‍♀️"
-  avatar           : "/assets/images/my-cat.jpg"
+  avatar           : "https://user-images.githubusercontent.com/42318591/108615416-2e1bb580-7447-11eb-8a54-6338e53ce625.png"
   bio              : "러블리냥 소심냥 안식빵"
   #location         : "Seoul, South Korea"
   links:
