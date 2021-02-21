@@ -169,7 +169,7 @@
 
   @include breakpoint($large) {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 }
 .sidebar .author__name {
@@ -190,6 +190,8 @@
 
   p {
     font-family: $cute;
+    margin-top: 1.6px;
+    margin-bottom: 3px;
   }
 }
 
@@ -251,7 +253,7 @@
   position: absolute;
   right: 0;
   margin-top: 15px;
-  padding: 10px;
+  padding: 15px;
   list-style-type: none;
   border: 1px solid $border-color;
   border-radius: $border-radius;
@@ -318,9 +320,9 @@
 
   a {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     padding-right: 5px;
-    padding-top: 2px;
+    padding-top: 0px;
     padding-bottom: 2px;
     color: inherit;
     font-size: $type-size-5;
