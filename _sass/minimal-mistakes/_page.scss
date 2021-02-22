@@ -329,7 +329,7 @@ body {
   border: 1px solid $background-color;
   border-radius: $border-radius;
   background-color: #4D5357;
-  font-family: $monospace;
+  font-family: $serif;
   color: $primary-color;
 
   &:hover {
@@ -347,7 +347,7 @@ body {
   border: 1px solid $background-color;
   border-radius: $border-radius;
   background-color: mix(#fff, #4D5357, 18%);
-  font-family: $monospace;
+  font-family: $serif;
   color: mix(#fff, $primary-color, 2%);;
 
   &:hover {
