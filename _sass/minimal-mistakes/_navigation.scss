@@ -435,7 +435,7 @@
   font-size: 1.25rem;
   font-family: $sans-serif;
 
-  img {
+  img { // 방문자수 이미지 크기 맞추느라 추가했던 것
     width: auto; height: auto;
     max-width: 140px;
     max-height: 38px;
@@ -444,8 +444,8 @@
 
   a {
     color: inherit;
-    font-size: $type-size-4;
-    font-family: $sans-serif;
+    font-size: $type-size-3;
+    font-family: $cute;
     color: mix(#fff,$primary-color,80%);
 
     &:hover {
