@@ -59,7 +59,7 @@ classes: wide
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
         <p></p>
-        <h4 class="page__meta-title">같은 <span style="font-family:'Coming Soon'; color:#fcd14f;">{{ page.categories[0] | capitalize }}</span> 카테고리 내 다른 글 보러가기</h4>
+        <h4 class="page__meta-title"><span style="font-family:'Coming Soon'; color:#fcd14f;">{{ page.categories[0] | downcase | capitalize }}</span> 카테고리 내 다른 글 보러가기</h4>
         {% include post_pagination.html %}
         <p></p>
 
