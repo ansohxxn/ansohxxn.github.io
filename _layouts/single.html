@@ -57,6 +57,7 @@ classes: wide
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        {% include post_pagination.html %}
         <!-- archive 중간 광고 -->
         <ins class="adsbygoogle"
              style="display:block"
@@ -73,9 +74,9 @@ classes: wide
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
         {% endif %}
       </footer>
-      {% include post_pagination.html %}
-      <!--{% if page.share %}{% include social-share.html %}{% endif %} 공유하기 꺼놨다 그냥-->
     </div>
+
+    {% if page.share %}{% include social-share.html %}{% endif %}
 
     {% if jekyll.environment == 'production' and site.comments.provider and page.comments %}
       {% include comments.html %}
