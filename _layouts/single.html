@@ -57,7 +57,12 @@ classes: wide
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <p></p>
+        <h4 class="page__meta-title">같은 <span style="font-family:'Coming Soon'; color:#fcd14f;">{{ page.categories[0] | capitalize }}</span> 카테고리 내 다른 글 보러가기</h4>
         {% include post_pagination.html %}
+        <p></p>
+
         <!-- archive 중간 광고 -->
         <ins class="adsbygoogle"
              style="display:block"
@@ -73,10 +78,9 @@ classes: wide
         {% if site.data.ui-text[site.locale].meta_label %}
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
         {% endif %}
+        {% if page.share %}{% include social-share.html %}{% endif %}
       </footer>
     </div>
-
-    {% if page.share %}{% include social-share.html %}{% endif %}
 
     {% if jekyll.environment == 'production' and site.comments.provider and page.comments %}
       {% include comments.html %}
@@ -87,7 +91,7 @@ classes: wide
   {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
   {% if page.id and page.related and site.related_posts.size > 0 %}
     <div class="page__related"> <!--site.data.ui-text[site.locale].related_label-->
-      <h4 class="page__related-title">{{ "최근 글" }}</h4>
+      <h4 class="page__related-title">{{ "최근 글 10 개 :)" }}</h4>
         {% for post in site.related_posts limit:10 %}
           {% include archive-single3.html %}
         {% endfor %}

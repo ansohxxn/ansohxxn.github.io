@@ -274,7 +274,7 @@ body {
 
 .page__share-title {
   margin-bottom: 10px;
-  font-size: $type-size-6;
+  font-size: $type-size-5;
   text-transform: uppercase;
 }
 
@@ -298,8 +298,9 @@ body {
 }
 
 .page__meta-title {
+  margin-top: 1px;
   margin-bottom: 10px;
-  font-size: $type-size-6;
+  font-size: $type-size-5;
   text-transform: uppercase;
 }
 
@@ -547,14 +548,17 @@ body {
   a {
     color: inherit;
     text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
 .page__related-title {
   margin-bottom: 20px;
-  font-size: $type-size-5;
-  color: #fcd14f;
-  text-transform: uppercase;
+  font-size: $type-size-6;
+  //color: #fcd14f;
 }
 
 /*
