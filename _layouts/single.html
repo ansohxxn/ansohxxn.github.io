@@ -54,21 +54,19 @@ classes: wide
             </nav>
           </aside>
         {% endif %}
+        <!-- 앞광고 -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6111782407607310"
+             data-ad-slot="3059261039"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
-        <!-- 광고 -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- archive 중간 광고 -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-6111782407607310"
-            data-ad-slot="5458515780"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-        <!-- 광고 -->
       </section>
 
       <footer class="page__meta">
@@ -77,9 +75,8 @@ classes: wide
         {% endif %}
       </footer>
 
-      {% if page.share %}{% include social-share.html %}{% endif %}
-
       {% include post_pagination.html %}
+      <!--{% if page.share %}{% include social-share.html %}{% endif %} 공유하기 꺼놨다 그냥-->
     </div>
 
     {% if jekyll.environment == 'production' and site.comments.provider and page.comments %}
@@ -87,20 +84,28 @@ classes: wide
     {% endif %}
   </article>
 
+  <!-- 중간 광고 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-6111782407607310"
+      data-ad-slot="5458515780"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+  <!-- 광고 -->
+
   {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
   {% if page.id and page.related and site.related_posts.size > 0 %}
-    <div class="page__related">
-      <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}</h4>
-      <div class="grid__wrapper">
-        {% for post in site.related_posts limit:4 %}
-          {% include archive-single.html type="grid" %}
-        {% endfor %}
-      </div>
-    </div>
+    {% for post in site.related_posts limit:10 %}
+      {% include archive-single3.html %}
+    {% endfor %}
   {% comment %}<!-- otherwise show recent posts if no related when `related: true` -->{% endcomment %}
   {% elsif page.id and page.related %}
     <div class="page__related">
-      <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}</h4>
+      <h4 class="page__related-title">{{ "최근 글" }}</h4>
       <div class="grid__wrapper">
         {% for post in site.posts limit:3 %}
           {% if post.id == page.id %}
