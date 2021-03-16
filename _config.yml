@@ -19,8 +19,6 @@ locale                   : "ko-KR"
 title                    : " 평생 공부 블로그 : Today I Learned‍ 🌙"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-# 📢📢 부족한 실력으로 오랜 시간동안 고민하고 공들여서 만들어 온 블로그입니다. 
-# 😭😭 블로그 개설하실 때 제게 어떠한 말씀도 없이 그대로 가져가지는 말아주세요 ㅠㅠ
 name                     : "식빵맘💛"
 description              : "공부 & 취미 블로그"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
