@@ -102,7 +102,31 @@ last_modified_at: 2021-03-15
 
 ![image](https://user-images.githubusercontent.com/42318591/111236148-8ce2e200-8635-11eb-896d-8f855844e2b4.png)
 
-댓글이 달리면 이렇게 Issue 에 올라온다.
+댓글이 달리면 이렇게 Issue 에 올라오고 메일로도 알림을 받을 수 있다. 
+
+<br>
+
+### 4. Github 메일 알림 설정하기 (메일로 댓글 알림 받기)
+
+![image](https://user-images.githubusercontent.com/42318591/111238388-58bdf000-863a-11eb-9141-1f05dfa5d138.png)
+
+참고로 Github 메일 알림은 Github Repository 의 Settings 의 Notifications 에 이메일을 등록하면 받을 수 있다.
+
+<br>
+
+### 번외) utterances 크기 조절
+
+![image](https://user-images.githubusercontent.com/42318591/111238657-d681fb80-863a-11eb-883f-8197f7b38e84.png)
+
+<https://baek.dev/post/4/> 이 블로그의 baekdev 님의 댓글 조언을 참고하여 적용하였다. utterances 의 너비를 더 넓혔다!
+
+```scss
+.utterances {
+  max-width: 100% !important;
+}
+```
+
+`css` 파일에서 위 코드만 추가해주면 된다. 나는 📜_page.css 에 적용하였다.
 
 ***
 <br>
