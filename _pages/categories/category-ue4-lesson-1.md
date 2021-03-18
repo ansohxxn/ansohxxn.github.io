@@ -10,5 +10,5 @@ sidebar_main: true
 
 ***
 
-{% assign posts = site.categories.['UE4 Lesson 1'] %}
+{% assign posts = site.categories['UE4 Lesson 1'] %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}

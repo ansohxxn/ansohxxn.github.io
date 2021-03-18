@@ -10,5 +10,5 @@ sidebar_main: true
 
 ***
 
-{% assign posts = site.categories.['DataStructure2'] %}
+{% assign posts = site.categories['DataStructure2'] %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
