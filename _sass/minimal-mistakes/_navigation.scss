@@ -161,7 +161,18 @@
       border-top-right-radius: 0;
     }
 
-    &.disabled {
+    &.disabled-first-child {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      color: rgba($muted-text-color, 0.5);
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    &.disabled-last-child {
+      margin-bottom: 1em;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
       color: rgba($muted-text-color, 0.5);
       pointer-events: none;
       cursor: not-allowed;
