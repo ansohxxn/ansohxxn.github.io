@@ -19,6 +19,8 @@ last_modified_at: 2020-08-20
 
 ## 순열이란
 
+> 선택 순서가 결과에 영향을 미치는 경우! (1,2)와 (2,1)은 달라야 할 때
+
 - 순서를 따진다.
   - `abc` 와 `acb`는 서로 다른 존재이다.
 - 중복을 허용하지 않는다.
@@ -332,7 +334,7 @@ d a b
 
 <br>
 
-## 재귀로 구현한 코드 2
+## 재귀로 구현한 코드 2 (배열로 방문 체크)
 
 - 아래 코드의 자세한 설명은 [이 포스트 참고](https://ansohxxn.github.io/algorithm/repeated-permutation/#%EC%88%9C%EC%97%B4-%EA%B5%AC%ED%95%98%EA%B8%B0)
 
@@ -364,7 +366,7 @@ void repeatPermutation(vector<pair<char, bool>> check, vector<char> perm, int de
             check[i].second = true;  // 이전에 perm 원소로 결정된 vec원소라고 표시해 줌.
             perm[depth] = check[i].first;   // 이전에 perm 원소로 결정된 vec원소가 아니라면 perm의 원소로 결정. depth 자리에 대입. 
             repeatPermutation(check, perm, depth + 1);  // perm의 다음 원소 결정하러 가기
-            check[i].second = false;  // 결정하고 돌아왔으면 체크 해제
+            check[i].second = false;  // 결정하고 돌아왔으면 체크 해제 👉 이 과정 중요!! 원래대로 복원하여 다음 for 반복에서 시작되는 경로에서 선택될 수 있도록
         }
     }
 }
@@ -402,6 +404,108 @@ d a
 d b
 d c
 ```
+
+<br>
+
+## 재귀로 구현한 코드 3 (배열로 방문 체크)
+
+```cpp
+void Permutation(vector<bool> visited, vector<char> arr, vector<char> perm, int depth)
+{
+    if (depth == perm.size())  // r
+    {
+        for (int i = 0; i < perm.size(); i++)
+            cout << perm[i] << " ";
+        cout << endl;
+
+        return;
+    }
+
+    for (int i = 0; i < arr.size(); i++) 
+    {
+        if (visited[i] == true)  
+            continue;
+        
+        visited[i] = true; // 방문 체크
+        perm[depth] = arr[i];   
+        Permutation(visited, arr, perm, depth + 1); 
+        visited[i] = false;  // 방문 해제
+    }
+}
+
+int main()
+{
+    vector<char> vec = { 'a', 'b', 'c', 'd' };
+    const int n = vec.size();
+    const int r = 2;
+    vector<char> perm(r);
+    vector<bool> visited(n);
+
+    Permutation(visited, vec, perm, 0); // 4P2 {'a', 'b', 'c', 'd'}의 길이 2의 순열 모두 출력하기
+
+    return 0;
+}
+```
+```
+💎출력💎
+
+a b
+a c
+a d
+b a
+b c
+b d
+c a
+c b
+c d
+d a
+d b
+d c
+```
+
+
+<br>
+
+## 재귀로 구현한 코드 4  (+ 비트 연산으로 방문 체크)
+
+```cpp
+int N = 4;
+int Nums[] = { 1, 2, 3, 4 };
+
+void solve(int cnt, int visited, int val) {
+    if (cnt == 2) // 4P2
+        cout << val << endl;
+
+    int ret = 0;
+    for (int i = 0; i < N; ++i) {
+        if (visited & (1 << i)) continue; // 방문한 비트에 대응되는 원소는 넘어감
+        // 매개변수 visited 에 visited | (1 << i) 이 대입되는 과정에서 방문 체크. visited 에서 i 자리에 해당하는 비트를 1 로 만든다.
+        // 방문 해제해줄 필요는 없음. 그냥 다음 재귀함수에 파라미터 넘겨준 것 뿐이며 현재 단계에서 visited 값은 변화가 없으므로
+        solve(cnt + 1, visited | (1 << i), val * 10 + Nums[i]);
+    }
+}
+
+int main(){
+    solve(0, 0, 0);
+}
+```
+```
+💎출력💎
+
+12
+13
+14
+21
+23
+24
+31
+32
+34
+41
+42
+43
+```
+
 
 <br>
 
