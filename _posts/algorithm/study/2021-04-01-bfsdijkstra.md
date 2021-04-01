@@ -1,5 +1,5 @@
 ---
-title:  "(C++) BFS 와 다익스트라의 거리 저장 및 업데이트" 
+title:  "(C++) BFS 와 다익스트라의 거리 저장 및 업데이트 과정 차이" 
 
 categories:
   - Algorithm
