@@ -1,5 +1,5 @@
 ---
-title:  "[STL 컨테이너] set, unordered_set (+ map)에 커스텀 구조체 혹은 객체를 담고 싶다면" 
+title:  "[STL 컨테이너] set, unordered_set (+ map)에 사용자 정의 구조체 혹은 객체 담기" 
 
 categories:
   - STL
@@ -13,9 +13,13 @@ date: 2021-04-01
 last_modified_at: 2021-04-01
 ---
 
+## 🚀 map, set, unordered_map, unordered_set 자세한 설명 
+
 - [[STL 컨테이너] map & unordered_map & multimap](https://ansohxxn.github.io/stl/map/)
 - [[STL 컨테이너] set & unordered_set & multiset](https://ansohxxn.github.io/stl/set/)
 - [[STL 컨테이너] map 과 set의 정렬](https://ansohxxn.github.io/stl/sortmapset/)
+
+<br>
 
 ## 🚀 `map`, `set` 에서 커스텀 구조체 or 객체 저장하기 (👉 정렬된 순서를 유지)
 
