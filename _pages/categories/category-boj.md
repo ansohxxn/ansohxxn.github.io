@@ -10,5 +10,8 @@ sidebar_main: true
 
 ***
 
+**주석 없는 코드는 <https://github.com/ansohxxn/coding-test> 참고**
+{: .notice--warning}
+
 {% assign posts = site.categories.BOJ %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
