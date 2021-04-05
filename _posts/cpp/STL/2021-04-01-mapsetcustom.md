@@ -198,6 +198,7 @@ int main()
   - 해당 구조체 혹은 클래스 타입의 전용 해시 함수를 직접 만들어주어야 하는데
     - *C++ 에서 제공하는 기본 자료형에 대한 해시 함수*를 사용하여 해시값을 만들어내도 되고
     - *XOR 연산자* 를 사용하여 만드는 방법도 있다.
+    - 무슨 방법을 쓰던, <u>최대한!! 같은 해시값이 리턴되지 않도록, 즉 해시 충돌이 발생하지 않도록 해시 함수를 짜는게 좋다.</u> ✨✨
 - 2️⃣ `==` 연산자 오버로딩이 필요하다. 
   - 해시 충돌(해시값 동일) 발생시 원소 비교가 가능해야하기 때문이다.
     - 두 인스턴스가 같다고 판단할 수 있는 그 기준이 필요하다.
@@ -206,6 +207,8 @@ int main()
 <br>
 
 ### 1️⃣ 해시함수
+
+#### 첫 번째 방법
 
 ```cpp
 namespace std {
@@ -228,6 +231,36 @@ namespace std {
 - C++은 `int`, `string` 등등 기본 타입의 인스턴스를 파라미터로 받아 어떤 해시 함수 값을 생성해주는 그런 객체를 제공하고 있다. *ex) hash\<string> hash_func 👉 string 을 파라미터로 받아 해시 함수값을 리턴해주는 C++ 제공 해시 객체*
   - 이 해시 객체를 이용하여 구조체 혹은 클래스의 멤버들과 *XOR* 연산도 좀 섞어보고.. 잘 짬뽕하여.. 해시 함수를 만들어주면 된다.  
 
+```cpp
+unordered_set<Student> map1; // ⭕
+unordered_set<Student, hash<Student>> map1; // ⭕
+```
+
+위와 같이 `std` 네임스페이스 안에서 `hash<구조체이름>` 사용하여 그 안에 정의하면 위와 같이 해시맵 자료구조를 선언할 때 파라미터로 `hash<구조체이름>`를 안넣어주어도 된다.
+
+<br>
+
+#### 두 번째 방법
+
+```cpp
+    struct MyHash {
+        size_t operator()(const Student& stu) const {
+            hash<string> hash_func; // string 을 파라미터로 받아 해시 함수값을 리턴해주는 C++ 제공 해시 객체
+
+            return hash_func(stu.name) ^ stu.grade; // 임의로 string 인 name 의 해시함수값과 int인 grade 값을 XOR 연산한 것을 해시 함수 값으로 하기로 정의!
+        }
+    };
+```
+
+이렇게 그냥 사용자 정의 구조체 안에서 `()` 연산자를 오버로딩하여 해시함수를 구현해주면
+
+```cpp
+unordered_set<Student> map1; // ❌
+unordered_set<Student, MyHash> map1; // ⭕
+```
+
+이땐 꼭 파라미터로 해당 구조체 이름을 함께 넘겨주어야 한다.
+
 <br>
 
 ### 2️⃣ == 연산자 오버로딩
@@ -245,23 +278,15 @@ struct Student {
 };
 ```
 
-<br>
-
-### 3️⃣ 사용
-
-```cpp
-unordered_set<Student> students1;
-unordered_map<Student, string> students2;
-```
-
-해시를 정의한 구조체 `hash`를 넘겨줄 필요는 없는듯 하다. 그냥 위와 같이 평소처럼 사용하면 된다!
+해시 충돌이 일어났을 때, 즉 이미 해시테이블 안에 있는 어떤 요소와 해시값이 동일하게 나왔을 때 버킷 안에 있는 원소들과 비교해야하기 때문에 `==` 연산자 오버로딩이 필요하다. 
 
 
 <br>
 
 ## 🚀 출처 및 참고
 
-윗 내용 모두 [모두의 코드](https://modoocode.com/224) 를 참고했습니다. :)
+- 커스텀 해시 함수를 사용했던 코테 문제 [[C++로 풀이] 블록 이동하기 (BFS)⭐⭐⭐](https://ansohxxn.github.io/programmers/128/)
+- 윗 내용 모두 [모두의 코드](https://modoocode.com/224) 를 참고했습니다. :)
 
 ***
 <br>
