@@ -1,5 +1,5 @@
 ---
-title: "DB 데이터베이스"
+title: "MySQL"
 layout: archive
 permalink: categories/db
 author_profile: true
