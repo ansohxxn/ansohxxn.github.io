@@ -232,6 +232,13 @@
         <span class="nav__sub-title">etc</span>
             <ul>
                 {% for category in site.categories %}
+                    {% if category[0] == "Blog" %}
+                        <li><a href="/categories/blog" class="">Blog Dev ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
                     {% if category[0] == "Design Pattern" %}
                         <li><a href="/categories/design-pattern" class="">디자인 패턴 ({{category[1].size}})</a></li>
                     {% endif %}
@@ -248,20 +255,6 @@
                 {% for category in site.categories %}
                     {% if category[0] == "Git" %}
                         <li><a href="/categories/git" class="">Git & Github ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "Blog" %}
-                        <li><a href="/categories/blog" class="">Blog Dev ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "DB" %}
-                        <li><a href="/categories/db" class="">DB ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
