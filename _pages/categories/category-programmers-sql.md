@@ -10,8 +10,7 @@ sidebar_main: true
 
 ***
 
-**주석 없는 코드는 <https://github.com/ansohxxn/coding-test> 참고**
-{: .notice--warning}
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=ansohxxn&repo=coding-test)](https://github.com/ansohxxn/coding-test)
 
 {% assign posts = site.categories['Programmers SQL'] %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
