@@ -36,10 +36,10 @@ last_modified_at: 2020-10-22
 
 
 ```cpp
-int getRoot(vector<int>& parent, int x)  // 인수로 넘긴 정점의 부모 정점을 알려줌
+int getRoot(vector<int>& parent, int x)  // 인수로 넘긴 정점의 루트를 알려줌
 {
-    if (parent[x] == x) return x; // 조상은 부모가 자기 자신. 조상을 찾았을 때 return
-    return parent[x] = getParent(parent, parent[x]); // parent[x] = parent[parent[x]] = parent[parent[parent[x]]] 이런식! x의 조상이 리턴됨. 
+    if (parent[x] == x) return x; // 루트는 부모가 자기 자신. 루트를 찾았을 때 return
+    return parent[x] = getRoot(parent, parent[x]); // parent[x] = parent[parent[x]] = parent[parent[parent[x]]] 이런식! 재귀호출 후 돌아오는 과정에서 부모 조상들의 루트도 같이 업데이트 해준다. 
 }
 
 void unionParent(vector<int>& parent, int a, int b)  // 두 정점을 병합함. 부모가 같은, 같은 그룹으로.
@@ -62,7 +62,9 @@ bool find(vector<int>& parent, int a, int b)  // 두 정점이 같은 부모를 
 `parents`에서 각 인덱스는 정점을 뜻하며 원소는 해당 정점의 부모 정점을 가리킨다. 정점이 4 개라면 초기값은 [0, 1, 2, 3]으로 자기 자신이 부모로 초기화 한다. 마치 이 과정은 `n`개의 트리를 만들어 놓고 시작하는 것과 같다. 최종적으로 [0, 0, 0, 0]이 되어 모든 정점의 부모 정점이 같아진다면, 즉 하나의 트리로 완성되었다면 종료한다.  0 과 2 정점이 이어진다면 [0, 1, 0, 3]이 될 것이도 1 과 3 이 이어진다면 [0, 1, 0, 1]이 될 것이고 1 과 0 이 이어진다면 최종적으로 [0, 0, 0, 0]이 될 것이다.
 
 1. *int getRoot(vector\<int>& parent, int x)*
-  - `x` 정점의 부모 정점을 리턴한다. 
+  - `x` 정점의 루트를 리턴한다. 
+  - <u>재귀 호출로 부모를 타고 타고 올라간다. 루트에 도달할 때까지.</u> 타고 타고 올라갈 수 있다는 것은, 타고 올라가도 바로 루트에 도달하지 못 했다는 것은 부모 조상들의 루트(parent)도 현재 수정이 필요하다는 얘기다. 
+  - 위 재귀 호출로 찾아낸 루트를 <u>재귀 호출 후 "돌아오는 과정"에서 대입으로 부모 및 조상들의 루트도 찾은 루트로 같이 제대로 정정을 해준다.</u>
 2. *void unionParent(vector\<int>& parent, int a, int b)*
   - 두 정점 `a`, `b`를 같은 부모를 가진 하나의 트리로 병합한다. 
   - 더 작은 값의 부모로 통합한다.
