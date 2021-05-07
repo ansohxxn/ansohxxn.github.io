@@ -381,7 +381,9 @@ int main() {
 
 ## 🚀 Prefix Sum
 
-> **Sum = Sum - A + B** 
+- **Sum = Sum - A + B** 
+- 혹은 누적합을 O(N) 으로 미리 구해놓은 후 (*Sum[i] = Sum[i - 1] + arr[i]*)
+  - **Sum[i + A] - Sum[i]** 이런식
 
 어떤 구간의 원소들을 구하는 합을 `Prefix Sum`으로 구하는 문제는 [[C++로 풀이] 광고 삽입 (구간합 Prefix Sum, 투포인터)⭐⭐⭐](https://ansohxxn.github.io/programmers/124/) 참고
 
