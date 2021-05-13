@@ -10,5 +10,8 @@ sidebar_main: true
 
 ***
 
+인프런에 있는 케이디님의 **[유니티 3D] 실전! 생존게임 만들기 - Advanced** 강의를 듣고 정리한 필기입니다. 😀 언제든지 다시 참고할 수 있도록, 지식 공유보단 개인적인 복습을 목적으로 포스팅하였습니다. <br> [🌜 강의 들으러 가기 Click](https://www.inflearn.com/course/unity-2#)
+{: .notice--warning}
+
 {% assign posts = site.categories['Unity Lesson 3'] %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
