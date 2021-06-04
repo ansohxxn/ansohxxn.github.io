@@ -15,8 +15,8 @@ last_modified_at: 2021-04-01
 
 ## 🚀 BFS 와 다익스트라에 대한 자세한 개념 설명
 
-- [Chapter 4-4. 그래프 순회 방법 2️⃣ - BFS(너비 우선 탐색)](http://127.0.0.1:4000/algorithm%20lesson%202/chapter4-4/)
-- [Chapter 4-5. 다익스트라 최단 경로 알고리즘](http://127.0.0.1:4000/algorithm%20lesson%202/chapter4-5/)
+- [Chapter 4-4. 그래프 순회 방법 2️⃣ - BFS(너비 우선 탐색)](https://ansohxxn.github.io/algorithm%20lesson%202/chapter4-4/)
+- [Chapter 4-5. 다익스트라 최단 경로 알고리즘](https://ansohxxn.github.io/algorithm%20lesson%202/chapter4-5/)
 
 <br>
 
